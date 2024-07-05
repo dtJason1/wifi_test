@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _play() async{
 
-    var b = await Process.run('iwlist', ["wlan0", 'scan']).then((value) => print(value));
+    await Process.run('iwlist', ["wlan0", 'scan']).then((value) => print(value));
   }
 
   @override
