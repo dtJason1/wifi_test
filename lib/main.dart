@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
         return;
       }
       // Filter SSIDs
-      var ssids = result.stdout.toString().trimLeft().trimRight().split('\n' ).where((line) => line.toString().contains('SSID')).toList();
+      var ssids = result.stdout.toString().replaceAll("  ", "").split('\n' ).where((line) => line.toString().contains('SSID')).toList();
 
       // Print or return the SSIDs
       ssids.forEach(print);
