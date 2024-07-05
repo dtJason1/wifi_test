@@ -59,12 +59,13 @@ class _MyHomePageState extends State<MyHomePage> {
         print('Error: ${result.stderr}');
         return;
       }
-      var ssidwithoutcolon = result.stderr.toString().split(' ');
+      var ssidwithoutcolon = result.stdout.toString().split(' ');
       // Filter SSIDs
-      var ssids = result.stdout.toString().split('\n' ).where((line) => line.toString().contains('SSID')).toList();
+      var ssids = ssidwithoutcolon.toString().split('\n' ).where((line) => line.toString().contains('SSID')).toList();
 
       // Print or return the SSIDs
       ssids.forEach(print);
+
     } catch (e) {
       print('Error: $e');
     }
