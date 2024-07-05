@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> scanWifi() async {
     try {
       // Run the command
-      var result = await Process.run('sudo', ['iw', 'dev', 'wlan0', 'scan']);
+      var result = await Process.run('iwlist',['wlan0', 'scan']);
 
       // Check for errors
       if (result.exitCode != 0) {
