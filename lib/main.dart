@@ -49,6 +49,26 @@ class _MyHomePageState extends State<MyHomePage> {
     var result = await Process.run('iwlist',['wlan0', 'scan' ,'|', 'grep', 'ESSID']);
     print(result.stdout);
   }
+  Future<void> scanWifi() async {
+    try {
+      // Run the command
+      var result = await Process.run('sudo', ['iw', 'dev', 'wlan0', 'scan']);
+
+      // Check for errors
+      if (result.exitCode != 0) {
+        print('Error: ${result.stderr}');
+        return;
+      }
+
+      // Filter SSIDs
+      var ssids = result.stdout.split('\n').where((line) => line.contains('SSID')).toList();
+
+      // Print or return the SSIDs
+      ssids.forEach(print);
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ElevatedButton(onPressed: _play, child: Text("hi")),
+            ElevatedButton(onPressed: scanWifi, child: Text("hi")),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
