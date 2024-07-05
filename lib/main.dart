@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> scanWifi() async {
     try {
       // Run the command
-      var result = await Process.start('iwlist',['wlan0', 'scan']);
+      var result = await Process.run('iwlist',['wlan0', 'scan']);
 
       // Check for errors
       if (result.exitCode != 0) {
@@ -61,15 +61,13 @@ class _MyHomePageState extends State<MyHomePage> {
       }
       var ssidwithoutcolon = result.stderr.toString().split(' ');
       // Filter SSIDs
-      var ssids = ssidwithoutcolon.toString().split('\n').where((line) => line.toString().contains('SSID')).toList();
+      var ssids = result.stdout.toString().split('\n' ).where((line) => line.toString().contains('SSID')).toList();
 
       // Print or return the SSIDs
       ssids.forEach(print);
-      result.kill();
     } catch (e) {
       print('Error: $e');
     }
-
   }
 
   @override
