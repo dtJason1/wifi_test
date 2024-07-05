@@ -35,12 +35,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-
-      _counter++;
-    });
-  }
 
 
 
@@ -49,10 +43,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return '/home/wakefit_cc/frpi/assets/sounds/requestedsound/${musicName}';
   }
 
-  void play() async{
+  void _play() async{
 
-    var b = await Process.start('iwlist', ["wlan0", 'scan']);
-    print(b);
+    var b = await Process.run('iwlist', ["wlan0", 'scan']).then((value) => print(value));
   }
 
   @override
@@ -67,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ElevatedButton(onPressed: play, child: Text("hi")),
+            ElevatedButton(onPressed: _play, child: Text("hi")),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
