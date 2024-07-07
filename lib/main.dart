@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
       }
       // Filter SSIDs
       var ssids = result.stdout.toString().replaceAll("  ", "").split('\n' ).where((line) => line.toString().contains('SSID')).toList();
-
+      print(ssids);
       // Print or return the SSIDs
       ssids.forEach(print);
     } catch (e) {
