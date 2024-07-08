@@ -33,23 +33,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-
-
-
-
-  String musicPath(String musicName){
-    return '/home/wakefit_cc/frpi/assets/sounds/requestedsound/${musicName}';
-  }
-
-  void _play() async{
-
-    // var result = await Process.run('ls', ['-l']);
-    var result = await Process.run('iwlist',['wlan0', 'scan' ,'|', 'grep', 'ESSID']);
-    print(result.stdout);
-  }
-  Future<void> scanWifi() async {
+  List<StatelessWidget> finalList = [];
+  Future<List<dynamic>> scanWifi() async {
     try {
       // Run the command
       var result = await Process.run('iwlist',['wlan0', 'scan']);
@@ -57,20 +42,55 @@ class _MyHomePageState extends State<MyHomePage> {
       // Check for errors
       if (result.exitCode != 0) {
         print('Error: ${result.stderr}');
-        return;
+        return [];
       }
       // Filter SSIDs
       var ssids = result.stdout.toString().replaceAll("  ", "").split('\n' ).where((line) => line.toString().contains('SSID')).toList();
       ssids.forEach((element) {
-        var removableElement= element.substring(0,6);
-        element = element.replaceAll("ESSID:", "");
-        element = element.replaceAll(r'"', '');
+        element = element.replaceAll("ESSID:", "").replaceAll(r'"', '');
+        finalList.add(MyButton(text: element));
+
         print(element);
       });
+      return finalList;
       // Print or return the SSIDs
     } catch (e) {
       print('Error: $e');
+      return [];
     }
+  }
+
+  void popup(){
+    showDialog(context: context,
+        builder: (context){
+          return Dialog(
+            child:
+              FutureBuilder(future: scanWifi(), builder: (BuildContext context, AsyncSnapshot snapshot){
+                if (snapshot.hasData == false) {
+                  return CircularProgressIndicator();
+                }
+                else{
+                  return SingleChildScrollView(
+                    child: Column(
+                      children: snapshot.data,
+
+                    ),
+                  );
+
+                }
+
+
+              }),
+
+
+
+
+          );
+
+        }
+
+    );
+
   }
 
   @override
@@ -86,13 +106,26 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(onPressed: scanWifi, child: Text("hi")),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+
           ],
         ),
       ),
  );
   }
+}
+
+
+class MyButton extends StatelessWidget{
+  MyButton({required this.text});
+  final String text;
+  @override
+  Widget build(BuildContext context){
+    return TextButton(onPressed: (){},
+      child: Text(text),
+    );
+
+
+  }
+
+
 }
