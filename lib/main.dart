@@ -64,10 +64,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ssids.forEach((element) {
         var removableElement= element.substring(0,6);
         element = element.replaceAll("ESSID:", "");
-        element = element.replaceAll(r"'", "");
+        element = element.replaceAll(r'"', '');
         print(element);
       });
-      print(ssids);
       // Print or return the SSIDs
     } catch (e) {
       print('Error: $e');
