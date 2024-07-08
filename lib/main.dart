@@ -51,7 +51,6 @@ class _MyHomePageState extends State<MyHomePage> {
       }
       // Filter SSIDs
       var ssids = result.stdout.toString().trim().split('\n');
-      print(ssids);
       ssids.removeAt(0);
       List<Widget> currentWIFIList = [];
       for (var ssid in ssids) {
@@ -59,7 +58,6 @@ class _MyHomePageState extends State<MyHomePage> {
           currentWIFIList = [MyButton(text: ssid.substring(26,56).replaceAll(" ", ""), iscurrentuse: true)];
         }
         else{
-          print(ssid.length);
 
           finalList.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false));
 
