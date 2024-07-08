@@ -196,6 +196,7 @@ class _MyButtonState extends State<MyButton> {
                 });}, child: Text("12345678"),),
                 TextButton(onPressed: () async{
                   try {
+                    print("${widget.text }, , ${myPW}");
                     await Process.run('nmcli',['device', 'dev ', 'wifi', 'connect', '${widget.text}', 'password', '$myPW']).then((value) => Navigator.of(context).pop());
 
 
