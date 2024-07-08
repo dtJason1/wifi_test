@@ -88,21 +88,23 @@ class _MyHomePageState extends State<MyHomePage> {
                 }
                 else{
                   return Container(
-                    width: 300,
-                    height: 300,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 25.0),
-                          child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
-                        ),
-                        SingleChildScrollView(
-                          child: Column(
-                            children: snapshot.data,
 
+                    child: Padding(
+                      padding: const EdgeInsets.all(40.0),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 25.0),
+                            child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
                           ),
-                        ),
-                      ],
+                          SingleChildScrollView(
+                            child: Column(
+                              children: snapshot.data,
+
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   );
 
