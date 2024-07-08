@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
+import 'package:virtual_keyboard_multi_language/virtual_keyboard_multi_language.dart';
 
 import 'package:flutter/rendering.dart';
 void main() {
@@ -153,6 +154,9 @@ class MyButton extends StatefulWidget{
 
 class _MyButtonState extends State<MyButton> {
   String myPW = "";
+  late TextEditingController _controllerText;
+  bool shiftEnabled = false;
+  bool isNumericMode = false;
 
   @override
   Widget build(BuildContext context){
@@ -209,27 +213,25 @@ class _MyButtonState extends State<MyButton> {
                     // TODO
                   }
                 }, child: Text("confirm")),
+                Container(
+                  color: Colors.deepPurple,
+                  child: VirtualKeyboard(
+                      height: 300,
+                      //width: 500,
+                      textColor: Colors.white,
+                      textController: _controllerText,
+                      //customLayoutKeys: _customLayoutKeys,
+                      defaultLayouts: [
+                        VirtualKeyboardDefaultLayouts.English
+                      ],
+                      //reverseLayout :true,
+                      type: isNumericMode
+                          ? VirtualKeyboardType.Numeric
+                          : VirtualKeyboardType.Alphanumeric,
+                      onKeyPress: _onKeyPress),
+                )
 
-
-                TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    hintText: 'Enter your email',
-                    labelStyle: TextStyle(color: Colors.redAccent),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      borderSide: BorderSide(width: 1, color: Colors.redAccent),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      borderSide: BorderSide(width: 1, color: Colors.redAccent),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    ),
-                  ),
-                  keyboardType: TextInputType.emailAddress,
-                )              ],),
+              ],),
           ),
         );
 
@@ -239,5 +241,29 @@ class _MyButtonState extends State<MyButton> {
     },
       child: Text(widget.text, style: TextStyle(color: this.widget.iscurrentuse ? Colors.blue : Colors.black),),
     );
+  }
+  _onKeyPress(VirtualKeyboardKey key) {
+    if (key.keyType == VirtualKeyboardKeyType.String) {
+      myPW = myPW + ((shiftEnabled ? key.capsText : key.text) ?? '');
+    } else if (key.keyType == VirtualKeyboardKeyType.Action) {
+      switch (key.action) {
+        case VirtualKeyboardKeyAction.Backspace:
+          if (myPW.length == 0) return;
+          myPW = myPW.substring(0, myPW.length - 1);
+          break;
+        case VirtualKeyboardKeyAction.Return:
+          myPW = myPW + '\n';
+          break;
+        case VirtualKeyboardKeyAction.Space:
+          myPW = myPW + (key.text ?? '');
+          break;
+        case VirtualKeyboardKeyAction.Shift:
+          shiftEnabled = !shiftEnabled;
+          break;
+        default:
+      }
+    }
+    // Update the screen
+    setState(() {});
   }
 }
