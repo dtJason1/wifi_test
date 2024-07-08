@@ -100,7 +100,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
                           ),
                           SizedBox(
-                            height: 300,
+                            height: 100,
+                            width: 100,
                             child: ListView(
                               shrinkWrap: true,
                               children: snapshot.data,
