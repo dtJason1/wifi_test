@@ -153,28 +153,33 @@ class MyButton extends StatelessWidget{
     return TextButton(onPressed: (){
       showDialog(context: context, builder:(context) {
         return Dialog(
-          child: Column(
-            children: [
-            Row(
+          child: SizedBox(
+            width: 300,
+            height: 300,
+            child: Column(
               children: [
-                Text("SSID"),
-                Text(text),
-              ],
-            ),
               Row(
                 children: [
                   Text("SSID"),
-                  TextField(
-                      obscureText: true,
-                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Password',
-                      ),
-                  )
+                  Text(text),
                 ],
-              )
+              ),
 
-          ],),
+              Row(
+                  children: [
+                    Text("SSID"),
+                    TextField(
+                        obscureText: true,
+                         decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Password',
+                        ),
+                    )
+                  ],
+                )
+
+            ],),
+          ),
 
 
 
