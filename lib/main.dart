@@ -157,7 +157,12 @@ class _MyButtonState extends State<MyButton> {
   late TextEditingController _controllerText;
   bool shiftEnabled = false;
   bool isNumericMode = false;
-
+  @override
+  void initState() {
+    // _customLayoutKeys = CustomLayoutKeys();
+    _controllerText = TextEditingController();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context){
     return TextButton(onPressed: (){
