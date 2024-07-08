@@ -33,8 +33,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<StatelessWidget> finalList = [];
   Future<List<dynamic>> scanWifi() async {
+    List<StatelessWidget> finalList = [];
+
     try {
       // Run the command
       var result = await Process.run('iwlist',['wlan0', 'scan']);
@@ -61,6 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void popup(){
+
     showDialog(context: context,
         builder: (context){
           return Dialog(
