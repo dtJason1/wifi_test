@@ -62,10 +62,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void popup(){
-
     showDialog(context: context,
         builder: (context){
           return Dialog(
+
             child:
               FutureBuilder(future: scanWifi(), builder: (BuildContext context, AsyncSnapshot snapshot){
                 if (snapshot.hasData == false) {
@@ -80,17 +80,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   );
 
                 }
-
-
               }),
-
-
-
-
           );
-
         }
-
     );
 
   }
@@ -102,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
       body: Container(
         width: 1200,
-        height: 8000,
+        height: 800,
         child: Column(
 
           mainAxisAlignment: MainAxisAlignment.center,
