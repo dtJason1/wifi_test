@@ -105,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ElevatedButton(onPressed: scanWifi, child: Text("hi")),
+            ElevatedButton(onPressed: popup, child: Text("hi")),
 
           ],
         ),
@@ -123,9 +123,5 @@ class MyButton extends StatelessWidget{
     return TextButton(onPressed: (){},
       child: Text(text),
     );
-
-
   }
-
-
 }
