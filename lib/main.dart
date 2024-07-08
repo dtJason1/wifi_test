@@ -99,14 +99,10 @@ class _MyHomePageState extends State<MyHomePage> {
                             padding: const EdgeInsets.symmetric(vertical: 25.0),
                             child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
                           ),
-                          Container(
-                            width: 300,
-                            height: 300,
-                            child: ListView(
-                              shrinkWrap: true,
-                              children: snapshot.data,
+                          ListView(
+                            shrinkWrap: true,
+                            children: snapshot.data,
 
-                            ),
                           ),
                         ],
                       ),
