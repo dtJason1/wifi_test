@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
+
+import 'package:flutter/rendering.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -98,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
                           ),
                           SingleChildScrollView(
-                            child: Column(
+                            child: ListView(
                               children: snapshot.data,
 
                             ),
