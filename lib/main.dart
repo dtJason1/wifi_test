@@ -150,7 +150,46 @@ class MyButton extends StatelessWidget{
   final bool iscurrentuse;
   @override
   Widget build(BuildContext context){
-    return TextButton(onPressed: (){},
+    return TextButton(onPressed: (){
+      showDialog(context: context, builder:(context) {
+        return Dialog(
+          child: Column(
+            children: [
+            Row(
+              children: [
+                Text("SSID"),
+                Text(text),
+              ],
+            ),
+              Row(
+                children: [
+                  Text("SSID"),
+                  TextField(
+                      obscureText: true,
+                       decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Password',
+                      ),
+                  )
+                ],
+              )
+
+          ],),
+
+
+
+        );
+
+
+
+
+
+
+
+      }
+      );
+
+    },
       child: Text(text, style: TextStyle(color: this.iscurrentuse ? Colors.blue : Colors.black),),
     );
   }
