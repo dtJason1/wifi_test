@@ -39,14 +39,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
     try {
       // Run the command
-      await Process.run('sudo',['nmcli','device', 'wifi', 'rescan']);
-      var result = await Process.run('sudo',['nmcli','device', 'wifi', 'list']);
+      await Process.run('nmcli',['device', 'wifi', 'rescan']);
+      var result = await Process.run('nmcli',['device', 'wifi', 'list']);
 
       // Check for errors
       if (result.exitCode != 0) {
         print('Error: ${result.stderr}');
         return [];
       }
+      print(result.stdout);
       // Filter SSIDs
       var ssids = result.stdout.toString().replaceAll("  ", "").split('\n' ).where((line) => line.toString().contains('SSID')).toList();
       ssids.forEach((element) {
