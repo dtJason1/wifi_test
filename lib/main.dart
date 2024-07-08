@@ -49,7 +49,8 @@ class _MyHomePageState extends State<MyHomePage> {
       }
       print(result.stdout);
       // Filter SSIDs
-      var ssids = result.stdout.toString().split('\n' );
+      var ssids = result.stdout.toString().split('\n');
+      print(ssids);
       ssids.removeAt(0);
       for (var ssid in ssids) {
         if(ssid[0] == '*'){
