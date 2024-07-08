@@ -197,6 +197,7 @@ class _MyButtonState extends State<MyButton> {
                 TextButton(onPressed: (){setState(() {
                   myPW = "gkgk2022";
                 });}, child: Text("gkgk2022"),),
+
                 TextButton(onPressed: () async{
                   try {
                     print("${widget.text }, , ${myPW}");
@@ -207,7 +208,10 @@ class _MyButtonState extends State<MyButton> {
                     print(e);
                     // TODO
                   }
-                }, child: Text("confirm"))
+                }, child: Text("confirm")),
+
+
+                TextField(decoration: InputDecoration(),),
               ],),
           ),
         );
