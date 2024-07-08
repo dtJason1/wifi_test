@@ -89,27 +89,24 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: CircularProgressIndicator());
                 }
                 else{
-                  return Container(
+                  return Padding(
+                    padding: const EdgeInsets.all(40.0),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 25.0),
+                          child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
+                        ),
+                        SizedBox(
+                          height: 300,
+                          width: 300,
+                          child: ListView(
+                            shrinkWrap: true,
+                            children: snapshot.data,
 
-                    child: Padding(
-                      padding: const EdgeInsets.all(40.0),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 25.0),
-                            child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
                           ),
-                          SizedBox(
-                            height: 100,
-                            width: 100,
-                            child: ListView(
-                              shrinkWrap: true,
-                              children: snapshot.data,
-
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   );
 
