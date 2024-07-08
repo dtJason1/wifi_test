@@ -50,17 +50,18 @@ class _MyHomePageState extends State<MyHomePage> {
       print(result.stdout);
       // Filter SSIDs
       var ssids = result.stdout.toString().split('\n' );
-      print(ssids.runtimeType);
-      ssids.forEach((element) {
-        element = element.replaceAll("ESSID:", "").replaceAll(r'"', '');
-        if (!element.isEmpty){
-          finalList.add(MyButton(text: element));
+      ssids.removeAt(0);
+      for (var ssid in ssids) {
+        if(ssid[0] == '*'){
+          finalList.add(MyButton(text: ssid.substring(15,30), iscurrentuse: true));
+        }
+        else{
+          finalList.add(MyButton(text: ssid.substring(15,30), iscurrentuse: false));
 
         }
+        
+      }
 
-
-        print(element);
-      });
       return finalList;
       // Print or return the SSIDs
     } catch (e) {
@@ -121,12 +122,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
 class MyButton extends StatelessWidget{
-  MyButton({required this.text});
+  MyButton({required this.text, required this.iscurrentuse});
   final String text;
+  final bool iscurrentuse;
   @override
   Widget build(BuildContext context){
     return TextButton(onPressed: (){},
-      child: Text(text),
+      child: Text(text, style: TextStyle(color: this.iscurrentuse ? Colors.blue : Colors.black),),
     );
   }
 }
