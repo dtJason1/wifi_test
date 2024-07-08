@@ -4,6 +4,7 @@ void main() {
   runApp(const MyApp());
 }
 
+// raspberry nmcli 설치됨
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -38,7 +39,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     try {
       // Run the command
-      var result = await Process.run('iwlist',['wlan0', 'scan']);
+      await Process.run('nmcli',['device', 'wifi', 'rescan']);
+      var result = await Process.run('nmcli',['device', 'wifi', 'list']);
 
       // Check for errors
       if (result.exitCode != 0) {
