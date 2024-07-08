@@ -211,8 +211,25 @@ class _MyButtonState extends State<MyButton> {
                 }, child: Text("confirm")),
 
 
-                TextField(decoration: InputDecoration(),),
-              ],),
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    hintText: 'Enter your email',
+                    labelStyle: TextStyle(color: Colors.redAccent),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      borderSide: BorderSide(width: 1, color: Colors.redAccent),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      borderSide: BorderSide(width: 1, color: Colors.redAccent),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                  ),
+                  keyboardType: TextInputType.emailAddress,
+                )              ],),
           ),
         );
 
