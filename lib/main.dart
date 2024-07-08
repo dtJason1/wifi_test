@@ -49,7 +49,8 @@ class _MyHomePageState extends State<MyHomePage> {
       }
       print(result.stdout);
       // Filter SSIDs
-      var ssids = result.stdout.toString().replaceAll("  ", "").split('\n' );
+      var ssids = result.stdout.toString().split('\n' );
+      print(ssids.runtimeType);
       ssids.forEach((element) {
         element = element.replaceAll("ESSID:", "").replaceAll(r'"', '');
         if (!element.isEmpty){
