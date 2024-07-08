@@ -49,7 +49,11 @@ class _MyHomePageState extends State<MyHomePage> {
       var ssids = result.stdout.toString().replaceAll("  ", "").split('\n' ).where((line) => line.toString().contains('SSID')).toList();
       ssids.forEach((element) {
         element = element.replaceAll("ESSID:", "").replaceAll(r'"', '');
-        finalList.add(MyButton(text: element));
+        if (!element.isEmpty){
+          finalList.add(MyButton(text: element));
+
+        }
+
 
         print(element);
       });
