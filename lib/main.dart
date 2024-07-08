@@ -154,7 +154,7 @@ class MyButton extends StatefulWidget{
 }
 
 class _MyButtonState extends State<MyButton> {
-  String myText = "";
+  String myPW = "";
 
   @override
   Widget build(BuildContext context){
@@ -189,18 +189,22 @@ class _MyButtonState extends State<MyButton> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(myText)
+                      child: Text(myPW)
                     )
                   ],
                 ),
                 TextButton(onPressed: (){setState(() {
-                   myText = "12345678";
+                   myPW = "12345678";
                 });}, child: Text("12345678"),),
-                TextButton(onPressed: ()async{
-                  var result = await Process.run('nmcli',['device', 'dev ', 'wifi', 'connect', '${widget.text}', 'password', '$myText']).then((value) => Navigator.of(context).pop());
+                TextButton(onPressed: () async{
+                  try {
+                    await Process.run('nmcli',['device', 'dev ', 'wifi', 'connect', '${widget.text}', 'password', '$myPW']).then((value) => Navigator.of(context).pop());
 
-                  
 
+                  } on Exception catch (e) {
+                    print(e);
+                    // TODO
+                  }
                 }, child: Text("confirm"))
               ],),
           ),
