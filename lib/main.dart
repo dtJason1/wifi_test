@@ -53,10 +53,10 @@ class _MyHomePageState extends State<MyHomePage> {
       ssids.removeAt(0);
       for (var ssid in ssids) {
         if(ssid[0] == '*'){
-          finalList.add(MyButton(text: ssid.substring(15,30), iscurrentuse: true));
+          finalList.add(MyButton(text: ssid.substring(15,45), iscurrentuse: true));
         }
         else{
-          finalList.add(MyButton(text: ssid.substring(15,30), iscurrentuse: false));
+          finalList.add(MyButton(text: ssid.substring(15,45), iscurrentuse: false));
 
         }
         
