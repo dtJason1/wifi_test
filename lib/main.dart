@@ -103,6 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             width: 300,
                             height: 300,
                             child: ListView(
+                              shrinkWrap: true,
                               children: snapshot.data,
 
                             ),
