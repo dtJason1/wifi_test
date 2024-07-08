@@ -194,6 +194,9 @@ class _MyButtonState extends State<MyButton> {
                 TextButton(onPressed: (){setState(() {
                    myPW = "12345678";
                 });}, child: Text("12345678"),),
+                TextButton(onPressed: (){setState(() {
+                  myPW = "gkgk2022";
+                });}, child: Text("gkgk2022"),),
                 TextButton(onPressed: () async{
                   try {
                     print("${widget.text }, , ${myPW}");
