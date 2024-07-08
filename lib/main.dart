@@ -82,18 +82,20 @@ class _MyHomePageState extends State<MyHomePage> {
               FutureBuilder(future: scanWifi(), builder: (BuildContext context, AsyncSnapshot snapshot){
                 if (snapshot.hasData == false) {
                   return SizedBox(
-                    width: 200,
-                      height: 200,
+                    width: 300,
+                      height: 300,
                       child: CircularProgressIndicator());
                 }
                 else{
                   return Container(
                     width: 300,
-                    height: 300,
 
                     child: Column(
                       children: [
-                        Text("WIFI Lists"),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 25.0),
+                          child: Text("WIFI Lists"),
+                        ),
                         SingleChildScrollView(
                           child: Column(
                             children: snapshot.data,
