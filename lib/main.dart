@@ -87,10 +87,20 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: CircularProgressIndicator());
                 }
                 else{
-                  return SingleChildScrollView(
-                    child: Column(
-                      children: snapshot.data,
+                  return Container(
+                    width: 300,
+                    height: 300,
 
+                    child: Column(
+                      children: [
+                        Text("WIFI Lists"),
+                        SingleChildScrollView(
+                          child: Column(
+                            children: snapshot.data,
+
+                          ),
+                        ),
+                      ],
                     ),
                   );
 
