@@ -37,7 +37,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Future<List<Widget>> scanWifi() async {
-    List<StatelessWidget> finalList = [];
+    List<StatefulWidget> finalList = [];
 
     try {
       // Run the command
@@ -144,10 +144,18 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 
-class MyButton extends StatelessWidget{
+class MyButton extends StatefulWidget{
   MyButton({required this.text, required this.iscurrentuse});
   final String text;
   final bool iscurrentuse;
+
+  @override
+  State<MyButton> createState() => _MyButtonState();
+}
+
+class _MyButtonState extends State<MyButton> {
+  String myText = "";
+
   @override
   Widget build(BuildContext context){
     return TextButton(onPressed: (){
@@ -166,8 +174,10 @@ class MyButton extends StatelessWidget{
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(text),
+                    child: Text(widget.text),
                   ),
+
+
                 ],
               ),
 
@@ -179,35 +189,28 @@ class MyButton extends StatelessWidget{
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                          obscureText: true,
-                           decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Password',
-                          ),
-                      ),
+                      child: Text(myText)
                     )
                   ],
-                )
+                ),
+                TextButton(onPressed: (){setState(() {
+                   myText = "gkgk2022";
+                });}, child: Text("gkgk2022"),),
+                TextButton(onPressed: ()async{
+                  var result = await Process.run('nmcli',['device', 'dev ', 'wifi', 'connect', '${widget.text}', 'password', '$myText']).then((value) => Navigator.of(context).pop());
 
-            ],),
+                  
+
+                }, child: Text("confirm"))
+              ],),
           ),
-
-
-
         );
-
-
-
-
-
-
 
       }
       );
 
     },
-      child: Text(text, style: TextStyle(color: this.iscurrentuse ? Colors.blue : Colors.black),),
+      child: Text(widget.text, style: TextStyle(color: this.widget.iscurrentuse ? Colors.blue : Colors.black),),
     );
   }
 }
