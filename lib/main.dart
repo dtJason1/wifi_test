@@ -160,20 +160,32 @@ class MyButton extends StatelessWidget{
               children: [
               Row(
                 children: [
-                  Text("SSID"),
-                  Text(text),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("SSID"),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(text),
+                  ),
                 ],
               ),
 
               Row(
                   children: [
-                    Text("SSID"),
-                    TextField(
-                        obscureText: true,
-                         decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Password',
-                        ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("Password"),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                          obscureText: true,
+                           decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Password',
+                          ),
+                      ),
                     )
                   ],
                 )
