@@ -69,7 +69,10 @@ class _MyHomePageState extends State<MyHomePage> {
             child:
               FutureBuilder(future: scanWifi(), builder: (BuildContext context, AsyncSnapshot snapshot){
                 if (snapshot.hasData == false) {
-                  return CircularProgressIndicator();
+                  return SizedBox(
+                    width: 400,
+                      height: 400,
+                      child: CircularProgressIndicator());
                 }
                 else{
                   return SingleChildScrollView(
