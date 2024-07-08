@@ -194,8 +194,8 @@ class _MyButtonState extends State<MyButton> {
                   ],
                 ),
                 TextButton(onPressed: (){setState(() {
-                   myText = "gkgk2022";
-                });}, child: Text("gkgk2022"),),
+                   myText = "12345678";
+                });}, child: Text("12345678"),),
                 TextButton(onPressed: ()async{
                   var result = await Process.run('nmcli',['device', 'dev ', 'wifi', 'connect', '${widget.text}', 'password', '$myText']).then((value) => Navigator.of(context).pop());
 
