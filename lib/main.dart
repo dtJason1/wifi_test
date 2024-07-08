@@ -34,7 +34,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Future<List<dynamic>> scanWifi() async {
+  Future<List<Widget>> scanWifi() async {
     List<StatelessWidget> finalList = [];
 
     try {
