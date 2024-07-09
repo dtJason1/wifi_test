@@ -8,13 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:wifi_test/provider.dart';
 
 void main() {
-  MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (_) => WifiProvider()),
-
-    ],
-    child: MyApp(),
-  );
+  runApp(MyApp());
 }
 
 // raspberry nmcli 설치됨
@@ -25,22 +19,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
+      home: MultiProvider(
+        providers: [
 
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+          ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
+
+        ],
+        child: MyHomePage(),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+
+
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key});
 
 
-  final String title;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
