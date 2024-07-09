@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 
 import 'package:flutter/rendering.dart';
-import 'package:wifi_test/provider.dart';
+
 
 void main() {
   // MultiProvider(
@@ -12,48 +12,37 @@ void main() {
   //
   //   ],
   //   child: MyApp(),
-  //
   // );
-  fakepage();
-
+  MyApp();
 }
 
+// raspberry nmcli 설치됨
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-class fakepage extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: MyHomePage(),
+    );
   }
 }
+class MyHomePage extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+    return Text("hell0");
 
+  }
+
+}
 //
-// // raspberry nmcli 설치됨
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-//
-//   // This widget is the root of your application.
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Flutter Demo',
-//       theme: ThemeData(
-//
-//         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-//         useMaterial3: true,
-//       ),
-//       home: const MyHomePage(title: 'Flutter Demo Home Page'),
-//     );
-//   }
-// }
-//
-// class fakepage extends StatelessWidget{
-//   @override
-//   Widget build(BuildContext context){
-//
-//     return Container()
-//   }
-//
-// }
 // class MyHomePage extends StatefulWidget {
 //   const MyHomePage({super.key, required this.title});
 //
