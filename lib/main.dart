@@ -231,6 +231,8 @@ class DialogContent extends StatefulWidget {
 class _DialogContentState extends State<DialogContent> {
   @override
   Widget build(BuildContext context) {
+    var wifiProvider = Provider.of<WifiProvider>(context);
+
     return Dialog(
 
         child:
@@ -251,7 +253,7 @@ class _DialogContentState extends State<DialogContent> {
                   width: 300,
                   child: Builder(
                     builder: (context) {
-                      if(widget.provider.wifiList == []){
+                      if(wifiProvider.wifiList == []){
                         return CircularProgressIndicator();
 
                       }
@@ -259,7 +261,7 @@ class _DialogContentState extends State<DialogContent> {
 
                         return ListView(
                           shrinkWrap: true,
-                          children: widget.provider.wifiList,
+                          children: wifiProvider.wifiList,
 
                         );
                       }
