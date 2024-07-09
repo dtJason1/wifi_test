@@ -120,7 +120,7 @@ class FileViewer extends StatelessWidget {
             SizedBox(
               height: 300,
               width: 300,
-              child: ListView(
+              child: wifiProvider.wifiList == [] ? CircularProgressIndicator() : ListView(
                 shrinkWrap: true,
                 children: wifiProvider.wifiList,
 
