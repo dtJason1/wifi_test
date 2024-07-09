@@ -81,8 +81,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
       body: Stack(
         children: [
-          Consumer2<WifiProvider, KeyBoardKey>(
-            builder: (context, provider,keyboardkey,child) {
+          Consumer<WifiProvider>(
+            builder: (context, provider,child) {
               return Stack(
                 children: [
                     Container(
