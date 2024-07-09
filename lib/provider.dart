@@ -107,76 +107,77 @@ class _MyButtonState extends State<MyButton> {
   void dialog2(){
     var keyBoardkey = Provider.of<KeyBoardKey>(context, listen: false);
 
-    showDialog(
-      context: context,
+
       //Notice the use of ChangeNotifierProvider<ReportState>.value
-      builder: (_) => ChangeNotifierProvider<KeyBoardKey>.value(
-        value: keyBoardkey,
-        child:  Dialog(
-          child: SizedBox(
-            width: 300,
-            height: 300,
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("SSID"),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(widget.text),
-                    ),
-                  ],
-                ),
+      //   child: Dialog(
+      //     child: SizedBox(
+      //       width: 300,
+      //       height: 300,
+      //       child: Column(
+      //         children: [
+      //           Row(
+      //             children: [
+      //               Padding(
+      //                 padding: const EdgeInsets.all(8.0),
+      //                 child: Text("SSID"),
+      //               ),
+      //               Padding(
+      //                 padding: const EdgeInsets.all(8.0),
+      //                 child: Text(widget.text),
+      //               ),
+      //             ],
+      //           ),
+      //
+      //           Row(
+      //             children: [
+      //               Padding(
+      //                 padding: const EdgeInsets.all(8.0),
+      //                 child: Text("Password"),
+      //               ),
+      //               Padding(
+      //                   padding: const EdgeInsets.all(8.0),
+      //                   child: GestureDetector(
+      //                     onTap: (){setState(() {
+      //                       _show = true;
+      //                     });},
+      //                     child: Container(
+      //                       width: 200,
+      //                       height: 40,
+      //                       color: Colors.blueAccent,
+      //                       child: Consumer<KeyBoardKey>(
+      //                         builder: (context, key, child) {
+      //                           return Text(key.key);
+      //                         }
+      //                       ),
+      //                     ),
+      //                   )
+      //               )
+      //             ],
+      //           ),
+      //           TextButton(onPressed: () async{
+      //             try {
+      //               print("${widget.text }, , ${myPW}");
+      //               await Process.run('nmcli',['device', 'wifi', 'connect', '${widget.text}', 'password', '$myPW']).then((value){
+      //                 print(value);
+      //                 Navigator.of(context).pop();});
+      //             } on Exception catch (e) {
+      //               print(e);
+      //               // TODO
+      //             }
+      //           }, child: Text("confirm")),
+      //         ],),
+      //     ),
+      //   ),
+      //
 
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Password"),
-                    ),
-                    Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: (){setState(() {
-                            _show = true;
-                          });},
-                          child: Container(
-                            width: 200,
-                            height: 40,
-                            color: Colors.blueAccent,
-                            child: Consumer<KeyBoardKey>(
-                              builder: (context, key, child) {
-                                return Text(key.key);
-                              }
-                            ),
-                          ),
-                        )
-                    )
-                  ],
-                ),
-                TextButton(onPressed: () async{
-                  try {
-                    print("${widget.text }, , ${myPW}");
-                    await Process.run('nmcli',['device', 'wifi', 'connect', '${widget.text}', 'password', '$myPW']).then((value){
-                      print(value);
-                      Navigator.of(context).pop();});
-                  } on Exception catch (e) {
-                    print(e);
-                    // TODO
-                  }
-                }, child: Text("confirm")),
-              ],),
-          ),
-        ),
-      ),
-
-    );
+    showDialog(context: context, builder:(_) => ChangeNotifierProvider<KeyBoardKey>.value(
+      value: keyBoardkey,
+      child: Dialog2(text:widget.text),
+    ) );
 
   }
-
+  // 다이얼로그는 써야하는데, 키보드가 안됨
+  // 키보드 키가 눌릴때마다
   @override
   Widget build(BuildContext context){
     return TextButton(onPressed: (){
@@ -186,5 +187,74 @@ class _MyButtonState extends State<MyButton> {
       child: Text(widget.text, style: TextStyle(color: this.widget.iscurrentuse ? Colors.blue : Colors.black),),
     );
   }
+
+}
+
+class Dialog2 extends StatelessWidget{
+  Dialog2({required this.text});
+  final String text;
+
+  @override
+  Widget build(BuildContext context){
+    var keyboardKey = Provider.of<KeyBoardKey>(context);
+    //Notice the use of ChangeNotifierProvider<ReportState>.value
+     return Dialog(
+        child: SizedBox(
+          width: 300,
+          height: 300,
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("SSID"),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(text),
+                  ),
+                ],
+              ),
+
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("Password"),
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        width: 200,
+                        height: 40,
+                        color: Colors.blueAccent,
+                        child: Consumer<KeyBoardKey>(
+                          builder: (context, key, child) {
+                            return Text(keyboardKey.key);
+                          }
+                        ),
+                      )
+                  )
+                ],
+              ),
+              TextButton(onPressed: () async{
+                try {
+                  await Process.run('nmcli',['device', 'wifi', 'connect', '${text}', 'password', '${keyboardKey.key}']).then((value){
+                    print(value);
+                    Navigator.of(context).pop();});
+                } on Exception catch (e) {
+                  print(e);
+                  // TODO
+                }
+              }, child: Text("confirm")),
+            ],),
+        ),
+      );
+
+
+
+  }
+
 
 }
