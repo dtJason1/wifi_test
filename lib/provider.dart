@@ -24,7 +24,11 @@ class WifiProvider extends ChangeNotifier{
       }
       // Filter SSIDs
       var ssids = result.stdout.toString().trim().split('\n');
+      print("====get sssids");
       print(ssids);
+      print("===========");
+
+
       ssids.removeAt(0);
       List<Widget> currentWIFIList = [];
       for (var ssid in ssids) {
@@ -48,7 +52,10 @@ class WifiProvider extends ChangeNotifier{
   }
 
   void changeWifiList() async{
+    print("-======scanning wifi");
     _wifiList = await scanWifi();
+    print("-======notifying=====");
+
     notifyListeners();
   }
 
