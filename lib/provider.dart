@@ -170,10 +170,12 @@ class _MyButtonState extends State<MyButton> {
       //   ),
       //
 
-    showDialog(context: context, builder:(_) => ChangeNotifierProvider<KeyBoardKey>.value(
-      value: keyBoardkey,
-      child: Dialog2(text:widget.text),
-    ) );
+    showDialog(
+        context: context,
+        builder:(_) => ChangeNotifierProvider<KeyBoardKey>.value(
+          value: keyBoardkey,
+          child: Dialog2(text:widget.text),
+        ) );
 
   }
   // 다이얼로그는 써야하는데, 키보드가 안됨
@@ -229,11 +231,7 @@ class Dialog2 extends StatelessWidget{
                         width: 200,
                         height: 40,
                         color: Colors.blueAccent,
-                        child: Consumer<KeyBoardKey>(
-                          builder: (context, key, child) {
-                            return Text(keyboardKey.key);
-                          }
-                        ),
+                        child: Text(keyboardKey.key),
                       )
                   )
                 ],

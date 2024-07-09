@@ -56,11 +56,9 @@ class _MyHomePageState extends State<MyHomePage> {
       //Notice the use of ChangeNotifierProvider<ReportState>.value
       builder: (_) => ChangeNotifierProvider<WifiProvider>.value(
         value: wifiProvider,
-        child: FileViewer(),
+        child: WifiListIndicator(),
       ),
-
     );
-
   }
   String myPW = "";
   late TextEditingController _controllerText;
@@ -182,7 +180,7 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 
-class FileViewer extends StatelessWidget {
+class WifiListIndicator extends StatelessWidget {
 
   Widget build(BuildContext context) {
   //you can enable or disable listen if you logic require so
