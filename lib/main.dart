@@ -47,12 +47,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void popup(){
     showDialog(context: context,
         builder: (context){
-          return Dialog(
+          return Consumer<WifiProvider>(
+            builder: (context, provider,child) {
+              return Dialog(
 
-            child:
-              Consumer<WifiProvider>(
-                builder: (context, provider, child) {
-                  return Padding(
+                child:
+                  Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: SizedBox(
                     height: 400,
@@ -61,24 +61,24 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 25.0),
-                            child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
-                          ),
+                          child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
+                        ),
 
                         SizedBox(
                           height: 300,
                           width: 300,
                           child: ListView(
                             shrinkWrap: true,
-                            children: provider.wifiList,
+                            children: [],
 
                           ),
                         ),
                       ],
                     ),
                   ),
-                              );
-                }
-              )
+                )
+              );
+            }
           );
         }
     );
