@@ -81,8 +81,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
       body: Stack(
         children: [
-          Consumer<WifiProvider>(
-            builder: (context, provider,child) {
+          Consumer2<WifiProvider, KeyBoardKey>(
+            builder: (context, provider,keyboardkey,child) {
               return Stack(
                 children: [
                     Container(
@@ -107,8 +107,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     AnimatedContainer(duration: Duration(seconds: 1),
                     color: Colors.deepPurple,
                     child: VirtualKeyboard(
-                        height: _show ? 300 : 0,
-                        width: 500,
+                        height: 400,
+                        width: 600,
                         textColor: Colors.white,
                         textController: _controllerText,
                         //customLayoutKeys: _customLayoutKeys,
@@ -155,10 +155,26 @@ class _MyHomePageState extends State<MyHomePage> {
     // Update the screen
 
     setState(() {
-      myPW = myPW;
+      Provider.of<KeyBoardKey>(context).addKey(myPW);
+      print(myPW);
 
     });
   }
+  // void dialog2(){
+  //   var wifiProvider = Provider.of<WifiProvider>(context, listen: false);
+  //
+  //   showDialog(
+  //     context: context,
+  //     //Notice the use of ChangeNotifierProvider<ReportState>.value
+  //     builder: (_) => ChangeNotifierProvider<WifiProvider>.value(
+  //       value: wifiProvider,
+  //       child: FileViewer(),
+  //     ),
+  //
+  //   );
+  //
+  // }
+
 }
 
 
@@ -189,11 +205,7 @@ class FileViewer extends StatelessWidget {
             SizedBox(
               height: 300,
               width: 300,
-              child: wifiProvider.wifiList == [] ? CircularProgressIndicator() : ListView(
-                shrinkWrap: true,
-                children: wifiProvider.wifiList,
-
-              ),
+              child: wifiProvider.wifiList == [] ? CircularProgressIndicator() : ListView(shrinkWrap: true, children: wifiProvider.wifiList,),
             ),
           ],
         ),

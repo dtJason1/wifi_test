@@ -4,7 +4,22 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:virtual_keyboard_multi_language/virtual_keyboard_multi_language.dart';
 import 'package:provider/provider.dart';
+class KeyBoardKey extends ChangeNotifier{
+  String _key = '';
+  String get key => _key;
 
+  void addKey (String insertedKey){
+    _key = insertedKey;
+    notifyListeners();
+
+  }
+  void clearKey(){
+    _key =  '';
+    notifyListeners();
+
+  }
+
+}
 
 class WifiProvider extends ChangeNotifier{
   List<Widget> _wifiList =  [];
@@ -88,11 +103,16 @@ class _MyButtonState extends State<MyButton> {
     _controllerText = TextEditingController();
     super.initState();
   }
-  @override
-  Widget build(BuildContext context){
-    return TextButton(onPressed: (){
-      showDialog(context: context, builder:(context) {
-        return Dialog(
+
+  void dialog2(){
+    var keyBoardkey = Provider.of<KeyBoardKey>(context, listen: false);
+
+    showDialog(
+      context: context,
+      //Notice the use of ChangeNotifierProvider<ReportState>.value
+      builder: (_) => ChangeNotifierProvider<KeyBoardKey>.value(
+        value: keyBoardkey,
+        child:  Dialog(
           child: SizedBox(
             width: 300,
             height: 300,
@@ -108,8 +128,6 @@ class _MyButtonState extends State<MyButton> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(widget.text),
                     ),
-
-
                   ],
                 ),
 
@@ -129,6 +147,7 @@ class _MyButtonState extends State<MyButton> {
                             width: 200,
                             height: 40,
                             color: Colors.blueAccent,
+                            child: Text(keyBoardkey.key),
                           ),
                         )
                     )
@@ -140,38 +159,24 @@ class _MyButtonState extends State<MyButton> {
                     await Process.run('nmcli',['device', 'wifi', 'connect', '${widget.text}', 'password', '$myPW']).then((value){
                       print(value);
                       Navigator.of(context).pop();});
-
-
                   } on Exception catch (e) {
                     print(e);
                     // TODO
                   }
                 }, child: Text("confirm")),
-                // AnimatedContainer(duration: Duration(seconds: 1),
-                //   color: Colors.deepPurple,
-                //   child: VirtualKeyboard(
-                //       height: _show ? 300 : 0,
-                //       //width: 500,
-                //       textColor: Colors.white,
-                //       textController: _controllerText,
-                //       //customLayoutKeys: _customLayoutKeys,
-                //       defaultLayouts: [
-                //         VirtualKeyboardDefaultLayouts.English
-                //       ],
-                //       //reverseLayout :true,
-                //       type: isNumericMode
-                //           ? VirtualKeyboardType.Numeric
-                //           : VirtualKeyboardType.Alphanumeric,
-                //       onKeyPress: _onKeyPress),
-                // )
-
-
               ],),
           ),
-        );
+        ),
+      ),
 
-      }
-      );
+    );
+
+  }
+
+  @override
+  Widget build(BuildContext context){
+    return TextButton(onPressed: (){
+      dialog2();
 
     },
       child: Text(widget.text, style: TextStyle(color: this.widget.iscurrentuse ? Colors.blue : Colors.black),),
