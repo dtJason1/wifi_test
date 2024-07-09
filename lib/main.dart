@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     ElevatedButton(onPressed: (){setState(() {
-                      provider.scanWifi().then((value) => isSelected = true);
+                      provider.changeWifiList;
                     });}, child: Text("hi")),
 
                   ],
