@@ -64,8 +64,7 @@ class WifiProvider extends ChangeNotifier{
             ];
         }
         else{
-
-          // finalList.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false));
+          finalList.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false));
         }
       }
       currentWIFIList.addAll(finalList);
@@ -195,12 +194,19 @@ class _MyButtonState extends State<MyButton> {
 
   @override
   Widget build(BuildContext context){
-    return TextButton(onPressed: (){
-      dialog2();
+    return  MultiProvider(
+      providers: [
 
-    },
-      child: Text(widget.text, style: TextStyle(color: this.widget.iscurrentuse ? Colors.blue : Colors.black),),
-    );
+        ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
+        ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
+
+      ],
+      child: TextButton(onPressed: (){
+        dialog2();
+
+      }, child: Text(widget.text, style: TextStyle(color: this.widget.iscurrentuse ? Colors.blue : Colors.black),),));
+
+
   }
 
 }
