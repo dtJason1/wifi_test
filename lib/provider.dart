@@ -246,7 +246,7 @@ class Dialog2 extends StatelessWidget{
                               width: 200,
                               height: 40,
                               color: Colors.blueAccent,
-                              child: TextField(cursorColor: Colors.red,),
+                              child: Text(keyboardkey.key),
                             )
                         );
                       }
