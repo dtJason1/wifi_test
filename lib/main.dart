@@ -112,33 +112,38 @@ class _MyHomePageState extends State<MyHomePage> {
           isSelected ? Consumer<WifiProvider>(
             builder: (context, provider, child) {
               return Center(
-                child: Container(child:Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: SizedBox(
-                    height: 400,
-                    child: Column(
+                child: GestureDetector(
+                  onTap: (){setState(() {
+                    isSelected = false;
+                  });},
+                  child: Container(child:Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: SizedBox(
+                      height: 400,
+                      child: Column(
 
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 25.0),
-                          child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
-                        ),
-
-                        SizedBox(
-
-                          height: 300,
-                          width: 300,
-                          child: ListView(
-                            shrinkWrap: true,
-                            children: provider.wifiList,
-
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 25.0),
+                            child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
                           ),
-                        ),
-                      ],
+
+                          SizedBox(
+
+                            height: 300,
+                            width: 300,
+                            child: ListView(
+                              shrinkWrap: true,
+                              children: provider.wifiList,
+
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                )
-                  ,),
+                  )
+                    ,),
+                ),
               );
             }
           ) : Container()
