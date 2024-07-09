@@ -116,6 +116,7 @@ class FileViewer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 25.0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
                   IconButton(onPressed: wifiProvider.changeWifiList, icon: Icon(Icons.refresh))
