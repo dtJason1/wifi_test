@@ -102,7 +102,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       ],
                     ),
                   ),
-
                     AnimatedContainer(duration: Duration(seconds: 1),
                       height: 400,
                       width: 200,

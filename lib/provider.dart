@@ -51,10 +51,21 @@ class WifiProvider extends ChangeNotifier{
       List<Widget> currentWIFIList = [];
       for (var ssid in ssids) {
         if(ssid[0] == '*'){
-          currentWIFIList = [MyButton(text: ssid.substring(26,56).replaceAll(" ", ""), iscurrentuse: true)];
+          currentWIFIList = [
+            MultiProvider(
+              providers: [
+
+                ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
+                ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
+
+              ],
+              child:  MyButton(text: ssid.substring(26,56).replaceAll(" ", ""), iscurrentuse: true),
+            ),
+            ];
         }
         else{
-          finalList.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false));
+
+          // finalList.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false));
         }
       }
       currentWIFIList.addAll(finalList);
