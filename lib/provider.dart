@@ -105,8 +105,6 @@ class _MyButtonState extends State<MyButton> {
   }
 
   void dialog2(){
-    var keyBoardkey = Provider.of<KeyBoardKey>(context, listen: false);
-
 
       //Notice the use of ChangeNotifierProvider<ReportState>.value
       //   child: Dialog(
@@ -172,14 +170,10 @@ class _MyButtonState extends State<MyButton> {
 
     showDialog(
         context: context,
-        builder:(_) => ChangeNotifierProvider<KeyBoardKey>.value(
-          value: keyBoardkey,
-          child: Dialog2(text:widget.text),
-        ) );
+        builder:(_) => Dialog2(text:widget.text) );
 
   }
-  // 다이얼로그는 써야하는데, 키보드가 안됨
-  // 키보드 키가 눌릴때마다
+
   @override
   Widget build(BuildContext context){
     return TextButton(onPressed: (){
