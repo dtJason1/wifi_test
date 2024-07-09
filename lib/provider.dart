@@ -10,6 +10,8 @@ class WifiProvider extends ChangeNotifier{
   List<Widget> _wifiList =  [];
   List<Widget> get wifiList => _wifiList;
 
+  bool _isLoading = true;
+  bool get isLoading => _isLoading;
   Future<List<Widget>> scanWifi() async {
     List<StatefulWidget> finalList = [];
 
@@ -55,6 +57,7 @@ class WifiProvider extends ChangeNotifier{
   void changeWifiList() async{
     print("-======scanning wifi");
     _wifiList = await scanWifi();
+    _isLoading = false;
     print("-======notifying=====");
 
     notifyListeners();
