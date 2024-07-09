@@ -90,19 +90,23 @@ class _MyHomePageState extends State<MyHomePage> {
 
       body: Stack(
         children: [
-          Container(
-            width: 1200,
-            height: 800,
-            child: Column(
+          Consumer<WifiProvider>(
+            builder: (context, provider,child) {
+              return Container(
+                width: 1200,
+                height: 800,
+                child: Column(
 
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                ElevatedButton(onPressed: (){setState(() {
-                  isSelected = true;
-                });}, child: Text("hi")),
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    ElevatedButton(onPressed: (){setState(() {
+                      provider.scanWifi().then((value) => isSelected = true);
+                    });}, child: Text("hi")),
 
-              ],
-            ),
+                  ],
+                ),
+              );
+            }
           ),
           isSelected ? Consumer<WifiProvider>(
             builder: (context, provider, child) {
