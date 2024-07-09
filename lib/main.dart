@@ -19,13 +19,12 @@ void main() {
 }
 
 
-class fakepage extends StatelessWidget{
+class fakepage extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
-
+  Widget build(BuildContext context) {
     return Container();
   }
-
+}
 
 //
 // // raspberry nmcli 설치됨
