@@ -46,42 +46,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   bool isSelected = false;
-  void popup(){
-    showDialog(context: context,
-        builder: (context){
-          return Dialog(
-
-            child:
-              Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: SizedBox(
-                height: 400,
-                child: Column(
-
-                  children: [
-                      Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 25.0),
-                      child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
-                    ),
-
-                    SizedBox(
-                      height: 300,
-                      width: 300,
-                      child: ListView(
-                        shrinkWrap: true,
-                        children: [],
-
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            )
-          );
-        }
-    );
-
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,9 +64,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                    ElevatedButton(onPressed: (){
+                     provider.changeWifiList();
                      showDialog(context: context, builder: (context){
                        return DialogContent(provider: provider);});
-                     }, child: child)
+                     }, child: Text("wifi"))
 
                   ],
                 ),
