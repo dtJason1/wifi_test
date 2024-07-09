@@ -111,34 +111,30 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           isSelected ? Consumer<WifiProvider>(
             builder: (context, provider, child) {
-              return Container(
+              return Center(
                 child: Container(child:Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: SizedBox(
-
                     height: 400,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 400.0),
-                      child: Column(
+                    child: Column(
 
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 25.0),
-                            child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 25.0),
+                          child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
+                        ),
+
+                        SizedBox(
+
+                          height: 300,
+                          width: 300,
+                          child: ListView(
+                            shrinkWrap: true,
+                            children: provider.wifiList,
+
                           ),
-
-                          SizedBox(
-
-                            height: 300,
-                            width: 300,
-                            child: ListView(
-                              shrinkWrap: true,
-                              children: provider.wifiList,
-
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 )
