@@ -5,9 +5,10 @@ import 'package:virtual_keyboard_multi_language/virtual_keyboard_multi_language.
 
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
-import 'package:wifi_test/provider.dart';
-
+import 'provider.dart';
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(MyApp());
 }
 
@@ -43,44 +44,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Future<List<Widget>> scanWifi() async {
-    List<StatefulWidget> finalList = [];
-
-    try {
-      // Run the command
-      await Process.run('nmcli',['device', 'wifi', 'rescan']);
-      var result = await Process.run('nmcli',['device', 'wifi', 'list']);
-
-      // Check for errors
-      if (result.exitCode != 0) {
-        print('Error: ${result.stderr}');
-        return [];
-      }
-      // Filter SSIDs
-      var ssids = result.stdout.toString().trim().split('\n');
-      ssids.removeAt(0);
-      List<Widget> currentWIFIList = [];
-      for (var ssid in ssids) {
-        if(ssid[0] == '*'){
-          currentWIFIList = [MyButton(text: ssid.substring(26,56).replaceAll(" ", ""), iscurrentuse: true)];
-        }
-        else{
-
-          finalList.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false));
-
-        }
-      }
-      currentWIFIList.addAll(finalList);
-
-      return currentWIFIList;
-
-      // Print or return the SSIDs
-    } catch (e) {
-      print('Error: $e');
-      return [];
-    }
-  }
-// sdf
   void popup(){
     showDialog(context: context,
         builder: (context){
@@ -88,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
             child:
               Consumer<WifiProvider>(
-                builder: (context, provider,builder) {
+                builder: (context, provider,child) {
                   return Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: SizedBox(
@@ -100,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             padding: const EdgeInsets.symmetric(vertical: 25.0),
                             child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
                           ),
+
                           SizedBox(
                             height: 300,
                             width: 300,

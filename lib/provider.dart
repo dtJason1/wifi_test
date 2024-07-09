@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:virtual_keyboard_multi_language/virtual_keyboard_multi_language.dart';
 import 'package:provider/provider.dart';
-class WifiProvider with ChangeNotifier{
-  List<Widget> wifiList =  [];
+
+class WifiProvider extends ChangeNotifier{
+  List<Widget> _wifiList =  [];
+  List<Widget> get wifiList => _wifiList;
+
   Future<List<Widget>> scanWifi() async {
     List<StatefulWidget> finalList = [];
 
@@ -28,9 +31,7 @@ class WifiProvider with ChangeNotifier{
           currentWIFIList = [MyButton(text: ssid.substring(26,56).replaceAll(" ", ""), iscurrentuse: true)];
         }
         else{
-
           finalList.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false));
-
         }
       }
       currentWIFIList.addAll(finalList);
@@ -45,8 +46,7 @@ class WifiProvider with ChangeNotifier{
   }
 
   void changeWifiList() async{
-    wifiList = await scanWifi();
-
+    _wifiList = await scanWifi();
     notifyListeners();
   }
 
