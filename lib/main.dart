@@ -106,10 +106,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
 
                     AnimatedContainer(duration: Duration(seconds: 1),
+                      height: 400,
+                      width: 200,
                     alignment: Alignment.bottomCenter,
                     color: Colors.deepPurple,
                     child: VirtualKeyboard(
-                        height: 100,
+                        height: 400,
                         width: 200,
                         textColor: Colors.white,
                         textController: _controllerText,
