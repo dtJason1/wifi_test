@@ -35,6 +35,7 @@ class WifiProvider extends ChangeNotifier{
         }
       }
       currentWIFIList.addAll(finalList);
+      print(currentWIFIList);
 
       return currentWIFIList;
 
