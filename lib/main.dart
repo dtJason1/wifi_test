@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:virtual_keyboard_multi_language/virtual_keyboard_multi_language.dart';
@@ -157,9 +158,9 @@ class _MyButtonState extends State<MyButton> {
   late TextEditingController _controllerText;
   bool shiftEnabled = false;
   bool isNumericMode = false;
+  bool _show = false;
   @override
   void initState() {
-    // _customLayoutKeys = CustomLayoutKeys();
     _controllerText = TextEditingController();
     super.initState();
   }
@@ -196,16 +197,19 @@ class _MyButtonState extends State<MyButton> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(myPW)
+                      child: GestureDetector(
+                        onTap: (){setState(() {
+                          _show = true;
+                        });},
+                        child: Container(
+                          width: 200,
+                          height: 40,
+                        ),
+                      )
                     )
                   ],
                 ),
-                TextButton(onPressed: (){setState(() {
-                   myPW = "12345678";
-                });}, child: Text("12345678"),),
-                TextButton(onPressed: (){setState(() {
-                  myPW = "gkgk2022";
-                });}, child: Text("gkgk2022"),),
+
 
                 TextButton(onPressed: () async{
                   try {
@@ -218,10 +222,10 @@ class _MyButtonState extends State<MyButton> {
                     // TODO
                   }
                 }, child: Text("confirm")),
-                Container(
+                AnimatedContainer(duration: Duration(seconds: 1),
                   color: Colors.deepPurple,
                   child: VirtualKeyboard(
-                      height: 300,
+                      height: _show ? 300 : 0,
                       //width: 500,
                       textColor: Colors.white,
                       textController: _controllerText,
@@ -269,6 +273,9 @@ class _MyButtonState extends State<MyButton> {
       }
     }
     // Update the screen
-    setState(() {});
+    setState(() {
+      myPW = myPW;
+
+    });
   }
 }
