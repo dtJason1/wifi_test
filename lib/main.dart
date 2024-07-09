@@ -161,20 +161,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
     });
   }
-  // void dialog2(){
-  //   var wifiProvider = Provider.of<WifiProvider>(context, listen: false);
-  //
-  //   showDialog(
-  //     context: context,
-  //     //Notice the use of ChangeNotifierProvider<ReportState>.value
-  //     builder: (_) => ChangeNotifierProvider<WifiProvider>.value(
-  //       value: wifiProvider,
-  //       child: FileViewer(),
-  //     ),
-  //
-  //   );
-  //
-  // }
 
 }
 

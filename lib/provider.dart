@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // import 'package:provider/provider.dart';
 import 'dart:io';
-import 'package:virtual_keyboard_multi_language/virtual_keyboard_multi_language.dart';
 import 'package:provider/provider.dart';
 class KeyBoardKey extends ChangeNotifier{
   String _key = '';
@@ -210,7 +209,6 @@ class Dialog2 extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     //Notice the use of ChangeNotifierProvider<ReportState>.value
-    var keyboardkey = Provider.of<KeyBoardKey>(context, listen: false);
 
     return Dialog(
         child: SizedBox(
@@ -246,7 +244,7 @@ class Dialog2 extends StatelessWidget{
                             width: 200,
                             height: 40,
                             color: Colors.blueAccent,
-                            child: Text(keyboardkey.key),
+                            child: TextField(cursorColor: Colors.red,),
                           )
                       );
                     }
