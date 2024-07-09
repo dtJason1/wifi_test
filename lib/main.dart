@@ -59,30 +59,35 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 400,
                 child: CircularProgressIndicator());
           }
-          return Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: SizedBox(
-              height: 400,
-              child: Column(
+          else {
+            return Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: SizedBox(
+                height: 400,
+                child: Column(
 
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 25.0),
-                    child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
-                  ),
-                  SizedBox(
-                    height: 300,
-                    width: 300,
-                    child: ListView(
-                      shrinkWrap: true,
-                      children: context.watch<WifiProvider>().wifiList,
-
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 25.0),
+                      child: Text("WIFI Lists",
+                        style: TextStyle(fontWeight: FontWeight.bold),),
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      height: 300,
+                      width: 300,
+                      child: ListView(
+                        shrinkWrap: true,
+                        children: context
+                            .watch<WifiProvider>()
+                            .wifiList,
+
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
+            );
+          }
         });
 
   }
@@ -106,6 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                       TextButton(child:  Text("hi"), onPressed: (){
+
                         provider.changeWifiList();
                         dialog();
                         },),
