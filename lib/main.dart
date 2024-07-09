@@ -61,6 +61,18 @@ class _MyHomePageState extends State<MyHomePage> {
     );
 
   }
+  String myPW = "";
+  late TextEditingController _controllerText;
+  bool shiftEnabled = false;
+  bool isNumericMode = false;
+  bool _show = false;
+  @override
+  void initState(){
+    _controllerText = TextEditingController();
+
+    super.initState();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
             builder: (context, provider,child) {
               return Stack(
                 children: [
-                  Container(
+                    Container(
                     width: 1200, // dialog에서 wifi list를 얻어온 다음,
                                   // wifi 로그인 dialog 에서 로그인 하면,  이전 dialog 는 업데이트,
                                   // dialog 에서 provider 를 못쓴는 것 같은데,
@@ -82,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                          TextButton(child:  Text("hi"), onPressed: () async{
+                          TextButton(child:  Text("WIFI"), onPressed: () async{
 
                             provider.changeWifiList();
                             dialog();
@@ -92,6 +104,23 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
 
+                    AnimatedContainer(duration: Duration(seconds: 1),
+                    color: Colors.deepPurple,
+                    child: VirtualKeyboard(
+                        height: _show ? 300 : 0,
+                        width: 500,
+                        textColor: Colors.white,
+                        textController: _controllerText,
+                        //customLayoutKeys: _customLayoutKeys,
+                        defaultLayouts: [
+                          VirtualKeyboardDefaultLayouts.English
+                        ],
+                        //reverseLayout :true,
+                        type: isNumericMode
+                            ? VirtualKeyboardType.Numeric
+                            : VirtualKeyboardType.Alphanumeric,
+                        onKeyPress: _onKeyPress),
+                  )
                 ],
               );
             }
@@ -101,6 +130,34 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
  );
+  }
+  _onKeyPress(VirtualKeyboardKey key) {
+    if (key.keyType == VirtualKeyboardKeyType.String) {
+      myPW = myPW + ((shiftEnabled ? key.capsText : key.text) ?? '');
+    } else if (key.keyType == VirtualKeyboardKeyType.Action) {
+      switch (key.action) {
+        case VirtualKeyboardKeyAction.Backspace:
+          if (myPW.length == 0) return;
+          myPW = myPW.substring(0, myPW.length - 1);
+          break;
+        case VirtualKeyboardKeyAction.Return:
+          myPW = myPW + '\n';
+          break;
+        case VirtualKeyboardKeyAction.Space:
+          myPW = myPW + (key.text ?? '');
+          break;
+        case VirtualKeyboardKeyAction.Shift:
+          shiftEnabled = !shiftEnabled;
+          break;
+        default:
+      }
+    }
+    // Update the screen
+
+    setState(() {
+      myPW = myPW;
+
+    });
   }
 }
 
