@@ -101,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: <Widget>[
                     ElevatedButton(onPressed: (){setState(() {
                       isSelected = true;
-                      provider.changeWifiList;
+                      provider.changeWifiList();
                     });}, child: Text("hi")),
 
                   ],
@@ -128,6 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
 
                           SizedBox(
+
                             height: 300,
                             width: 300,
                             child: ListView(
