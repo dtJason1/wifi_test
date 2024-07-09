@@ -44,41 +44,39 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  bool isSelected = false;
   void popup(){
     showDialog(context: context,
         builder: (context){
-          return Consumer<WifiProvider>(
-            builder: (context, provider,child) {
-              return Dialog(
+          return Dialog(
 
-                child:
-                  Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: SizedBox(
-                    height: 400,
-                    child: Column(
+            child:
+              Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: SizedBox(
+                height: 400,
+                child: Column(
 
-                      children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 25.0),
-                          child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
-                        ),
-
-                        SizedBox(
-                          height: 300,
-                          width: 300,
-                          child: ListView(
-                            shrinkWrap: true,
-                            children: [],
-
-                          ),
-                        ),
-                      ],
+                  children: [
+                      Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 25.0),
+                      child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
                     ),
-                  ),
-                )
-              );
-            }
+
+                    SizedBox(
+                      height: 300,
+                      width: 300,
+                      child: ListView(
+                        shrinkWrap: true,
+                        children: [],
+
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
           );
         }
     );
@@ -90,17 +88,24 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
 
-      body: Container(
-        width: 1200,
-        height: 800,
-        child: Column(
+      body: Stack(
+        children: [
+          Container(
+            width: 1200,
+            height: 800,
+            child: Column(
 
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(onPressed: popup, child: Text("hi")),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                ElevatedButton(onPressed: (){setState(() {
+                  isSelected = true;
+                });}, child: Text("hi")),
 
-          ],
-        ),
+              ],
+            ),
+          ),
+          isSelected ? Container(color: Colors.red,) : Container()
+        ],
       ),
  );
   }
