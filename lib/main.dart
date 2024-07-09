@@ -52,6 +52,13 @@ class _MyHomePageState extends State<MyHomePage> {
     showDialog(
         context: context,
         builder: (dialog) {
+
+          if(context.watch<WifiProvider>().isLoading){
+            return Container(
+              width: 400,
+                height: 400,
+                child: CircularProgressIndicator());
+          }
           return Padding(
             padding: const EdgeInsets.all(10.0),
             child: SizedBox(
@@ -98,7 +105,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                      TextButton(child:  Text("hi"), onPressed: (){provider.changeWifiList();},),
+                      TextButton(child:  Text("hi"), onPressed: (){
+                        provider.changeWifiList();
+                        dialog();
+                        },),
 
                   ],
                 ),
