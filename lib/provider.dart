@@ -181,7 +181,15 @@ class _MyButtonState extends State<MyButton> {
 
     showDialog(
         context: context,
-        builder:(_) => Dialog2(text:widget.text) );
+        builder:(_) => MultiProvider(
+          providers: [
+            ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
+            ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
+          ],
+          child:  Dialog2(text:widget.text),
+        ),
+
+    );
 
   }
 
