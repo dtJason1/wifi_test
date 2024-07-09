@@ -193,7 +193,9 @@ class Dialog2 extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     //Notice the use of ChangeNotifierProvider<ReportState>.value
-     return Dialog(
+    var keyboardkey = Provider.of<KeyBoardKey>(context, listen: false);
+
+    return Dialog(
         child: SizedBox(
           width: 300,
           height: 300,
@@ -220,6 +222,7 @@ class Dialog2 extends StatelessWidget{
                   ),
                   Consumer<KeyBoardKey>(
                     builder: (context , keyboardkey, child) {
+
                       return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
