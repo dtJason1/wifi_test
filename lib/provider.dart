@@ -147,24 +147,24 @@ class _MyButtonState extends State<MyButton> {
                     // TODO
                   }
                 }, child: Text("confirm")),
+                // AnimatedContainer(duration: Duration(seconds: 1),
+                //   color: Colors.deepPurple,
+                //   child: VirtualKeyboard(
+                //       height: _show ? 300 : 0,
+                //       //width: 500,
+                //       textColor: Colors.white,
+                //       textController: _controllerText,
+                //       //customLayoutKeys: _customLayoutKeys,
+                //       defaultLayouts: [
+                //         VirtualKeyboardDefaultLayouts.English
+                //       ],
+                //       //reverseLayout :true,
+                //       type: isNumericMode
+                //           ? VirtualKeyboardType.Numeric
+                //           : VirtualKeyboardType.Alphanumeric,
+                //       onKeyPress: _onKeyPress),
+                // )
 
-                AnimatedContainer(duration: Duration(seconds: 1),
-                  color: Colors.deepPurple,
-                  child: VirtualKeyboard(
-                      height: _show ? 300 : 0,
-                      //width: 500,
-                      textColor: Colors.white,
-                      textController: _controllerText,
-                      //customLayoutKeys: _customLayoutKeys,
-                      defaultLayouts: [
-                        VirtualKeyboardDefaultLayouts.English
-                      ],
-                      //reverseLayout :true,
-                      type: isNumericMode
-                          ? VirtualKeyboardType.Numeric
-                          : VirtualKeyboardType.Alphanumeric,
-                      onKeyPress: _onKeyPress),
-                )
 
               ],),
           ),
@@ -204,4 +204,5 @@ class _MyButtonState extends State<MyButton> {
 
     });
   }
+
 }

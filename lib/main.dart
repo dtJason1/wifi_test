@@ -71,23 +71,28 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Consumer<WifiProvider>(
             builder: (context, provider,child) {
-              return Container(
-                width: 1200, // dialog에서 wifi list를 얻어온 다음,
-                              // wifi 로그인 dialog 에서 로그인 하면,  이전 dialog 는 업데이트,
-                              // dialog 에서 provider 를 못쓴는 것 같은데,
-                height: 800,
-                child: Column(
+              return Stack(
+                children: [
+                  Container(
+                    width: 1200, // dialog에서 wifi list를 얻어온 다음,
+                                  // wifi 로그인 dialog 에서 로그인 하면,  이전 dialog 는 업데이트,
+                                  // dialog 에서 provider 를 못쓴는 것 같은데,
+                    height: 800,
+                    child: Column(
 
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                      TextButton(child:  Text("hi"), onPressed: () async{
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                          TextButton(child:  Text("hi"), onPressed: () async{
 
-                        provider.changeWifiList();
-                        dialog();
-                        },),
+                            provider.changeWifiList();
+                            dialog();
+                            },),
 
-                  ],
-                ),
+                      ],
+                    ),
+                  ),
+
+                ],
               );
             }
           ),
