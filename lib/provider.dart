@@ -192,7 +192,6 @@ class Dialog2 extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    var keyboardKey = Provider.of<KeyBoardKey>(context);
     //Notice the use of ChangeNotifierProvider<ReportState>.value
      return Dialog(
         child: SizedBox(
@@ -219,27 +218,35 @@ class Dialog2 extends StatelessWidget{
                     padding: const EdgeInsets.all(8.0),
                     child: Text("Password"),
                   ),
-                  Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: 200,
-                        height: 40,
-                        color: Colors.blueAccent,
-                        child: Text(keyboardKey.key),
-                      )
+                  Consumer<KeyBoardKey>(
+                    builder: (context , keyboardkey, child) {
+                      return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: 200,
+                            height: 40,
+                            color: Colors.blueAccent,
+                            child: Text(keyboardkey.key),
+                          )
+                      );
+                    }
                   )
                 ],
               ),
-              TextButton(onPressed: () async{
-                try {
-                  await Process.run('nmcli',['device', 'wifi', 'connect', '${text}', 'password', '${keyboardKey.key}']).then((value){
-                    print(value);
-                    Navigator.of(context).pop();});
-                } on Exception catch (e) {
-                  print(e);
-                  // TODO
+              Consumer<KeyBoardKey>(
+                builder: (context, keyboardkey, child) {
+                  return TextButton(onPressed: () async{
+                    try {
+                      await Process.run('nmcli',['device', 'wifi', 'connect', '${text}', 'password', '${keyboardkey.key}']).then((value){
+                        print(value);
+                        Navigator.of(context).pop();});
+                    } on Exception catch (e) {
+                      print(e);
+                      // TODO
+                    }
+                  }, child: Text("confirm"));
                 }
-              }, child: Text("confirm")),
+              ),
             ],),
         ),
       );
