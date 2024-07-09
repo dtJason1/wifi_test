@@ -110,6 +110,7 @@ class FileViewer extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       child: SizedBox(
         height: 400,
+        width: 400,
         child: Column(
 
           children: [
