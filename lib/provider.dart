@@ -212,67 +212,67 @@ class Dialog2 extends StatelessWidget{
     //Notice the use of ChangeNotifierProvider<ReportState>.value
 
     return Dialog(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          color: Color.fromRGBO(0, 0, 0, 0.3),
-          child: Center(
-            child: SizedBox(
-              width: 300,
-              height: 300,
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text("SSID"),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(text),
-                      ),
-                    ],
-                  ),
-            
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text("Password"),
-                      ),
-                      Consumer<KeyBoardKey>(
-                        builder: (context , keyboardkey, child) {
-            
-                          return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                width: 200,
-                                height: 40,
-                                color: Colors.blueAccent,
-                                child: TextField(cursorColor: Colors.red,),
-                              )
-                          );
-                        }
-                      )
-                    ],
-                  ),
-                  Consumer<KeyBoardKey>(
-                    builder: (context, keyboardkey, child) {
-                      return TextButton(onPressed: () async{
-                        try {
-                          await Process.run('nmcli',['device', 'wifi', 'connect', '${text}', 'password', '${keyboardkey.key}']).then((value){
-                            print(value);
-                            Navigator.of(context).pop();});
-                        } on Exception catch (e) {
-                          print(e);
-                          // TODO
-                        }
-                      }, child: Text("confirm"));
-                    }
-                  ),
-                ],),
-            ),
+        child: Center(
+          child: Container(
+            width: 300,
+            height: 300,
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("SSID"),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(text),
+                    ),
+                  ],
+                ),
+
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("Password"),
+                    ),
+                    Consumer<KeyBoardKey>(
+                      builder: (context , keyboardkey, child) {
+
+                        return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              width: 200,
+                              height: 40,
+                              color: Colors.blueAccent,
+                              child: TextField(cursorColor: Colors.red,),
+                            )
+                        );
+                      }
+                    )
+                  ],
+                ),
+                Consumer<KeyBoardKey>(
+                  builder: (context, keyboardkey, child) {
+                    return TextButton(onPressed: () async{
+                      try {
+                        await Process.run('nmcli',['device', 'wifi', 'connect', '${text}', 'password', '${keyboardkey.key}']).then((value){
+                          print(value);
+                          Navigator.of(context).pop();});
+                      } on Exception catch (e) {
+                        print(e);
+                        // TODO
+                      }
+                    }, child: Text("confirm"));
+                  }
+                ),
+                Consumer<KeyBoardKey>(
+                  builder: (context, keyboardkey, child) {
+                    return TextButton(child: Text("Q"), onPressed: (){keyboardkey.addKey("q");},);
+                  }
+                )
+              ],),
           ),
         ),
       );
