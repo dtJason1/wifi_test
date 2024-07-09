@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
         providers: [
 
           ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
+          ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
 
         ],
         child: MyHomePage(),
