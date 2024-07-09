@@ -94,6 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
             builder: (context, provider,child) {
               return GestureDetector(
                 onTap: (){setState(() {
+                  print("tapped");
                   isSelected = false;
                 });},
                 child: Container(
