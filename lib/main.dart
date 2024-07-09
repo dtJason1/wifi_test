@@ -7,14 +7,17 @@ import 'package:provider/provider.dart';
 import 'package:wifi_test/provider.dart';
 
 void main() {
-  MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (_) => WifiProvider()),
-
-    ],
-    child: MyApp(),
-  );
+  // MultiProvider(
+  //   providers: [
+  //     ChangeNotifierProvider(create: (_) => WifiProvider()),
+  //
+  //   ],
+  //   child: MyApp(),
+  //
+  // );
+  MyApp();
 }
+
 
 // raspberry nmcli 설치됨
 class MyApp extends StatelessWidget {
@@ -30,11 +33,20 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: fakepage()
     );
+    // const MyHomePage(title: 'Flutter Demo Home Page'),
   }
 }
 
+class fakepage extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+
+    return Container();
+  }
+
+}
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
