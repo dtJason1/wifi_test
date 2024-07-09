@@ -147,7 +147,11 @@ class _MyButtonState extends State<MyButton> {
                             width: 200,
                             height: 40,
                             color: Colors.blueAccent,
-                            child: Text(keyBoardkey.key),
+                            child: Consumer<KeyBoardKey>(
+                              builder: (context, key, child) {
+                                return Text(key.key);
+                              }
+                            ),
                           ),
                         )
                     )
@@ -181,33 +185,6 @@ class _MyButtonState extends State<MyButton> {
     },
       child: Text(widget.text, style: TextStyle(color: this.widget.iscurrentuse ? Colors.blue : Colors.black),),
     );
-  }
-  _onKeyPress(VirtualKeyboardKey key) {
-    if (key.keyType == VirtualKeyboardKeyType.String) {
-      myPW = myPW + ((shiftEnabled ? key.capsText : key.text) ?? '');
-    } else if (key.keyType == VirtualKeyboardKeyType.Action) {
-      switch (key.action) {
-        case VirtualKeyboardKeyAction.Backspace:
-          if (myPW.length == 0) return;
-          myPW = myPW.substring(0, myPW.length - 1);
-          break;
-        case VirtualKeyboardKeyAction.Return:
-          myPW = myPW + '\n';
-          break;
-        case VirtualKeyboardKeyAction.Space:
-          myPW = myPW + (key.text ?? '');
-          break;
-        case VirtualKeyboardKeyAction.Shift:
-          shiftEnabled = !shiftEnabled;
-          break;
-        default:
-      }
-    }
-    // Update the screen
-    setState(() {
-      myPW = myPW;
-
-    });
   }
 
 }
