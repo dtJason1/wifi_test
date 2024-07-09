@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:virtual_keyboard_multi_language/virtual_keyboard_multi_language.dart';
 import 'package:provider/provider.dart';
 
+
 class WifiProvider extends ChangeNotifier{
   List<Widget> _wifiList =  [];
   List<Widget> get wifiList => _wifiList;
@@ -137,8 +138,6 @@ class _MyButtonState extends State<MyButton> {
                     return TextButton(onPressed: () async{
                       try {
                         print("${widget.text }, , ${myPW}");
-                        provider.scanWifi();
-
                         await Process.run('nmcli',['device', 'wifi', 'connect', '${widget.text}', 'password', '$myPW']).then((value){
                           print(value);
                           Navigator.of(context).pop();});
