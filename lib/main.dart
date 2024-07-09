@@ -47,6 +47,39 @@ class _MyHomePageState extends State<MyHomePage> {
 
   bool isSelected = false;
 
+  void dialog(){
+    final myModel = context.read<WifiProvider>();
+    showDialog(
+        context: context,
+        builder: (dialog) {
+          return Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: SizedBox(
+              height: 400,
+              child: Column(
+
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 25.0),
+                    child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
+                  ),
+                  SizedBox(
+                    height: 300,
+                    width: 300,
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: context.watch<WifiProvider>().wifiList,
+
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -57,23 +90,23 @@ class _MyHomePageState extends State<MyHomePage> {
           Consumer<WifiProvider>(
             builder: (context, provider,child) {
               return Container(
-                width: 1200,
+                width: 1200, // dialog에서 wifi list를 얻어온 다음,
+                              // wifi 로그인 dialog 에서 로그인 하면,  이전 dialog 는 업데이트,
+                              // dialog 에서 provider 를 못쓴는 것 같은데,
                 height: 800,
                 child: Column(
 
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                   ElevatedButton(onPressed: (){
-                     provider.changeWifiList();
-                     showDialog(context: context, builder: (context){
-                       return DialogContent(provider: provider);});
-                     }, child: Text("wifi"))
+                      TextButton(child:  Text("hi"), onPressed: (){provider.changeWifiList();},),
 
                   ],
                 ),
               );
             }
           ),
+
+
         ],
       ),
  );
@@ -81,198 +114,3 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 
-class MyButton extends StatefulWidget{
-  MyButton({required this.text, required this.iscurrentuse});
-  final String text;
-  final bool iscurrentuse;
-
-  @override
-  State<MyButton> createState() => _MyButtonState();
-}
-
-class _MyButtonState extends State<MyButton> {
-  String myPW = "";
-  late TextEditingController _controllerText;
-  bool shiftEnabled = false;
-  bool isNumericMode = false;
-  bool _show = false;
-  @override
-  void initState() {
-    _controllerText = TextEditingController();
-    super.initState();
-  }
-  @override
-  Widget build(BuildContext context){
-    return TextButton(onPressed: (){
-      showDialog(context: context, builder:(context) {
-        return Dialog(
-          child: SizedBox(
-            width: 300,
-            height: 300,
-            child: Column(
-              children: [
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text("SSID"),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(widget.text),
-                  ),
-
-
-                ],
-              ),
-
-              Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Password"),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GestureDetector(
-                        onTap: (){setState(() {
-                          _show = true;
-                        });},
-                        child: Container(
-                          width: 200,
-                          height: 40,
-                        ),
-                      )
-                    )
-                  ],
-                ),
-
-
-                TextButton(onPressed: () async{
-                  try {
-                    print("${widget.text }, , ${myPW}");
-                    await Process.run('nmcli',['device', 'wifi', 'connect', '${widget.text}', 'password', '$myPW']).then((value) => Navigator.of(context).pop());
-
-
-                  } on Exception catch (e) {
-                    print(e);
-                    // TODO
-                  }
-                }, child: Text("confirm")),
-                AnimatedContainer(duration: Duration(seconds: 1),
-                  color: Colors.deepPurple,
-                  child: VirtualKeyboard(
-                      height: _show ? 300 : 0,
-                      //width: 500,
-                      textColor: Colors.white,
-                      textController: _controllerText,
-                      //customLayoutKeys: _customLayoutKeys,
-                      defaultLayouts: [
-                        VirtualKeyboardDefaultLayouts.English
-                      ],
-                      //reverseLayout :true,
-                      type: isNumericMode
-                          ? VirtualKeyboardType.Numeric
-                          : VirtualKeyboardType.Alphanumeric,
-                      onKeyPress: _onKeyPress),
-                )
-
-              ],),
-          ),
-        );
-
-      }
-      );
-
-    },
-      child: Text(widget.text, style: TextStyle(color: this.widget.iscurrentuse ? Colors.blue : Colors.black),),
-    );
-  }
-  _onKeyPress(VirtualKeyboardKey key) {
-    if (key.keyType == VirtualKeyboardKeyType.String) {
-      myPW = myPW + ((shiftEnabled ? key.capsText : key.text) ?? '');
-    } else if (key.keyType == VirtualKeyboardKeyType.Action) {
-      switch (key.action) {
-        case VirtualKeyboardKeyAction.Backspace:
-          if (myPW.length == 0) return;
-          myPW = myPW.substring(0, myPW.length - 1);
-          break;
-        case VirtualKeyboardKeyAction.Return:
-          myPW = myPW + '\n';
-          break;
-        case VirtualKeyboardKeyAction.Space:
-          myPW = myPW + (key.text ?? '');
-          break;
-        case VirtualKeyboardKeyAction.Shift:
-          shiftEnabled = !shiftEnabled;
-          break;
-        default:
-      }
-    }
-    // Update the screen
-    setState(() {
-      myPW = myPW;
-
-    });
-  }
-}
-
-
-class DialogContent extends StatefulWidget {
-
-  final WifiProvider provider;
-
-  const DialogContent({Key? key, required this.provider}) : super(key: key);
-
-  @override
-  _DialogContentState createState() => _DialogContentState();
-}
-
-class _DialogContentState extends State<DialogContent> {
-  @override
-  Widget build(BuildContext context) {
-    var wifiProvider = Provider.of<WifiProvider>(context);
-
-    return Dialog(
-
-        child:
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: SizedBox(
-            height: 400,
-            child: Column(
-
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 25.0),
-                  child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
-                ),
-
-                SizedBox(
-                  height: 300,
-                  width: 300,
-                  child: Builder(
-                    builder: (context) {
-                      if(wifiProvider.wifiList == []){
-                        return CircularProgressIndicator();
-
-                      }
-                      else{
-
-                        return ListView(
-                          shrinkWrap: true,
-                          children: wifiProvider.wifiList,
-
-                        );
-                      }
-
-                    }
-                  ),
-                ),
-              ],
-            ),
-          ),
-        )
-    );
-  }
-}
