@@ -131,25 +131,20 @@ class _MyButtonState extends State<MyButton> {
                     )
                   ],
                 ),
+                TextButton(onPressed: () async{
+                  try {
+                    print("${widget.text }, , ${myPW}");
+                    await Process.run('nmcli',['device', 'wifi', 'connect', '${widget.text}', 'password', '$myPW']).then((value){
+                      print(value);
+                      Navigator.of(context).pop();});
 
 
-                Consumer<WifiProvider>(
-                  builder: (context, provider,builder) {
-                    return TextButton(onPressed: () async{
-                      try {
-                        print("${widget.text }, , ${myPW}");
-                        await Process.run('nmcli',['device', 'wifi', 'connect', '${widget.text}', 'password', '$myPW']).then((value){
-                          print(value);
-                          Navigator.of(context).pop();});
-
-
-                      } on Exception catch (e) {
-                        print(e);
-                        // TODO
-                      }
-                    }, child: Text("confirm"));
+                  } on Exception catch (e) {
+                    print(e);
+                    // TODO
                   }
-                ),
+                }, child: Text("confirm")),
+
                 AnimatedContainer(duration: Duration(seconds: 1),
                   color: Colors.deepPurple,
                   child: VirtualKeyboard(
