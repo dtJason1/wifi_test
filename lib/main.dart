@@ -109,8 +109,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     alignment: Alignment.bottomCenter,
                     color: Colors.deepPurple,
                     child: VirtualKeyboard(
-                        height: 400,
-                        width: 600,
+                        height: 100,
+                        width: 200,
                         textColor: Colors.white,
                         textController: _controllerText,
                         //customLayoutKeys: _customLayoutKeys,
