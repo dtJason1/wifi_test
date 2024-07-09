@@ -92,19 +92,24 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Consumer<WifiProvider>(
             builder: (context, provider,child) {
-              return Container(
-                width: 1200,
-                height: 800,
-                child: Column(
+              return GestureDetector(
+                onTap: (){setState(() {
+                  isSelected = false;
+                });},
+                child: Container(
+                  width: 1200,
+                  height: 800,
+                  child: Column(
 
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    ElevatedButton(onPressed: (){setState(() {
-                      isSelected = true;
-                      provider.changeWifiList();
-                    });}, child: Text("hi")),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      ElevatedButton(onPressed: (){setState(() {
+                        isSelected = true;
+                        provider.changeWifiList();
+                      });}, child: Text("hi")),
 
-                  ],
+                    ],
+                  ),
                 ),
               );
             }
@@ -112,38 +117,35 @@ class _MyHomePageState extends State<MyHomePage> {
           isSelected ? Consumer<WifiProvider>(
             builder: (context, provider, child) {
               return Center(
-                child: GestureDetector(
-                  onTap: (){setState(() {
-                    isSelected = false;
-                  });},
-                  child: Container(child:Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: SizedBox(
-                      height: 400,
-                      child: Column(
+                child: Container(
+                  color: Colors.grey,
+                  child:Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: SizedBox(
+                    height: 400,
+                    child: Column(
 
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 25.0),
-                            child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 25.0),
+                          child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
+                        ),
+
+                        SizedBox(
+
+                          height: 300,
+                          width: 300,
+                          child: ListView(
+                            shrinkWrap: true,
+                            children: provider.wifiList,
+
                           ),
-
-                          SizedBox(
-
-                            height: 300,
-                            width: 300,
-                            child: ListView(
-                              shrinkWrap: true,
-                              children: provider.wifiList,
-
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  )
-                    ,),
-                ),
+                  ),
+                )
+                  ,),
               );
             }
           ) : Container()
