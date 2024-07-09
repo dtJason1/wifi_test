@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'dart:io';
 import 'package:virtual_keyboard_multi_language/virtual_keyboard_multi_language.dart';
 
@@ -93,81 +92,23 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Consumer<WifiProvider>(
             builder: (context, provider,child) {
-              return GestureDetector(
-                onTap: (){setState(() {
-                  print("tapped");
-                  isSelected = false;
-                });},
-                child: Container(
-                  width: 1200,
-                  height: 800,
-                  child: Column(
+              return Container(
+                width: 1200,
+                height: 800,
+                child: Column(
 
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      ElevatedButton(onPressed: (){setState(() {
-                        isSelected = true;
-                        provider.changeWifiList();
-                      });}, child: Text("hi")),
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                   ElevatedButton(onPressed: (){
+                     showDialog(context: context, builder: (context){
+                       return DialogContent(provider: provider);});
+                     }, child: child)
 
-                    ],
-                  ),
+                  ],
                 ),
               );
             }
           ),
-          GestureDetector(
-            onTap: (){
-              setState(() {
-                print("hi");
-                isSelected = false;
-              });
-            },
-
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-          )),
-          
-          isSelected ? Consumer<WifiProvider>(
-            builder: (context, provider, child) {
-              return Center(
-                child: Container(
-                  color: Colors.grey,
-                  child:Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: SizedBox(
-                    height: 400,
-                    child: Column(
-
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 25.0),
-                          child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
-                        ),
-
-                        Builder(
-                          builder: (context) {
-                            return SizedBox(
-
-                              height: 300,
-                              width: 300,
-                              child: ListView(
-                                shrinkWrap: true,
-                                children: provider.wifiList,
-
-                              ),
-                            );
-                          }
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-                  ,),
-              );
-            }
-          ) : Container()
         ],
       ),
  );
@@ -308,5 +249,63 @@ class _MyButtonState extends State<MyButton> {
       myPW = myPW;
 
     });
+  }
+}
+
+
+class DialogContent extends StatefulWidget {
+
+  final WifiProvider provider;
+
+  const DialogContent({Key? key, required this.provider}) : super(key: key);
+
+  @override
+  _DialogContentState createState() => _DialogContentState();
+}
+
+class _DialogContentState extends State<DialogContent> {
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+
+        child:
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: SizedBox(
+            height: 400,
+            child: Column(
+
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 25.0),
+                  child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
+                ),
+
+                SizedBox(
+                  height: 300,
+                  width: 300,
+                  child: Builder(
+                    builder: (context) {
+                      if(widget.provider.wifiList == []){
+                        return CircularProgressIndicator();
+
+                      }
+                      else{
+
+                        return ListView(
+                          shrinkWrap: true,
+                          children: widget.provider.wifiList,
+
+                        );
+                      }
+
+                    }
+                  ),
+                ),
+              ],
+            ),
+          ),
+        )
+    );
   }
 }
