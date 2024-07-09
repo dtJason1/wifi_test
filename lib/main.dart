@@ -89,42 +89,30 @@ class _MyHomePageState extends State<MyHomePage> {
             child:
               Consumer<WifiProvider>(
                 builder: (context, provider,builder) {
-                  return FutureBuilder(future: scanWifi(), builder: (BuildContext context, AsyncSnapshot snapshot){
-                    if (snapshot.hasData == false) {
-                      return SizedBox(
-                        width: 300,
-                          height: 300,
-                          child: CircularProgressIndicator());
-                    }
-                    else{
-                      return Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: SizedBox(
-                          height: 400,
-                          child: Column(
+                  return Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: SizedBox(
+                      height: 400,
+                      child: Column(
 
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 25.0),
-                                child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
-                              ),
-                              SizedBox(
-                                height: 300,
-                                width: 300,
-                                child: ListView(
-                                  shrinkWrap: true,
-                                  children: snapshot.data,
-
-                                ),
-                              ),
-                            ],
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 25.0),
+                            child: Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
                           ),
-                        ),
-                      );
+                          SizedBox(
+                            height: 300,
+                            width: 300,
+                            child: ListView(
+                              shrinkWrap: true,
+                              children: provider.wifiList,
 
-                    }
-                  });
-                }
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );                }
               ),
           );
         }
