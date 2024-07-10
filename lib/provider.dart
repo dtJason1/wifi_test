@@ -318,11 +318,13 @@ class Dialog2 extends StatelessWidget{
                       child: Text("Password"),
                     ),
                     Consumer<KeyBoardKey>(
-                      builder: (context , keyboardkey, child) {
+                      builder: (context , provider, child) {
 
                         return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(onPressed: (){keyBoardDialog();}, child: Text(keyboardkey.key),)
+                            child: GestureDetector(
+                                onTap: (){keyBoardDialog();},
+                                child: Text( provider.key))
                         );
                       }
                     )
@@ -394,7 +396,7 @@ class _KeyState extends State<Key> {
                   height: 50,
                   decoration: BoxDecoration(border: Border.all(color: Colors.black)),
                   alignment: Alignment.center,
-                  child: TextButton(onPressed: (){provider.addKey(widget.keyboardkey);}, child: Text(provider.key),),
+                  child: TextButton(onPressed: (){provider.addKey(widget.keyboardkey);}, child: Text(widget.keyboardkey),),
 
 
               );
