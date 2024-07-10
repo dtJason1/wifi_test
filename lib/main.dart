@@ -102,26 +102,26 @@ class _MyHomePageState extends State<MyHomePage> {
                       ],
                     ),
                   ),
-                    AnimatedContainer(duration: Duration(seconds: 1),
-                      height: 400,
-                      width: 200,
-                    alignment: Alignment.bottomCenter,
-                    color: Colors.deepPurple,
-                    child: VirtualKeyboard(
-                        height: 400,
-                        width: 200,
-                        textColor: Colors.white,
-                        textController: _controllerText,
-                        //customLayoutKeys: _customLayoutKeys,
-                        defaultLayouts: [
-                          VirtualKeyboardDefaultLayouts.English
-                        ],
-                        //reverseLayout :true,
-                        type: isNumericMode
-                            ? VirtualKeyboardType.Numeric
-                            : VirtualKeyboardType.Alphanumeric,
-                        onKeyPress: _onKeyPress),
-                  )
+                  //   AnimatedContainer(duration: Duration(seconds: 1),
+                  //     height: 400,
+                  //     width: 200,
+                  //   alignment: Alignment.bottomCenter,
+                  //   color: Colors.deepPurple,
+                  //   child: VirtualKeyboard(
+                  //       height: 400,
+                  //       width: 200,
+                  //       textColor: Colors.white,
+                  //       textController: _controllerText,
+                  //       //customLayoutKeys: _customLayoutKeys,
+                  //       defaultLayouts: [
+                  //         VirtualKeyboardDefaultLayouts.English
+                  //       ],
+                  //       //reverseLayout :true,
+                  //       type: isNumericMode
+                  //           ? VirtualKeyboardType.Numeric
+                  //           : VirtualKeyboardType.Alphanumeric,
+                  //       onKeyPress: _onKeyPress),
+                  // )
                 ],
               );
             }
@@ -132,35 +132,35 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
  );
   }
-  _onKeyPress(VirtualKeyboardKey key) {
-    if (key.keyType == VirtualKeyboardKeyType.String) {
-      myPW = myPW + ((shiftEnabled ? key.capsText : key.text) ?? '');
-    } else if (key.keyType == VirtualKeyboardKeyType.Action) {
-      switch (key.action) {
-        case VirtualKeyboardKeyAction.Backspace:
-          if (myPW.length == 0) return;
-          myPW = myPW.substring(0, myPW.length - 1);
-          break;
-        case VirtualKeyboardKeyAction.Return:
-          myPW = myPW + '\n';
-          break;
-        case VirtualKeyboardKeyAction.Space:
-          myPW = myPW + (key.text ?? '');
-          break;
-        case VirtualKeyboardKeyAction.Shift:
-          shiftEnabled = !shiftEnabled;
-          break;
-        default:
-      }
-    }
-    // Update the screen
-
-    setState(() {
-      Provider.of<KeyBoardKey>(context).addKey(myPW);
-      print(myPW);
-
-    });
-  }
+  // _onKeyPress(VirtualKeyboardKey key) {
+  //   if (key.keyType == VirtualKeyboardKeyType.String) {
+  //     myPW = myPW + ((shiftEnabled ? key.capsText : key.text) ?? '');
+  //   } else if (key.keyType == VirtualKeyboardKeyType.Action) {
+  //     switch (key.action) {
+  //       case VirtualKeyboardKeyAction.Backspace:
+  //         if (myPW.length == 0) return;
+  //         myPW = myPW.substring(0, myPW.length - 1);
+  //         break;
+  //       case VirtualKeyboardKeyAction.Return:
+  //         myPW = myPW + '\n';
+  //         break;
+  //       case VirtualKeyboardKeyAction.Space:
+  //         myPW = myPW + (key.text ?? '');
+  //         break;
+  //       case VirtualKeyboardKeyAction.Shift:
+  //         shiftEnabled = !shiftEnabled;
+  //         break;
+  //       default:
+  //     }
+  //   }
+  //   // Update the screen
+  //
+  //   setState(() {
+  //     Provider.of<KeyBoardKey>(context).addKey(myPW);
+  //     print(myPW);
+  //
+  //   });
+  // }
 
 }
 

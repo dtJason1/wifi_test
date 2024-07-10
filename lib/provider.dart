@@ -214,72 +214,158 @@ class Dialog2 extends StatelessWidget{
     return Dialog(
 
           child: Container(
-            width: 300,
-            height: 300,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            color: Color.fromRGBO(0, 0, 0, 0),
             child: Column(
               children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("SSID"),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(text),
-                    ),
-                  ],
-                ),
-
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Password"),
-                    ),
-                    Consumer<KeyBoardKey>(
-                      builder: (context , keyboardkey, child) {
-
-                        return Padding(
+                Container(
+                  width: 300,
+                  height: 300,
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              width: 200,
-                              height: 40,
-                              color: Colors.blueAccent,
-                              child: Text(keyboardkey.key),
-                            )
-                        );
-                      }
-                    )
-                  ],
+                            child: Text("SSID"),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(text),
+                          ),
+                        ],
+                      ),
+
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text("Password"),
+                          ),
+                          Consumer<KeyBoardKey>(
+                            builder: (context , keyboardkey, child) {
+
+                              return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    width: 200,
+                                    height: 40,
+                                    color: Colors.blueAccent,
+                                    child: Text(keyboardkey.key),
+                                  )
+                              );
+                            }
+                          )
+                        ],
+                      ),
+                      Consumer<KeyBoardKey>(
+                        builder: (context, keyboardkey, child) {
+                          return TextButton(onPressed: () async{
+                            try {
+                              await Process.run('nmcli',['device', 'wifi', 'connect', '${text}', 'password', '${keyboardkey.key}']).then((value){
+                                print(value);
+                                Navigator.of(context).pop();});
+                            } on Exception catch (e) {
+                              print(e);
+                              // TODO
+                            }
+                          }, child: Text("confirm"));
+                        }
+                      ),
+                      Consumer<KeyBoardKey>(
+                        builder: (context, keyboardkey, child) {
+                          return TextButton(child: Text("Q"), onPressed: (){keyboardkey.addKey("q");},);
+                        }
+                      )
+                    ],),
                 ),
-                Consumer<KeyBoardKey>(
-                  builder: (context, keyboardkey, child) {
-                    return TextButton(onPressed: () async{
-                      try {
-                        await Process.run('nmcli',['device', 'wifi', 'connect', '${text}', 'password', '${keyboardkey.key}']).then((value){
-                          print(value);
-                          Navigator.of(context).pop();});
-                      } on Exception catch (e) {
-                        print(e);
-                        // TODO
-                      }
-                    }, child: Text("confirm"));
-                  }
-                ),
-                Consumer<KeyBoardKey>(
-                  builder: (context, keyboardkey, child) {
-                    return TextButton(child: Text("Q"), onPressed: (){keyboardkey.addKey("q");},);
-                  }
-                )
-              ],),
+                
+              ],
+            ),
           ),
         );
-
-
-
-
   }
 
 
+}
+
+
+class Key extends StatefulWidget{
+  const Key({super.key, required this.keyboardkey});
+  final String keyboardkey;
+
+  @override
+  State<Key> createState() => _KeyState();
+}
+
+class _KeyState extends State<Key> {
+  @override
+  Widget build(BuildContext context){
+    return Container(
+      width: 50,
+      height: 50,
+      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+      alignment: Alignment.center,
+      child: Text(widget.keyboardkey),
+
+
+    );
+
+
+  }
+}
+
+
+class KeyBoard extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+    return Container(
+      child:
+
+      GridView(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 10),
+        children: List.generate(30, (index) => null)
+        // [
+        //   Key(keyboardkey: '1',),
+        //   Key(keyboardkey: '2',),
+        //   Key(keyboardkey: '3',),
+        //   Key(keyboardkey: '4',),
+        //   Key(keyboardkey: '5',),
+        //   Key(keyboardkey: '6',),
+        //   Key(keyboardkey: '7',),
+        //   Key(keyboardkey: '8',),
+        //   Key(keyboardkey: '9',),
+        //   Key(keyboardkey: '0',),
+        //   Key(keyboardkey: 'q',),
+        //   Key(keyboardkey: 'w',),
+        //   Key(keyboardkey: 'e',),
+        //   Key(keyboardkey: 'r',),
+        //   Key(keyboardkey: 't',),
+        //   Key(keyboardkey: 'y',),
+        //   Key(keyboardkey: 'u',),
+        //   Key(keyboardkey: 'i',),
+        //   Key(keyboardkey: 'o',),
+        //   Key(keyboardkey: 'p',),
+        //   Key(keyboardkey: 'a',),
+        //   Key(keyboardkey: 's',),
+        //   Key(keyboardkey: 'd',),
+        //   Key(keyboardkey: 'f',),
+        //   Key(keyboardkey: 'g',),
+        //   Key(keyboardkey: 'h',),
+        //   Key(keyboardkey: 'j',),
+        //   Key(keyboardkey: 'k',),
+        //   Key(keyboardkey: 'l',),
+        //   Key(keyboardkey: 'z',),
+        //   Key(keyboardkey: 'x',),
+        //   Key(keyboardkey: 'c',),
+        //   Key(keyboardkey: 'v',),
+        //   Key(keyboardkey: 'b',),
+        //   Key(keyboardkey: 'n',),
+        //   Key(keyboardkey: 'm',),
+        //   Key(keyboardkey: 'back',)
+        // ],
+      ),
+    );
+  }
 }
