@@ -212,7 +212,7 @@ class Dialog2 extends StatelessWidget{
     //Notice the use of ChangeNotifierProvider<ReportState>.value
 
     return Dialog(
-        child: Center(
+
           child: Container(
             width: 300,
             height: 300,
@@ -274,8 +274,8 @@ class Dialog2 extends StatelessWidget{
                 )
               ],),
           ),
-        ),
-      );
+        );
+
 
 
 
