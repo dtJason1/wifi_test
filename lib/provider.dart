@@ -247,7 +247,6 @@ class _MyButtonState extends State<MyButton> {
     //
 
     showDialog(
-      barrierColor: Color(0x01000000),
       context: context,
       builder:(_) => MultiProvider(
         providers: [
