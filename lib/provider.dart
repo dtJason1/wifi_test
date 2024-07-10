@@ -182,83 +182,6 @@ class _MyButtonState extends State<MyButton> {
     );
 
   }
-  void keyBoardDialog(){
-
-    //Notice the use of ChangeNotifierProvider<ReportState>.value
-    //   child: Dialog(
-    //     child: SizedBox(
-    //       width: 300,
-    //       height: 300,
-    //       child: Column(
-    //         children: [
-    //           Row(
-    //             children: [
-    //               Padding(
-    //                 padding: const EdgeInsets.all(8.0),
-    //                 child: Text("SSID"),
-    //               ),
-    //               Padding(
-    //                 padding: const EdgeInsets.all(8.0),
-    //                 child: Text(widget.text),
-    //               ),
-    //             ],
-    //           ),
-    //
-    //           Row(
-    //             children: [
-    //               Padding(
-    //                 padding: const EdgeInsets.all(8.0),
-    //                 child: Text("Password"),
-    //               ),
-    //               Padding(
-    //                   padding: const EdgeInsets.all(8.0),
-    //                   child: GestureDetector(
-    //                     onTap: (){setState(() {
-    //                       _show = true;
-    //                     });},
-    //                     child: Container(
-    //                       width: 200,
-    //                       height: 40,
-    //                       color: Colors.blueAccent,
-    //                       child: Consumer<KeyBoardKey>(
-    //                         builder: (context, key, child) {
-    //                           return Text(key.key);
-    //                         }
-    //                       ),
-    //                     ),
-    //                   )
-    //               )
-    //             ],
-    //           ),
-    //           TextButton(onPressed: () async{
-    //             try {
-    //               print("${widget.text }, , ${myPW}");
-    //               await Process.run('nmcli',['device', 'wifi', 'connect', '${widget.text}', 'password', '$myPW']).then((value){
-    //                 print(value);
-    //                 Navigator.of(context).pop();});
-    //             } on Exception catch (e) {
-    //               print(e);
-    //               // TODO
-    //             }
-    //           }, child: Text("confirm")),
-    //         ],),
-    //     ),
-    //   ),
-    //
-
-    showDialog(
-      context: context,
-      builder:(_) => MultiProvider(
-        providers: [
-          ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
-          ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
-        ],
-        child:  KeyBoardDialogue(),
-      ),
-
-    );
-
-  }
 
 
   @override
@@ -288,6 +211,84 @@ class Dialog2 extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     //Notice the use of ChangeNotifierProvider<ReportState>.value
+    void keyBoardDialog(){
+
+      //Notice the use of ChangeNotifierProvider<ReportState>.value
+      //   child: Dialog(
+      //     child: SizedBox(
+      //       width: 300,
+      //       height: 300,
+      //       child: Column(
+      //         children: [
+      //           Row(
+      //             children: [
+      //               Padding(
+      //                 padding: const EdgeInsets.all(8.0),
+      //                 child: Text("SSID"),
+      //               ),
+      //               Padding(
+      //                 padding: const EdgeInsets.all(8.0),
+      //                 child: Text(widget.text),
+      //               ),
+      //             ],
+      //           ),
+      //
+      //           Row(
+      //             children: [
+      //               Padding(
+      //                 padding: const EdgeInsets.all(8.0),
+      //                 child: Text("Password"),
+      //               ),
+      //               Padding(
+      //                   padding: const EdgeInsets.all(8.0),
+      //                   child: GestureDetector(
+      //                     onTap: (){setState(() {
+      //                       _show = true;
+      //                     });},
+      //                     child: Container(
+      //                       width: 200,
+      //                       height: 40,
+      //                       color: Colors.blueAccent,
+      //                       child: Consumer<KeyBoardKey>(
+      //                         builder: (context, key, child) {
+      //                           return Text(key.key);
+      //                         }
+      //                       ),
+      //                     ),
+      //                   )
+      //               )
+      //             ],
+      //           ),
+      //           TextButton(onPressed: () async{
+      //             try {
+      //               print("${widget.text }, , ${myPW}");
+      //               await Process.run('nmcli',['device', 'wifi', 'connect', '${widget.text}', 'password', '$myPW']).then((value){
+      //                 print(value);
+      //                 Navigator.of(context).pop();});
+      //             } on Exception catch (e) {
+      //               print(e);
+      //               // TODO
+      //             }
+      //           }, child: Text("confirm")),
+      //         ],),
+      //     ),
+      //   ),
+      //
+
+      showDialog(
+        barrierColor: Color(0x01000000),
+        context: context,
+        builder:(_) => MultiProvider(
+          providers: [
+            ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
+            ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
+          ],
+          child:  KeyBoardDialogue(),
+        ),
+
+      );
+
+    }
 
     return Dialog(
 
@@ -320,9 +321,7 @@ class Dialog2 extends StatelessWidget{
 
                         return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(onPressed: (){
-                              showDialog(barrierColor: Color(0x01000000), context: (context), builder: (context){return Text("helloo");});
-                            }, child: Text(keyboardkey.key),)
+                            child: ElevatedButton(onPressed: (){keyBoardDialog();}, child: Text(keyboardkey.key),)
                         );
                       }
                     )
@@ -360,11 +359,10 @@ class KeyBoardDialogue extends StatelessWidget{
   Widget build(BuildContext context){
 
     return Dialog(
-      alignment: Alignment.center,
+      alignment: Alignment.bottomCenter,
       child: Container(
           width: 400,
           height: 300,
-          color: Colors.red,
 
           child: Text("this is a keyboard")),
 
