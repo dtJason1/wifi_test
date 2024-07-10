@@ -8,7 +8,7 @@ class KeyBoardKey extends ChangeNotifier{
   String get key => _key;
 
   void addKey (String insertedKey){
-    _key = insertedKey;
+    _key += insertedKey;
     notifyListeners();
 
   }
