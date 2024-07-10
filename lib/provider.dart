@@ -362,7 +362,12 @@ class KeyBoardDialogue extends StatelessWidget{
 
     return Dialog(
       alignment: Alignment.bottomCenter,
-      child: Text("this is a keyboard"),
+      child: Container(
+          width: 400,
+          height: 300,
+          color: Colors.red,
+
+          child: Text("this is a keyboard")),
 
 
 
