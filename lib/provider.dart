@@ -361,12 +361,12 @@ class KeyBoardDialogue extends StatelessWidget{
     return Dialog(
       alignment: Alignment.bottomCenter,
       child: Container(
-          width: 400,
-          height: 300,
+          width: 800,
+          height: 400,
 
-          child: Text("this is a keyboard")),
+          child: Key(keyboardkey: 'q'),
 
-
+      )
 
     );
   }
@@ -385,16 +385,26 @@ class Key extends StatefulWidget{
 class _KeyState extends State<Key> {
   @override
   Widget build(BuildContext context){
-    return Container(
-      width: 50,
-      height: 50,
-      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-      alignment: Alignment.center,
-      child: Text(widget.keyboardkey),
+
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
+        ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
+      ],
+      child:Consumer<KeyBoardKey>(
+        builder: (context, provider, child) {
+          return Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+                alignment: Alignment.center,
+                child: TextButton(onPressed: (){provider.addKey(widget.keyboardkey);}, child: Text(widget.keyboardkey),),
 
 
+              );
+        }
+      ),
     );
-
 
   }
 }
