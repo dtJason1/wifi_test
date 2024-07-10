@@ -361,7 +361,7 @@ class KeyBoardDialogue extends StatelessWidget{
   Widget build(BuildContext context){
 
     return Dialog(
-      alignment: Alignment.bottomCenter,
+      alignment: Alignment.center,
       child: Container(
           width: 400,
           height: 300,
