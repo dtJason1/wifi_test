@@ -9,6 +9,7 @@ class KeyBoardKey extends ChangeNotifier{
 
   void addKey (String insertedKey){
     _key += insertedKey;
+    print(_key);
     notifyListeners();
 
   }
@@ -321,7 +322,7 @@ class Dialog2 extends StatelessWidget{
 
                         return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(onPressed: (){keyBoardDialog();}, child: Text(keyboardkey.key),)
+                            child: ElevatedButton(onPressed: (){keyBoardDialog();}, child: Text("onpressed"),)
                         );
                       }
                     )
