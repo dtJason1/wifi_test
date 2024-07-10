@@ -242,12 +242,9 @@ class Dialog2 extends StatelessWidget{
 
                         return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              width: 200,
-                              height: 40,
-                              color: Colors.blueAccent,
-                              child: Text(keyboardkey.key),
-                            )
+                            child: ElevatedButton(onPressed: (){
+                              showDialog(barrierColor: Color(0x01000000), context: (context), builder: (context){return Text("helloo");});
+                            }, child: Text("input"),)
                         );
                       }
                     )
