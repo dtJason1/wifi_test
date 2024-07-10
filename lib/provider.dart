@@ -389,12 +389,12 @@ class _KeyState extends State<Key> {
       ],
       child:Consumer<KeyBoardKey>(
         builder: (context, provider, child) {
-          return Container(
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-                alignment: Alignment.center,
-                child: TextButton(onPressed: (){provider.addKey(widget.keyboardkey);}, child: Text(widget.keyboardkey),),
+            return Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+                  alignment: Alignment.center,
+                  child: TextButton(onPressed: (){provider.addKey(widget.keyboardkey);}, child: Text(provider.key),),
 
 
               );
