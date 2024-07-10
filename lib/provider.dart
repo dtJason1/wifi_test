@@ -322,7 +322,7 @@ class Dialog2 extends StatelessWidget{
 
                         return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(onPressed: (){keyBoardDialog();}, child: Text("onpressed"),)
+                            child: ElevatedButton(onPressed: (){keyBoardDialog();}, child: Text(keyboardkey.key),)
                         );
                       }
                     )
@@ -342,11 +342,6 @@ class Dialog2 extends StatelessWidget{
                     }, child: Text("confirm"));
                   }
                 ),
-                Consumer<KeyBoardKey>(
-                  builder: (context, keyboardkey, child) {
-                    return TextButton(child: Text("Q"), onPressed: (){keyboardkey.addKey("q");},);
-                  }
-                )
               ],),
           ),
         );
@@ -362,8 +357,8 @@ class KeyBoardDialogue extends StatelessWidget{
     return Dialog(
       alignment: Alignment.bottomCenter,
       child: Container(
-          width: 800,
-          height: 400,
+          width: 600,
+          height: 300,
 
           child: Key(keyboardkey: 'q'),
 
