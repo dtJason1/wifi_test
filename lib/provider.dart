@@ -205,10 +205,15 @@ class _MyButtonState extends State<MyButton> {
 
 }
 
-class Dialog2 extends StatelessWidget{
+class Dialog2 extends StatefulWidget{
   Dialog2({required this.text});
   final String text;
 
+  @override
+  State<Dialog2> createState() => _Dialog2State();
+}
+
+class _Dialog2State extends State<Dialog2> {
   @override
   Widget build(BuildContext context){
     //Notice the use of ChangeNotifierProvider<ReportState>.value
@@ -290,7 +295,13 @@ class Dialog2 extends StatelessWidget{
       );
 
     }
+    late TextEditingController controller;
+    @override
+    void initState(){
+      controller = TextEditingController();
+       controller.text =Provider.of<KeyBoardKey>(context).key;
 
+    }
     return Dialog(
 
           child: Container(
@@ -306,7 +317,7 @@ class Dialog2 extends StatelessWidget{
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(text),
+                      child: Text(widget.text),
                     ),
                   ],
                 ),
@@ -322,11 +333,14 @@ class Dialog2 extends StatelessWidget{
 
                         return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(onTap: (){keyBoardDialog();}, child: SizedBox(
+                            child: SizedBox(
 
                                 width: 100, height: 20,
 
-                                child: Text(provider.key, style: TextStyle(fontSize: 15),)))
+                                child: TextField(onTap:(){keyBoardDialog();},
+                                  controller: controller,
+
+                                ))
 
                         //      (){keyBoardDialog();}
                         );
@@ -338,7 +352,7 @@ class Dialog2 extends StatelessWidget{
                   builder: (context, keyboardkey, child) {
                     return TextButton(onPressed: () async{
                       try {
-                        await Process.run('nmcli',['device', 'wifi', 'connect', '${text}', 'password', '${keyboardkey.key}']).then((value){
+                        await Process.run('nmcli',['device', 'wifi', 'connect', '${widget.text}', 'password', '${keyboardkey.key}']).then((value){
                           print(value);
                           Navigator.of(context).pop();});
                       } on Exception catch (e) {
@@ -352,8 +366,6 @@ class Dialog2 extends StatelessWidget{
           ),
         );
   }
-
-
 }
 
 class KeyBoardDialogue extends StatelessWidget{
