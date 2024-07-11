@@ -363,10 +363,10 @@ class _Dialog2State extends State<Dialog2> {
                   builder: (context, keyboardkey, wifiProvider,  child) {
                     return TextButton(onPressed: () async{
                       try {
-                        await Process.run('sudo nmcli',['device', 'wifi', 'connect', '${widget.text}', 'password', '${keyboardkey.key}']).then((value){
+                        await Process.run('nmcli',['device', 'wifi', 'connect', '${widget.text}', 'password', '${keyboardkey.key}']).then((value){
 
                           print(value.stdout);
-                          print(value.stderr);
+                          print(" err: ${value.stderr}");
                           keyboardkey.clearKey();
                           Future.delayed(const Duration(seconds: 1)).then((value) {
                               wifiProvider.changeWifiList();
