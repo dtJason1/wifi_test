@@ -217,7 +217,6 @@ class Dialog2 extends StatefulWidget{
 }
 
 class _Dialog2State extends State<Dialog2> {
-  late TextEditingController controller;
   @override
   void initState(){
     super.initState();
