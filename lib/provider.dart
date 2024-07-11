@@ -363,7 +363,7 @@ class _Dialog2State extends State<Dialog2> {
                   builder: (context, keyboardkey, wifiProvider,  child) {
                     return TextButton(onPressed: () async{
                       try {
-                        await Process.run('nmcli',['device', 'wifi', 'connect', '${widget.text}', 'password', '${keyboardkey.key}']).then((value){
+                        await Process.run('sudo nmcli',['device', 'wifi', 'connect', '${widget.text}', 'password', '${keyboardkey.key}']).then((value){
 
                           print(value.stdout);
                           print(value.stderr);
