@@ -322,7 +322,11 @@ class Dialog2 extends StatelessWidget{
 
                         return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(onTap: (){keyBoardDialog();}, child: SizedBox( width: 100, height: 20,child: Text(provider.key)))
+                            child: GestureDetector(onTap: (){keyBoardDialog();}, child: SizedBox(
+
+                                width: 100, height: 20,
+
+                                child: Text(provider.key, style: TextStyle(fontSize: 15),)))
 
                         //      (){keyBoardDialog();}
                         );
