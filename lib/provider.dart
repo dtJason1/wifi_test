@@ -10,6 +10,7 @@ class KeyBoardKey extends ChangeNotifier{
   void addKey (String insertedKey){
     _key += insertedKey;
     print(_key);
+    controller.text = _key;
     notifyListeners();
 
   }
@@ -204,6 +205,8 @@ class _MyButtonState extends State<MyButton> {
   }
 
 }
+TextEditingController controller = TextEditingController();
+
 
 class Dialog2 extends StatefulWidget{
   Dialog2({required this.text});
@@ -218,9 +221,6 @@ class _Dialog2State extends State<Dialog2> {
   @override
   void initState(){
     super.initState();
-    controller = TextEditingController();
-    controller.text =Provider.of<KeyBoardKey>(context).key;
-
   }
   @override
   Widget build(BuildContext context){
