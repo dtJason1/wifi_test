@@ -24,6 +24,8 @@ class KeyBoardKey extends ChangeNotifier{
   }
   void clearKey(){
     _key =  '';
+    controller.text = _key;
+
     notifyListeners();
 
   }
@@ -357,14 +359,19 @@ class _Dialog2State extends State<Dialog2> {
                     )
                   ],
                 ),
-                Consumer<KeyBoardKey>(
-                  builder: (context, keyboardkey, child) {
+                Consumer2<KeyBoardKey,WifiProvider >(
+                  builder: (context, keyboardkey, wifiProvider,  child) {
                     return TextButton(onPressed: () async{
                       try {
                         await Process.run('nmcli',['device', 'wifi', 'connect', '${widget.text}', 'password', '${keyboardkey.key}']).then((value){
 
                           print(value.stdout);
-                          Navigator.of(context).pop();});
+                          keyboardkey.clearKey();
+                          Future.delayed(const Duration(seconds: 1)).then((value) {
+                              wifiProvider.changeWifiList();
+                              Navigator.of(context).pop();
+                          });
+                         });
                       } on Exception catch (e) {
                         print(e);
                         // TODO
