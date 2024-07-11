@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 // import 'package:provider/provider.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
@@ -376,6 +377,10 @@ class _Dialog2State extends State<Dialog2> {
   }
 }
 
+List keyList =['1','2','3','4','5','6','7','8','9','0',
+  'q','w','e','r','t','y','u','i','o','p',
+'a','s','d','f','g','h','j','k','l',
+'z','x','c','v','b','n','m'];
 class KeyBoardDialogue extends StatelessWidget{
   @override
   Widget build(BuildContext context){
@@ -386,7 +391,39 @@ class KeyBoardDialogue extends StatelessWidget{
           width: 600,
           height: 300,
 
-          child: Key(keyboardkey: 'q'),
+          child: GridView.count(crossAxisCount: 10,
+                  children: List.generate(keyList.length, (index) => Key(keyboardkey: keyList[index])),
+                  // children: [
+                  //   // Key(keyboardkey: '1',),
+                  //   // Key(keyboardkey: '2',),
+                  //   // Key(keyboardkey: '3',),
+                  //   // Key(keyboardkey: '4',),
+                  //   // Key(keyboardkey: '5',),
+                  //   // Key(keyboardkey: '6',),
+                  //   // Key(keyboardkey: '7',),
+                  //   // Key(keyboardkey: '8',),
+                  //   // Key(keyboardkey: '9',),
+                  //   // Key(keyboardkey: '0',),
+                  //   // Key(keyboardkey: 'q',),
+                  //   // Key(keyboardkey: 'w',),
+                  //   // Key(keyboardkey: 'e',),
+                  //   // Key(keyboardkey: 'r',),
+                  //   // Key(keyboardkey: 't',),
+                  //   // Key(keyboardkey: 'y',),
+                  //   // Key(keyboardkey: 'q',),
+                  //   // Key(keyboardkey: 'q',),
+                  //   // Key(keyboardkey: 'q',),
+                  //   // Key(keyboardkey: 'q',),
+                  //   // Key(keyboardkey: 'q',),
+                  //   // Key(keyboardkey: 'q',),
+                  //   // Key(keyboardkey: 'q',),
+                  //   // Key(keyboardkey: 'q',),
+                  //   // Key(keyboardkey: 'q',),
+                  //   //
+                  //   // Key(keyboardkey: 'q',)
+                  //
+                  // ],
+          ),
 
       )
 
