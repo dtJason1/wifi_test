@@ -214,6 +214,14 @@ class Dialog2 extends StatefulWidget{
 }
 
 class _Dialog2State extends State<Dialog2> {
+  late TextEditingController controller;
+  @override
+  void initState(){
+    super.initState();
+    controller = TextEditingController();
+    controller.text =Provider.of<KeyBoardKey>(context).key;
+
+  }
   @override
   Widget build(BuildContext context){
     //Notice the use of ChangeNotifierProvider<ReportState>.value
@@ -295,13 +303,7 @@ class _Dialog2State extends State<Dialog2> {
       );
 
     }
-    late TextEditingController controller;
-    @override
-    void initState(){
-      controller = TextEditingController();
-       controller.text =Provider.of<KeyBoardKey>(context).key;
 
-    }
     return Dialog(
 
           child: Container(
