@@ -445,24 +445,18 @@ class _KeyState extends State<Key> {
   @override
   Widget build(BuildContext context){
 
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
-        ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
-      ],
-      child:Consumer<KeyBoardKey>(
-        builder: (context, provider, child) {
-            return Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-                  alignment: Alignment.center,
-                  child: TextButton(onPressed: (){provider.addKey(widget.keyboardkey);}, child: Text(widget.keyboardkey),),
+    return Consumer<KeyBoardKey>(
+      builder: (context, provider, child) {
+          return Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+                alignment: Alignment.center,
+                child: TextButton(onPressed: (){provider.addKey(widget.keyboardkey);}, child: Text(widget.keyboardkey),),
 
 
-              );
-        }
-      ),
+            );
+      }
     );
 
   }
