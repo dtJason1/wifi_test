@@ -8,9 +8,16 @@ class KeyBoardKey extends ChangeNotifier{
   String get key => _key;
 
   void addKey (String insertedKey){
-    _key += insertedKey;
+    if(_key.length <= 8){
+
+    }
+    else {
+      _key += insertedKey;
+    }
     print(_key);
     controller.text = _key;
+
+
     notifyListeners();
 
   }
