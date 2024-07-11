@@ -38,8 +38,8 @@ class WifiProvider extends ChangeNotifier{
 
   bool _isLoading = true;
   bool get isLoading => _isLoading;
-  Future<List<Widget>> scanWifi() async {
-    List<StatefulWidget> finalList = [];
+  Future<List<MyButton>> scanWifi() async {
+    List<MyButton> finalList = [];
 
     try {
       // Run the command
@@ -59,7 +59,7 @@ class WifiProvider extends ChangeNotifier{
 
 
       ssids.removeAt(0);
-      List<Widget> currentWIFIList = [];
+      List< MyButton> currentWIFIList = [];
       for (var ssid in ssids) {
         if(ssid[0] == '*'){
           currentWIFIList = [
@@ -98,9 +98,8 @@ class WifiProvider extends ChangeNotifier{
 
 class MyButton extends StatefulWidget{
   MyButton({required this.text, required this.iscurrentuse});
-  final String text;
+  String text;
   final bool iscurrentuse;
-
   @override
   State<MyButton> createState() => _MyButtonState();
 }
@@ -118,69 +117,6 @@ class _MyButtonState extends State<MyButton> {
   }
 
   void dialog2(){
-
-      //Notice the use of ChangeNotifierProvider<ReportState>.value
-      //   child: Dialog(
-      //     child: SizedBox(
-      //       width: 300,
-      //       height: 300,
-      //       child: Column(
-      //         children: [
-      //           Row(
-      //             children: [
-      //               Padding(
-      //                 padding: const EdgeInsets.all(8.0),
-      //                 child: Text("SSID"),
-      //               ),
-      //               Padding(
-      //                 padding: const EdgeInsets.all(8.0),
-      //                 child: Text(widget.text),
-      //               ),
-      //             ],
-      //           ),
-      //
-      //           Row(
-      //             children: [
-      //               Padding(
-      //                 padding: const EdgeInsets.all(8.0),
-      //                 child: Text("Password"),
-      //               ),
-      //               Padding(
-      //                   padding: const EdgeInsets.all(8.0),
-      //                   child: GestureDetector(
-      //                     onTap: (){setState(() {
-      //                       _show = true;
-      //                     });},
-      //                     child: Container(
-      //                       width: 200,
-      //                       height: 40,
-      //                       color: Colors.blueAccent,
-      //                       child: Consumer<KeyBoardKey>(
-      //                         builder: (context, key, child) {
-      //                           return Text(key.key);
-      //                         }
-      //                       ),
-      //                     ),
-      //                   )
-      //               )
-      //             ],
-      //           ),
-      //           TextButton(onPressed: () async{
-      //             try {
-      //               print("${widget.text }, , ${myPW}");
-      //               await Process.run('nmcli',['device', 'wifi', 'connect', '${widget.text}', 'password', '$myPW']).then((value){
-      //                 print(value);
-      //                 Navigator.of(context).pop();});
-      //             } on Exception catch (e) {
-      //               print(e);
-      //               // TODO
-      //             }
-      //           }, child: Text("confirm")),
-      //         ],),
-      //     ),
-      //   ),
-      //
-
     showDialog(
         context: context,
         builder:(_) => MultiProvider(
@@ -363,6 +299,10 @@ class _Dialog2State extends State<Dialog2> {
                   builder: (context, keyboardkey, wifiProvider,  child) {
                     return TextButton(onPressed: () async{
                       try {
+                        List<MyButton> currentuse = await wifiProvider.scanWifi();
+                        String currentUseText = currentuse.first.text;
+
+                        await Process.run('nmcli', ['con', 'delete', '${currentUseText}']);
                         await Process.run('nmcli',['device', 'wifi', 'connect', '${widget.text}', 'password', '${keyboardkey.key}']).then((value){
 
                           print(value.stdout);
