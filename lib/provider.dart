@@ -12,7 +12,7 @@ class KeyBoardKey extends ChangeNotifier{
     _key += insertedKey;
 
     controller.text = _key;
-    print(_key);
+
 
     notifyListeners();
 
@@ -124,11 +124,18 @@ class _MyButtonState extends State<MyButton> {
 
   @override
   Widget build(BuildContext context){
-    return  TextButton(onPressed: (){
-      dialog2();
+    return  MultiProvider(
+      providers: [
 
-    },
-      child: Text(widget.text, style: TextStyle(color: this.widget.iscurrentuse ? Colors.blue : Colors.black),),);
+        ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
+        ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
+
+      ],
+      child: TextButton(onPressed: (){
+        dialog2();
+
+      },
+        child: Text(widget.text, style: TextStyle(color: this.widget.iscurrentuse ? Colors.blue : Colors.black),),));
 
 
   }
@@ -220,7 +227,13 @@ class _Dialog2State extends State<Dialog2> {
       showDialog(
         barrierColor: Color(0x01000000),
         context: context,
-        builder:(_) => KeyBoardDialogue(),
+        builder:(_) => MultiProvider(
+          providers: [
+            ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
+            ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
+          ],
+          child:  KeyBoardDialogue(),
+        ),
 
       );
 
@@ -283,9 +296,8 @@ class _Dialog2State extends State<Dialog2> {
                         print("widget text : ${widget.text}");
 
 
-                        print("keyboardkey.key : ${keyboardkey.key}");
                         Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', 'gkgk2022']).then((value) {
-                          print("keyboardkey.key : ${keyboardkey.key}");
+                          print(keyboardkey.key);
                           print("connected ${value.stdout}");
                           print(" err: ${value.stderr}");
                           keyboardkey.clearKey();
@@ -336,6 +348,36 @@ class KeyBoardDialogue extends StatelessWidget{
 
           child: GridView.count(crossAxisCount: 10,
                   children: List.generate(keyList.length, (index) => Key(keyboardkey: keyList[index])),
+                  // children: [
+                  //   // Key(keyboardkey: '1',),
+                  //   // Key(keyboardkey: '2',),
+                  //   // Key(keyboardkey: '3',),
+                  //   // Key(keyboardkey: '4',),
+                  //   // Key(keyboardkey: '5',),
+                  //   // Key(keyboardkey: '6',),
+                  //   // Key(keyboardkey: '7',),
+                  //   // Key(keyboardkey: '8',),
+                  //   // Key(keyboardkey: '9',),
+                  //   // Key(keyboardkey: '0',),
+                  //   // Key(keyboardkey: 'q',),
+                  //   // Key(keyboardkey: 'w',),
+                  //   // Key(keyboardkey: 'e',),
+                  //   // Key(keyboardkey: 'r',),
+                  //   // Key(keyboardkey: 't',),
+                  //   // Key(keyboardkey: 'y',),
+                  //   // Key(keyboardkey: 'q',),
+                  //   // Key(keyboardkey: 'q',),
+                  //   // Key(keyboardkey: 'q',),
+                  //   // Key(keyboardkey: 'q',),
+                  //   // Key(keyboardkey: 'q',),
+                  //   // Key(keyboardkey: 'q',),
+                  //   // Key(keyboardkey: 'q',),
+                  //   // Key(keyboardkey: 'q',),
+                  //   // Key(keyboardkey: 'q',),
+                  //   //
+                  //   // Key(keyboardkey: 'q',)
+                  //
+                  // ],
           ),
 
       )
