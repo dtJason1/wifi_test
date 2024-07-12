@@ -1,3 +1,5 @@
+import 'dart:js_interop';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -295,6 +297,8 @@ class _Dialog2State extends State<Dialog2> {
                         print(currentUseText);
                         print("widget text : ${widget.text}");
 
+
+                        print(keyboardkey.key);
                         Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', 'gkgk2022']).then((value) {
                           print(keyboardkey.key);
                           print("connected ${value.stdout}");
