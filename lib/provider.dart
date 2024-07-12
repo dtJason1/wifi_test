@@ -296,7 +296,7 @@ class _Dialog2State extends State<Dialog2> {
                         await Process.run('nmcli',['con', 'down',  '${currentUseText}']).then((value) {
                           print(keyboardkey.key);
 
-                          Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${keyboardkey.key}']).then((value){
+                          Process.run('nmcli',['dev', 'wifi', 'connect', 'HAHA', 'password', 'gkgk2022']).then((value){
                             print(keyboardkey.key);
                             print("connected ${value.stdout}");
                             print(" err: ${value.stderr}");
