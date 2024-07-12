@@ -293,11 +293,12 @@ class _Dialog2State extends State<Dialog2> {
                         String currentUseText = currentuse.first.text;
 
                         print(currentUseText);
-                        await Process.run('nmcli',['con', 'down',  '${currentUseText}']).then((value) async{
+                        await Process.run('nmcli',['con', 'down',  '${currentUseText}']).then((value) {
+                          print(keyboardkey.key);
 
-                          await Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${keyboardkey.key}']).then((value){
+                          Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${keyboardkey.key}']).then((value){
                             print(keyboardkey.key);
-                            print(value.stdout);
+                            print("connected ${value.stdout}");
                             print(" err: ${value.stderr}");
                             keyboardkey.clearKey();
                             Future.delayed(const Duration(seconds: 1)).then((value) {
