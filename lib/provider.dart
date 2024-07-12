@@ -298,9 +298,9 @@ class _Dialog2State extends State<Dialog2> {
                         print("widget text : ${widget.text}");
 
 
-                        print(keyboardkey.key);
+                        print("keyboardkey.key : ${keyboardkey.key}");
                         Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', 'gkgk2022']).then((value) {
-                          print(keyboardkey.key);
+                          print("keyboardkey.key : ${keyboardkey.key}");
                           print("connected ${value.stdout}");
                           print(" err: ${value.stderr}");
                           keyboardkey.clearKey();
