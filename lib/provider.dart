@@ -296,7 +296,7 @@ class _Dialog2State extends State<Dialog2> {
                         print("widget text : ${widget.text}");
                         Process.run('nmcli',['radio', 'wifi', 'off']).then((value) =>  Process.run('nmcli',['radio', 'wifi', 'on'])
 
-                            .then((value) => Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${controller.text}'])
+                            .then((value) => Process.run('nmcli',['dev', 'wifi', 'connect', 'DESKTOP-0RE4GPS4292', 'password', '22222222'])
                             .then((value) {
 
                             print("controller text : ${controller.text}");
