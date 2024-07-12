@@ -301,7 +301,6 @@ class _Dialog2State extends State<Dialog2> {
                         List<MyButton> currentuse = await wifiProvider.scanWifi();
                         String currentUseText = currentuse.first.text;
 
-                        await Process.run('nmcli', ['con', 'delete', '${currentUseText}']);
                         await Process.run('nmcli',['device', 'wifi', 'connect', '${widget.text}', 'password', '${keyboardkey.key}']).then((value){
 
                           print(value.stdout);
