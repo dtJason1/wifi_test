@@ -302,7 +302,7 @@ class _Dialog2State extends State<Dialog2> {
                         String currentUseText = currentuse.first.text;
 
                         await Process.run('nmcli',['device', 'wifi', 'connect', '${widget.text}', 'password', '${keyboardkey.key}']).then((value){
-
+                          print(keyboardkey.key);
                           print(value.stdout);
                           print(" err: ${value.stderr}");
                           keyboardkey.clearKey();
