@@ -12,7 +12,7 @@ class KeyBoardKey extends ChangeNotifier{
     _key += insertedKey;
 
     controller.text = _key;
-
+    print(_key);
 
     notifyListeners();
 
@@ -109,7 +109,13 @@ class _MyButtonState extends State<MyButton> {
   void dialog2(){
     showDialog(
         context: context,
-        builder:(_) => Dialog2(text:widget.text),
+        builder:(_) => MultiProvider(
+          providers: [
+            ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
+            ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
+          ],
+          child:  Dialog2(text:widget.text),
+        ),
 
     );
 
@@ -214,7 +220,13 @@ class _Dialog2State extends State<Dialog2> {
       showDialog(
         barrierColor: Color(0x01000000),
         context: context,
-        builder:(_) => KeyBoardDialogue(),
+        builder:(_) => MultiProvider(
+          providers: [
+            ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
+            ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
+          ],
+          child:  KeyBoardDialogue(),
+        ),
 
       );
 
