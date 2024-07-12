@@ -294,13 +294,13 @@ class _Dialog2State extends State<Dialog2> {
 
                         print(currentUseText);
                         print("widget text : ${widget.text}");
+                        Process.run('nmcli',['dev', 'wifi', 'list']);
 
-                        await Process.run('nmcli',['device', 'wifi', 'rescan']);
-                        await Process.run('nmcli',['device', 'wifi', 'list']);
-                        Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}']).then((value) {
+
+                        Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${controller.text}']).then((value) {
                           print("controller text : ${controller.text}");
-                          print("stdout ${value.stdout}");
-                          print("stderr: ${value.stderr}");
+                          print("connected ${value.stdout}");
+                          print("err: ${value.stderr}");
                           keyboardkey.clearKey();
                           Future.delayed(const Duration(seconds: 1)).then((value) {
                             wifiProvider.changeWifiList();
@@ -349,36 +349,7 @@ class KeyBoardDialogue extends StatelessWidget{
 
           child: GridView.count(crossAxisCount: 10,
                   children: List.generate(keyList.length, (index) => Key(keyboardkey: keyList[index])),
-                  // children: [
-                  //   // Key(keyboardkey: '1',),
-                  //   // Key(keyboardkey: '2',),
-                  //   // Key(keyboardkey: '3',),
-                  //   // Key(keyboardkey: '4',),
-                  //   // Key(keyboardkey: '5',),
-                  //   // Key(keyboardkey: '6',),
-                  //   // Key(keyboardkey: '7',),
-                  //   // Key(keyboardkey: '8',),
-                  //   // Key(keyboardkey: '9',),
-                  //   // Key(keyboardkey: '0',),
-                  //   // Key(keyboardkey: 'q',),
-                  //   // Key(keyboardkey: 'w',),
-                  //   // Key(keyboardkey: 'e',),
-                  //   // Key(keyboardkey: 'r',),
-                  //   // Key(keyboardkey: 't',),
-                  //   // Key(keyboardkey: 'y',),
-                  //   // Key(keyboardkey: 'q',),
-                  //   // Key(keyboardkey: 'q',),
-                  //   // Key(keyboardkey: 'q',),
-                  //   // Key(keyboardkey: 'q',),
-                  //   // Key(keyboardkey: 'q',),
-                  //   // Key(keyboardkey: 'q',),
-                  //   // Key(keyboardkey: 'q',),
-                  //   // Key(keyboardkey: 'q',),
-                  //   // Key(keyboardkey: 'q',),
-                  //   //
-                  //   // Key(keyboardkey: 'q',)
-                  //
-                  // ],
+
           ),
 
       )
