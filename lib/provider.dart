@@ -220,13 +220,7 @@ class _Dialog2State extends State<Dialog2> {
       showDialog(
         barrierColor: Color(0x01000000),
         context: context,
-        builder:(_) => MultiProvider(
-          providers: [
-            ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
-            ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
-          ],
-          child:  KeyBoardDialogue(),
-        ),
+        builder:(_) => KeyBoardDialogue(),
 
       );
 
@@ -342,36 +336,6 @@ class KeyBoardDialogue extends StatelessWidget{
 
           child: GridView.count(crossAxisCount: 10,
                   children: List.generate(keyList.length, (index) => Key(keyboardkey: keyList[index])),
-                  // children: [
-                  //   // Key(keyboardkey: '1',),
-                  //   // Key(keyboardkey: '2',),
-                  //   // Key(keyboardkey: '3',),
-                  //   // Key(keyboardkey: '4',),
-                  //   // Key(keyboardkey: '5',),
-                  //   // Key(keyboardkey: '6',),
-                  //   // Key(keyboardkey: '7',),
-                  //   // Key(keyboardkey: '8',),
-                  //   // Key(keyboardkey: '9',),
-                  //   // Key(keyboardkey: '0',),
-                  //   // Key(keyboardkey: 'q',),
-                  //   // Key(keyboardkey: 'w',),
-                  //   // Key(keyboardkey: 'e',),
-                  //   // Key(keyboardkey: 'r',),
-                  //   // Key(keyboardkey: 't',),
-                  //   // Key(keyboardkey: 'y',),
-                  //   // Key(keyboardkey: 'q',),
-                  //   // Key(keyboardkey: 'q',),
-                  //   // Key(keyboardkey: 'q',),
-                  //   // Key(keyboardkey: 'q',),
-                  //   // Key(keyboardkey: 'q',),
-                  //   // Key(keyboardkey: 'q',),
-                  //   // Key(keyboardkey: 'q',),
-                  //   // Key(keyboardkey: 'q',),
-                  //   // Key(keyboardkey: 'q',),
-                  //   //
-                  //   // Key(keyboardkey: 'q',)
-                  //
-                  // ],
           ),
 
       )
