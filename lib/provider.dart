@@ -53,9 +53,7 @@ class WifiProvider extends ChangeNotifier{
       }
       // Filter SSIDs
       var ssids = result.stdout.toString().trim().split('\n');
-      print("====get sssids");
-      print(ssids);
-      print("===========");
+
 
 
       ssids.removeAt(0);
