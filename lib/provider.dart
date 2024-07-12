@@ -109,13 +109,7 @@ class _MyButtonState extends State<MyButton> {
   void dialog2(){
     showDialog(
         context: context,
-        builder:(_) => MultiProvider(
-          providers: [
-            ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
-            ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
-          ],
-          child:  Dialog2(text:widget.text),
-        ),
+        builder:(_) => Dialog2(text:widget.text),
 
     );
 
@@ -124,18 +118,11 @@ class _MyButtonState extends State<MyButton> {
 
   @override
   Widget build(BuildContext context){
-    return  MultiProvider(
-      providers: [
+    return  TextButton(onPressed: (){
+      dialog2();
 
-        ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
-        ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
-
-      ],
-      child: TextButton(onPressed: (){
-        dialog2();
-
-      },
-        child: Text(widget.text, style: TextStyle(color: this.widget.iscurrentuse ? Colors.blue : Colors.black),),));
+    },
+      child: Text(widget.text, style: TextStyle(color: this.widget.iscurrentuse ? Colors.blue : Colors.black),),);
 
 
   }
@@ -227,13 +214,7 @@ class _Dialog2State extends State<Dialog2> {
       showDialog(
         barrierColor: Color(0x01000000),
         context: context,
-        builder:(_) => MultiProvider(
-          providers: [
-            ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
-            ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
-          ],
-          child:  KeyBoardDialogue(),
-        ),
+        builder:(_) => KeyBoardDialogue(),
 
       );
 
