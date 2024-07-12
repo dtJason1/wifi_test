@@ -294,23 +294,23 @@ class _Dialog2State extends State<Dialog2> {
 
                         print(currentUseText);
                         print("widget text : ${widget.text}");
-                        var a = await Process.run('nmcli',['radio', 'wifi', 'on']).then((value) =>
-                            Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${controller.text}']).then((value) {
-                              print("controller text : ${controller.text}");
-                              print("stdout ${value.stdout}");
-                              print("err: ${value.stderr}");
-                              keyboardkey.clearKey();
-                              Future.delayed(const Duration(seconds: 1)).then((value) {
-                                wifiProvider.changeWifiList();
-                                Navigator.of(context).pop();
-                              });
+                        Process.run('nmcli',['radio', 'wifi', 'off']);
+
+                        Process.run('nmcli',['radio', 'wifi', 'on']);
+
+                        Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${controller.text}']).then((value) {
+                          print("controller text : ${controller.text}");
+                          print("connected ${value.stdout}");
+                          print("err: ${value.stderr}");
+                          keyboardkey.clearKey();
+                          Future.delayed(const Duration(seconds: 1)).then((value) {
+                            wifiProvider.changeWifiList();
+                            Navigator.of(context).pop();
+                          });
 
 
-                            }
-                            )
+                        }
                         );
-
-
                         // await Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${keyboardkey.key}']).then((value){
                         //   print(keyboardkey.key);
                         //   print(value.stdout);
