@@ -297,7 +297,7 @@ class _Dialog2State extends State<Dialog2> {
 
                         await Process.run('nmcli',['device', 'wifi', 'rescan']);
                         await Process.run('nmcli',['device', 'wifi', 'list']);
-                        Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${controller.text}']).then((value) {
+                        Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}']).then((value) {
                           print("controller text : ${controller.text}");
                           print("stdout ${value.stdout}");
                           print("stderr: ${value.stderr}");
