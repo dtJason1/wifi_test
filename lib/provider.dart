@@ -311,19 +311,6 @@ class _Dialog2State extends State<Dialog2> {
                         );
 
 
-                        Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${controller.text}']).then((value) {
-                          print("controller text : ${controller.text}");
-                          print("stdout ${value.stdout}");
-                          print("err: ${value.stderr}");
-                          keyboardkey.clearKey();
-                          Future.delayed(const Duration(seconds: 1)).then((value) {
-                            wifiProvider.changeWifiList();
-                            Navigator.of(context).pop();
-                          });
-
-
-                        }
-                        );
                         // await Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${keyboardkey.key}']).then((value){
                         //   print(keyboardkey.key);
                         //   print(value.stdout);
