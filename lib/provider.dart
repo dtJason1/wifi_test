@@ -293,6 +293,8 @@ class _Dialog2State extends State<Dialog2> {
                         String currentUseText = currentuse.first.text;
 
                         print(currentUseText);
+                        print("widget text : ${widget.text}");
+
                         Process.run('nmcli',['dev', 'wifi', 'connect', 'HAHA', 'password', 'gkgk2022']).then((value) {
                           print(keyboardkey.key);
                           print("connected ${value.stdout}");
