@@ -75,10 +75,8 @@ class WifiProvider extends ChangeNotifier{
   }
 
   void changeWifiList() async{
-    print("-======scanning wifi");
     _wifiList = await scanWifi();
     _isLoading = false;
-    print("-======notifying=====");
 
     notifyListeners();
   }
@@ -294,16 +292,35 @@ class _Dialog2State extends State<Dialog2> {
                         List<MyButton> currentuse = await wifiProvider.scanWifi();
                         String currentUseText = currentuse.first.text;
 
-                        await Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${keyboardkey.key}']).then((value){
-                          print(keyboardkey.key);
-                          print(value.stdout);
-                          print(" err: ${value.stderr}");
-                          keyboardkey.clearKey();
-                          Future.delayed(const Duration(seconds: 1)).then((value) {
+                        print(currentUseText);
+                        await Process.run('nmcli',['con', 'down',  '${currentUseText}']).then((value) async{
+
+                          await Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${keyboardkey.key}']).then((value){
+                            print(keyboardkey.key);
+                            print(value.stdout);
+                            print(" err: ${value.stderr}");
+                            keyboardkey.clearKey();
+                            Future.delayed(const Duration(seconds: 1)).then((value) {
                               wifiProvider.changeWifiList();
                               Navigator.of(context).pop();
-                          });
-                         });
+                            });
+
+
+                          }
+
+                          );
+                        }
+                        );
+                        // await Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${keyboardkey.key}']).then((value){
+                        //   print(keyboardkey.key);
+                        //   print(value.stdout);
+                        //   print(" err: ${value.stderr}");
+                        //   keyboardkey.clearKey();
+                        //   Future.delayed(const Duration(seconds: 1)).then((value) {
+                        //       wifiProvider.changeWifiList();
+                        //       Navigator.of(context).pop();
+                        //   });
+                        //  });
                       } on Exception catch (e) {
                         print(e);
                         // TODO
