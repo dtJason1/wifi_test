@@ -162,68 +162,6 @@ class _Dialog2State extends State<Dialog2> {
     //Notice the use of ChangeNotifierProvider<ReportState>.value
     void keyBoardDialog(){
 
-      //Notice the use of ChangeNotifierProvider<ReportState>.value
-      //   child: Dialog(
-      //     child: SizedBox(
-      //       width: 300,
-      //       height: 300,
-      //       child: Column(
-      //         children: [
-      //           Row(
-      //             children: [
-      //               Padding(
-      //                 padding: const EdgeInsets.all(8.0),
-      //                 child: Text("SSID"),
-      //               ),
-      //               Padding(
-      //                 padding: const EdgeInsets.all(8.0),
-      //                 child: Text(widget.text),
-      //               ),
-      //             ],
-      //           ),
-      //
-      //           Row(
-      //             children: [
-      //               Padding(
-      //                 padding: const EdgeInsets.all(8.0),
-      //                 child: Text("Password"),
-      //               ),
-      //               Padding(
-      //                   padding: const EdgeInsets.all(8.0),
-      //                   child: GestureDetector(
-      //                     onTap: (){setState(() {
-      //                       _show = true;
-      //                     });},
-      //                     child: Container(
-      //                       width: 200,
-      //                       height: 40,
-      //                       color: Colors.blueAccent,
-      //                       child: Consumer<KeyBoardKey>(
-      //                         builder: (context, key, child) {
-      //                           return Text(key.key);
-      //                         }
-      //                       ),
-      //                     ),
-      //                   )
-      //               )
-      //             ],
-      //           ),
-      //           TextButton(onPressed: () async{
-      //             try {
-      //               print("${widget.text }, , ${myPW}");
-      //               await Process.run('nmcli',['device', 'wifi', 'connect', '${widget.text}', 'password', '$myPW']).then((value){
-      //                 print(value);
-      //                 Navigator.of(context).pop();});
-      //             } on Exception catch (e) {
-      //               print(e);
-      //               // TODO
-      //             }
-      //           }, child: Text("confirm")),
-      //         ],),
-      //     ),
-      //   ),
-      //
-
       showDialog(
         barrierColor: Color(0x01000000),
         context: context,
@@ -234,11 +172,8 @@ class _Dialog2State extends State<Dialog2> {
           ],
           child:  KeyBoardDialogue(),
         ),
-
       );
-
     }
-
     return Dialog(
 
           child: Container(
@@ -294,28 +229,7 @@ class _Dialog2State extends State<Dialog2> {
 
                         print(currentUseText);
                         print("widget text : ${widget.text}");
-                        // Process.run('nmcli',['radio', 'wifi', 'off']).then((value) =>  Process.run('nmcli',['radio', 'wifi', 'on'])
-                        //
-                        //     .then((value) => Process.run('nmcli',['dev', 'wifi', 'connect', 'DESKTOP-0RE4GPS4292', 'password', '22222222'])
-                        //     .then((value) {
-                        //
-                        //     print("controller text : ${controller.text}");
-                        //     print("stdout ${value.stdout}");
-                        //     print("err: ${value.stderr}");
-                        //     keyboardkey.clearKey();
-                        //     Future.delayed(const Duration(seconds: 1)).then((value) {
-                        //       wifiProvider.changeWifiList();
-                        //       Navigator.of(context).pop();
-                        //     });
-                        //
-                        //
-                        // })
-                        //
-                        //
-                        // )
-                        //
-                        //
-                        // );
+
 
 // Run the command
                         await Process.run('nmcli',['device', 'wifi', 'rescan']);
@@ -329,21 +243,14 @@ class _Dialog2State extends State<Dialog2> {
                           Future.delayed(const Duration(seconds: 1)).then((value) {
                             wifiProvider.changeWifiList();
                             Navigator.of(context).pop();
+                            wifiProvider.changeWifiList();
+
                           });
 
 
-                        }
+                          }
                         );
-                        // await Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${keyboardkey.key}']).then((value){
-                        //   print(keyboardkey.key);
-                        //   print(value.stdout);
-                        //   print(" err: ${value.stderr}");
-                        //   keyboardkey.clearKey();
-                        //   Future.delayed(const Duration(seconds: 1)).then((value) {
-                        //       wifiProvider.changeWifiList();
-                        //       Navigator.of(context).pop();
-                        //   });
-                        //  });
+
                       } on Exception catch (e) {
                         print(e);
                         // TODO
