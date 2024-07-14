@@ -239,6 +239,30 @@ class _Dialog2State extends State<Dialog2> {
                           print("controller text : ${controller.text}");
                           print("stdout ${value.stdout}");
                           print("err: ${value.stderr}");
+                          if(value.stderr.toString().contains("property is invalid")){
+                            showDialog(context: context, builder: (context){
+                              return Dialog(
+                                child: Center(child: Text("password not matched"),),
+
+
+                              );
+
+
+                            });
+
+                          }
+                          if(value.stderr.toString().contains("No network with SSID")){
+                            showDialog(context: context, builder: (context){
+                              return Dialog(
+                                child: Center(child: Text("Cannot get SSID"),),
+
+                              );
+
+
+                            });
+
+                          }
+
                           keyboardkey.clearKey();
                           Future.delayed(const Duration(seconds: 1)).then((value) {
                             wifiProvider.changeWifiList();
