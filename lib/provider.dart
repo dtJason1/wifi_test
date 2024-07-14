@@ -242,9 +242,7 @@ class _Dialog2State extends State<Dialog2> {
                           if(value.stderr.toString().contains("property is invalid")){
                             showDialog(context: context, builder: (context){
                               return Dialog(
-                                child: Center(child: Text("password not matched"),),
-
-
+                                child: Container( width:300, height:300, child: Center(child: Text("password not matched", style: TextStyle(color: Colors.red),),)),
                               );
 
 
@@ -254,7 +252,7 @@ class _Dialog2State extends State<Dialog2> {
                           if(value.stderr.toString().contains("No network with SSID")){
                             showDialog(context: context, builder: (context){
                               return Dialog(
-                                child: Center(child: Text("Cannot get SSID"),),
+                                child: Container( width:300, height:300, child: Center(child: Text("cannot get SSID", style: TextStyle(color: Colors.red),),)),
 
                               );
 
