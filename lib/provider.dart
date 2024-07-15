@@ -426,8 +426,16 @@ class _KeyState extends State<Key> {
                     provider.clearKey();
                   }
                   else if(widget.keyboardkey == "&123"){
-                    provider.specialKeyboard();
-                  }
+                    setState(() {
+                      if (!_specialKeyboardState) {
+                        provider.specialKeyboard();
+                        _specialKeyboardState  = !_specialKeyboardState;
+                      }
+                      else{
+                        _specialKeyboardState  = !_specialKeyboardState;
+                        provider.deCapsLock();
+                      }
+                    });                  }
                   else if(widget.keyboardkey == "shift"){
                     setState(() {
                       if (!_specialKeyboardState) {
