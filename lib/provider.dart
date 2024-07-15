@@ -348,7 +348,10 @@ class _KeyState extends State<Key> {
       builder: (context, provider, child) {
           return Container(
                 width: (widget.keyboardkey == "Back" ||  widget.keyboardkey == "Enter") ? 120: null,
-                decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+                decoration: BoxDecoration(border: Border.all(color: Colors.black),
+                    color: (widget.keyboardkey == "shift") ? Colors.black : null
+
+                ),
                 alignment: Alignment.center,
                 child: TextButton(onPressed: (){  
                   if(widget.keyboardkey == "Back") {
