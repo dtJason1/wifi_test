@@ -269,6 +269,12 @@ class _Dialog2State extends State<Dialog2> {
 
                           });
 
+                          Future.delayed(const Duration(seconds: 5)).then((value) {
+                            wifiProvider.changeWifiList();
+                            Navigator.of(context).pop();
+                            wifiProvider.changeWifiList();
+
+                          });
 
                           }
                         );
