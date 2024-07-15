@@ -282,12 +282,22 @@ class _Dialog2State extends State<Dialog2> {
   }
 }
 
-List keyList =['1','2','3','4','5','6','7','8','9','0',
+List keyList = normalKeyList;
+List capsLockKeyList = ['1','2','3','4','5','6','7','8','9','0',
+  'Q','W','E','R','T','Y','U','I','O','P','Back',
+  'A','S','D','F','G','H','J','K','L',"'",'Enter',
+  'shift','Z','X','C','V','B','N','M',',','.','?','shift',
+  '&123', 'space', 'x'];
+List normalKeyList = ['1','2','3','4','5','6','7','8','9','0',
   'q','w','e','r','t','y','u','i','o','p','Back',
-'a','s','d','f','g','h','j','k','l',"'",'Enter',
+  'a','s','d','f','g','h','j','k','l',"'",'Enter',
   'shift','z','x','c','v','b','n', 'm',',','.','?','shift',
   '&123', 'space', 'x'];
+
 class KeyBoardDialogue extends StatelessWidget{
+
+
+
   @override
   Widget build(BuildContext context){
 
@@ -345,18 +355,19 @@ class Key extends StatefulWidget{
 }
 
 class _KeyState extends State<Key> {
+  bool _isCapsLocked = false;
   @override
   Widget build(BuildContext context){
 
     return Consumer<KeyBoardKey>(
       builder: (context, provider, child) {
           return Container(
-                width: (widget.keyboardkey == "Back" ||  widget.keyboardkey == "Enter")  ? 120: (widget.keyboardkey == "space") ? 600 : null,
+                width: (widget.keyboardkey == "Back" ||  widget.keyboardkey == "Enter")  ? 120: (widget.keyboardkey == "space") ? 500 : null,
 
 
 
                 decoration: BoxDecoration(border: Border.all(color: Colors.black),
-                    color: (widget.keyboardkey == "shift") ? Colors.black : null
+                    color: (widget.keyboardkey == "shift" || widget.keyboardkey == "&123" ) ? Colors.black : null
 
                 ),
                 alignment: Alignment.center,
@@ -367,7 +378,19 @@ class _KeyState extends State<Key> {
                   else if(widget.keyboardkey == "Enter"){
                     Navigator.pop(context);
                   }
+                  else if(widget.keyboardkey == "Shift"){
+                    setState(() {
+                      _isCapsLocked  = !_isCapsLocked;
+                      if(_isCapsLocked){
+                        keyList = capsLockKeyList;
+                      }
+                      else{
+                        keyList = normalKeyList;
+                      }
+                    });
+                  }
                   else{
+
                     provider.addKey(widget.keyboardkey);
                   }
                  }, child: Text(widget.keyboardkey, style: TextStyle(fontSize: 12, color: (widget.keyboardkey == "shift") ? Colors.white : null ),),),
