@@ -114,8 +114,22 @@ class _WifiListIndicatorState extends State<WifiListIndicator> {
 
 
   Widget build(BuildContext context) {
-
+    List< MyButton> finalList = [];
+    List< MyButton> currentWIFIList = [];
     var wifiProvider = Provider.of<WifiProvider>(context);
+
+    for (var ssid in wifiProvider.wifiList) {
+      if(ssid[0] == '*'){
+        currentWIFIList = [
+          MyButton(text: ssid.substring(26,56).replaceAll(" ", ""), iscurrentuse: true, provider: wifiProvider,)
+        ];
+      }
+      else{
+        finalList.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false, provider: wifiProvider));
+      }
+    }
+    currentWIFIList.addAll(finalList);
+
     return Dialog(
 
     child: Padding(
@@ -140,7 +154,7 @@ class _WifiListIndicatorState extends State<WifiListIndicator> {
             SizedBox(
               height: 300,
               width: 300,
-              child: wifiProvider.wifiList == [] ? CircularProgressIndicator() : ListView(shrinkWrap: true, children: wifiProvider.wifiList,),
+              child: wifiProvider.wifiList == [] ? CircularProgressIndicator() : ListView(shrinkWrap: true, children: currentWIFIList,),
             ),
           ],
         ),

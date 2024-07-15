@@ -29,12 +29,12 @@ class KeyBoardKey extends ChangeNotifier{
 }
 
 class WifiProvider extends ChangeNotifier{
-  List<Widget> _wifiList =  [];
-  List<Widget> get wifiList => _wifiList;
+  List<String> _wifiList =  [];
+  List<String> get wifiList => _wifiList;
 
   bool _isLoading = true;
   bool get isLoading => _isLoading;
-  Future<List<MyButton>> scanWifi() async {
+  Future<List<String>> scanWifi() async {
     List<MyButton> finalList = [];
 
     try {
@@ -66,7 +66,7 @@ class WifiProvider extends ChangeNotifier{
       }
       currentWIFIList.addAll(finalList);
 
-      return currentWIFIList;
+      return ssids;
 
       // Print or return the SSIDs
     } catch (e) {
@@ -125,18 +125,11 @@ class _MyButtonState extends State<MyButton> {
 
   @override
   Widget build(BuildContext context){
-    return  MultiProvider(
-      providers: [
+    return  TextButton(onPressed: (){
+      dialog2();
 
-        ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
-        ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
-
-      ],
-      child: TextButton(onPressed: (){
-        dialog2();
-
-      },
-        child: Text(widget.text, style: TextStyle(color: this.widget.iscurrentuse ? Colors.blue : Colors.black),),));
+    },
+      child: Text(widget.text, style: TextStyle(color: this.widget.iscurrentuse ? Colors.blue : Colors.black),),);
 
 
   }
@@ -227,11 +220,7 @@ class _Dialog2State extends State<Dialog2> {
                   builder: (context, keyboardkey, wifiProvider,  child) {
                     return TextButton(onPressed: () async{
                       try {
-                        List<MyButton> currentuse = await wifiProvider.scanWifi();
-                        String currentUseText = currentuse.first.text;
 
-                        print(currentUseText);
-                        print("widget text : ${widget.text}");
 
                         await Process.run('nmcli',['device', 'wifi', 'rescan']);
                         var result = await Process.run('nmcli',['device', 'wifi', 'list']);
