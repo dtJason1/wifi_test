@@ -280,8 +280,8 @@ class _Dialog2State extends State<Dialog2> {
   }
 }
 
-List keyList =['1','2','3','4','5','6','7','8','9','0','Back',
-  'q','w','e','r','t','y','u','i','o','p',
+List keyList =['1','2','3','4','5','6','7','8','9','0',
+  'q','w','e','r','t','y','u','i','o','p','Back',
 'a','s','d','f','g','h','j','k','l',
 'z','x','c','v','b'];
 class KeyBoardDialogue extends StatelessWidget{
@@ -299,6 +299,7 @@ class KeyBoardDialogue extends StatelessWidget{
           child: Column(
             children: [
               Row(children: List.generate(10, (index) => Expanded(child: Key(keyboardkey: keyList[index],)),),),
+              Row(children: List.generate(11, (index) => Expanded(child: Key(keyboardkey: keyList[index+10],))),)
             ],
           ),
 
