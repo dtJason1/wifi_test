@@ -54,17 +54,7 @@ class WifiProvider extends ChangeNotifier{
 
       ssids.removeAt(0);
       List< MyButton> currentWIFIList = [];
-      for (var ssid in ssids) {
-        if(ssid[0] == '*'){
-          currentWIFIList = [
-            MyButton(text: ssid.substring(26,56).replaceAll(" ", ""), iscurrentuse: true)
-            ];
-        }
-        else{
-          finalList.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false));
-        }
-      }
-      currentWIFIList.addAll(finalList);
+
 
       return ssids;
 
