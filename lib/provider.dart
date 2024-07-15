@@ -285,7 +285,7 @@ class _Dialog2State extends State<Dialog2> {
 List keyList =['1','2','3','4','5','6','7','8','9','0',
   'q','w','e','r','t','y','u','i','o','p','Back',
 'a','s','d','f','g','h','j','k','l',"'",'enter',
-  'shift','z','x','c','v','b','n'];
+  'shift','z','x','c','v','b','n', 'm',',','.','?','shift'];
 class KeyBoardDialogue extends StatelessWidget{
   @override
   Widget build(BuildContext context){
@@ -310,10 +310,10 @@ class KeyBoardDialogue extends StatelessWidget{
               )),
 
               Padding(
-                padding: const EdgeInsets.only(left: 40.0),
-                child: Container(width:560, height: 60, child: Row(
+                padding: const EdgeInsets.only(left: 30.0),
+                child: Container(width:570, height: 60, child: Row(
                   children: [
-                    Expanded(child: Row(children: List.generate(10, (index) => Expanded(child: Key(keyboardkey: keyList[index+20],))))),
+                    Expanded(child: Row(children: List.generate(10, (index) => Expanded(child: Key(keyboardkey: keyList[index+21],))))),
                     Key(keyboardkey: keyList[31])
                   ],
                 )),
@@ -322,8 +322,7 @@ class KeyBoardDialogue extends StatelessWidget{
                 padding: const EdgeInsets.only(left: 100.0),
                 child: Container(width:500, height: 60, child: Row(
                   children: [
-                    Expanded(child: Row(children: List.generate(20, (index) => Expanded(child: Key(keyboardkey: keyList[index],))))),
-                    Key(keyboardkey: keyList[30])
+                    Expanded(child: Row(children: List.generate(12, (index) => Expanded(child: Key(keyboardkey: keyList[index+32],))))),
                   ],
                 )),
               ),
