@@ -293,10 +293,13 @@ class KeyBoardDialogue extends StatelessWidget{
       child: Container(
           width: 600,
           height: 300,
-
-          child: GridView.count(crossAxisCount: 11,
-                  children: List.generate(keyList.length, (index) => Key(keyboardkey: keyList[index])),
-
+          //
+          // child: GridView.count(crossAxisCount: 11,
+          //         children: List.generate(keyList.length, (index) => Key(keyboardkey: keyList[index])),
+          child: Column(
+            children: [
+              Row(children: List.generate(10, (index) => Expanded(child: Key(keyboardkey: keyList[index],)),),),
+            ],
           ),
 
       )
@@ -322,8 +325,6 @@ class _KeyState extends State<Key> {
     return Consumer<KeyBoardKey>(
       builder: (context, provider, child) {
           return Container(
-                width: 50,
-                height: 50,
                 decoration: BoxDecoration(border: Border.all(color: Colors.black)),
                 alignment: Alignment.center,
                 child: TextButton(onPressed: (){
