@@ -201,19 +201,20 @@ class _Dialog2State extends State<Dialog2> {
 
                         return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-
-                                width: 100, height: 20,
-
-                                child: TextField(
-
-                                  decoration: InputDecoration(contentPadding: EdgeInsets.zero),
-                                  onTap:(){keyBoardDialog();},
-                                  controller: controller,
-
-                                ))
-
+                            child: Container(
+                              height: 20,
+                              width: 100,
+                              child: TextFormField(
+                                maxLines: 1,
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  contentPadding: EdgeInsets.fromLTRB(5.0, 1.0, 5.0, 1.0),
+                                ),
+                                onTap:(){keyBoardDialog();},
+                                controller: controller,                              ),
+                            )
                         //      (){keyBoardDialog();}
+
                         );
                       }
                     )
@@ -332,7 +333,7 @@ class _KeyState extends State<Key> {
                   else{
                     provider.addKey(widget.keyboardkey);
                   }
-                 }, child: Text(widget.keyboardkey, style: TextStyle(fontSize: 8),),),
+                 }, child: Text(widget.keyboardkey, style: TextStyle(fontSize: 12),),),
 
 
             );
