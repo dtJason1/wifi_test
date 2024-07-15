@@ -205,7 +205,10 @@ class _Dialog2State extends State<Dialog2> {
 
                                 width: 100, height: 20,
 
-                                child: TextField(onTap:(){keyBoardDialog();},
+                                child: TextField(
+
+                                  decoration: InputDecoration(contentPadding: EdgeInsets.zero),
+                                  onTap:(){keyBoardDialog();},
                                   controller: controller,
 
                                 ))
