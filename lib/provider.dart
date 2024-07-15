@@ -285,7 +285,8 @@ class _Dialog2State extends State<Dialog2> {
 List keyList =['1','2','3','4','5','6','7','8','9','0',
   'q','w','e','r','t','y','u','i','o','p','Back',
 'a','s','d','f','g','h','j','k','l',"'",'enter',
-  'shift','z','x','c','v','b','n', 'm',',','.','?','shift'];
+  'shift','z','x','c','v','b','n', 'm',',','.','?','shift'
+  '&123', 'space', 'x'];
 class KeyBoardDialogue extends StatelessWidget{
   @override
   Widget build(BuildContext context){
@@ -318,9 +319,12 @@ class KeyBoardDialogue extends StatelessWidget{
                   ],
                 )),
               ),
-               Container(width:600, height: 60, child: Row(children: List.generate(12, (index) => Expanded(child: Key(keyboardkey: keyList[index+32],)),),)
-
-              ),
+              Container(width:600, height: 60, child: Row(children: List.generate(12, (index) => Expanded(child: Key(keyboardkey: keyList[index+32],)),),),),
+              Container(width:600, height: 60, child: Row(children: [
+                Key(keyboardkey: keyList[44]),
+                Key(keyboardkey: keyList[45]),
+                Key(keyboardkey: keyList[46])
+              ],),)
             ],
           ),
 
@@ -348,6 +352,9 @@ class _KeyState extends State<Key> {
       builder: (context, provider, child) {
           return Container(
                 width: (widget.keyboardkey == "Back" ||  widget.keyboardkey == "Enter") ? 120: null,
+
+
+
                 decoration: BoxDecoration(border: Border.all(color: Colors.black),
                     color: (widget.keyboardkey == "shift") ? Colors.black : null
 
@@ -363,7 +370,7 @@ class _KeyState extends State<Key> {
                   else{
                     provider.addKey(widget.keyboardkey);
                   }
-                 }, child: Text(widget.keyboardkey, style: TextStyle(fontSize: 12),),),
+                 }, child: Text(widget.keyboardkey, style: TextStyle(fontSize: 12, color: (widget.keyboardkey == "shift") ? Colors.white : null ),),),
 
 
             );
