@@ -307,10 +307,17 @@ class KeyBoardDialogue extends StatelessWidget{
                   Expanded(child: Row(children: List.generate(10, (index) => Expanded(child: Key(keyboardkey: keyList[index+10],))))),
                   Key(keyboardkey: keyList[20])
                 ],
-              )
-              
+              )),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 100.0),
+                child: Container(width:500, height: 60, child: Row(
+                  children: [
+                    Expanded(child: Row(children: List.generate(20, (index) => Expanded(child: Key(keyboardkey: keyList[index],))))),
+                    Key(keyboardkey: keyList[30])
+                  ],
+                )),
               ),
-              Container(width:600, height: 60, child: Row(children: List.generate(11, (index) => Expanded(child: Key(keyboardkey: keyList[index+21],))),))
 
             ],
           ),
