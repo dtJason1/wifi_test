@@ -292,7 +292,7 @@ class KeyBoardDialogue extends StatelessWidget{
     return Dialog(
       alignment: Alignment.bottomCenter,
       child: Container(
-          width: 600,
+          width: 700,
           height: 300,
           //
           // child: GridView.count(crossAxisCount: 11,
