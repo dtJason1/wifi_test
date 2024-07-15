@@ -419,7 +419,7 @@ class _KeyState extends State<Key> {
                   else if(widget.keyboardkey == "Enter"){
                     Navigator.pop(context);
                   }
-                  else if(widget.keyboardkey == "Enter"){
+                  else if(widget.keyboardkey == "space"){
                     provider.addKey(" ");
                   }
                   else if(widget.keyboardkey == "clear"){
