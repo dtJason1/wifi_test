@@ -319,8 +319,8 @@ class KeyBoardDialogue extends StatelessWidget{
                 )),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 100.0),
-                child: Container(width:500, height: 60, child: Row(
+                padding: const EdgeInsets.only(left: -30.0),
+                child: Container(width:600, height: 60, child: Row(
                   children: [
                     Expanded(child: Row(children: List.generate(12, (index) => Expanded(child: Key(keyboardkey: keyList[index+32],))))),
                   ],
