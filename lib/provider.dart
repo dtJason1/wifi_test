@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 // import 'package:provider/provider.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
+import 'package:wifi_test/main.dart';
 class KeyBoardKey extends ChangeNotifier{
   String _key = '';
   String get key => _key;
@@ -141,6 +142,8 @@ class _MyButtonState extends State<MyButton> {
   }
 
 }
+
+
 TextEditingController controller = TextEditingController();
 
 
@@ -230,8 +233,6 @@ class _Dialog2State extends State<Dialog2> {
                         print(currentUseText);
                         print("widget text : ${widget.text}");
 
-
-// Run the command
                         await Process.run('nmcli',['device', 'wifi', 'rescan']);
                         var result = await Process.run('nmcli',['device', 'wifi', 'list']);
 
@@ -244,10 +245,7 @@ class _Dialog2State extends State<Dialog2> {
                               return Dialog(
                                 child: Container( width:300, height:300, child: Center(child: Text("password not matched", style: TextStyle(color: Colors.red),),)),
                               );
-
-
                             });
-
                           }
                           if(value.stderr.toString().contains("No network with SSID")){
                             showDialog(context: context, builder: (context){
@@ -263,6 +261,7 @@ class _Dialog2State extends State<Dialog2> {
 
                           keyboardkey.clearKey();
                           Future.delayed(const Duration(seconds: 1)).then((value) {
+
                             wifiProvider.changeWifiList();
                             Navigator.of(context).pop();
                             wifiProvider.changeWifiList();

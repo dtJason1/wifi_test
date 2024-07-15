@@ -85,10 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
               return Stack(
                 children: [
                     Container(
-                    width: 1200, // dialog에서 wifi list를 얻어온 다음,
-                                  // wifi 로그인 dialog 에서 로그인 하면,  이전 dialog 는 업데이트,
-                                  // dialog 에서 provider 를 못쓴는 것 같은데,
-                    height: 800,
+                    width: 1200,
                     child: Column(
 
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -102,26 +99,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       ],
                     ),
                   ),
-                  //   AnimatedContainer(duration: Duration(seconds: 1),
-                  //     height: 400,
-                  //     width: 200,
-                  //   alignment: Alignment.bottomCenter,
-                  //   color: Colors.deepPurple,
-                  //   child: VirtualKeyboard(
-                  //       height: 400,
-                  //       width: 200,
-                  //       textColor: Colors.white,
-                  //       textController: _controllerText,
-                  //       //customLayoutKeys: _customLayoutKeys,
-                  //       defaultLayouts: [
-                  //         VirtualKeyboardDefaultLayouts.English
-                  //       ],
-                  //       //reverseLayout :true,
-                  //       type: isNumericMode
-                  //           ? VirtualKeyboardType.Numeric
-                  //           : VirtualKeyboardType.Alphanumeric,
-                  //       onKeyPress: _onKeyPress),
-                  // )
                 ],
               );
             }
@@ -132,45 +109,19 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
  );
   }
-  // _onKeyPress(VirtualKeyboardKey key) {
-  //   if (key.keyType == VirtualKeyboardKeyType.String) {
-  //     myPW = myPW + ((shiftEnabled ? key.capsText : key.text) ?? '');
-  //   } else if (key.keyType == VirtualKeyboardKeyType.Action) {
-  //     switch (key.action) {
-  //       case VirtualKeyboardKeyAction.Backspace:
-  //         if (myPW.length == 0) return;
-  //         myPW = myPW.substring(0, myPW.length - 1);
-  //         break;
-  //       case VirtualKeyboardKeyAction.Return:
-  //         myPW = myPW + '\n';
-  //         break;
-  //       case VirtualKeyboardKeyAction.Space:
-  //         myPW = myPW + (key.text ?? '');
-  //         break;
-  //       case VirtualKeyboardKeyAction.Shift:
-  //         shiftEnabled = !shiftEnabled;
-  //         break;
-  //       default:
-  //     }
-  //   }
-  //   // Update the screen
-  //
-  //   setState(() {
-  //     Provider.of<KeyBoardKey>(context).addKey(myPW);
-  //     print(myPW);
-  //
-  //   });
-  // }
 
 }
 
+final firstWifiListKey = GlobalKey();
 
 class WifiListIndicator extends StatelessWidget {
 
   Widget build(BuildContext context) {
+
   //you can enable or disable listen if you logic require so
   var wifiProvider = Provider.of<WifiProvider>(context);
   return Dialog(
+
     child: Padding(
       padding: const EdgeInsets.all(10.0),
       child: SizedBox(
@@ -185,7 +136,8 @@ class WifiListIndicator extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
-                  IconButton(onPressed: wifiProvider.changeWifiList, icon: Icon(Icons.refresh))
+                  IconButton(
+                      onPressed: wifiProvider.changeWifiList, icon: Icon(Icons.refresh))
                 ],
               ),
             ),
