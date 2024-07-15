@@ -273,6 +273,7 @@ class _Dialog2State extends State<Dialog2> {
                         var result = await Process.run('nmcli',['device', 'wifi', 'list']);
 
                         Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${controller.text}']).then((value) {
+                          print(widget.text);
                           print("controller text : ${controller.text}");
                           print("stdout ${value.stdout}");
                           print("err: ${value.stderr}");
@@ -290,8 +291,6 @@ class _Dialog2State extends State<Dialog2> {
                                 child: Container( width:300, height:300, child: Center(child: Text("cannot get SSID", style: TextStyle(color: Colors.red),),)),
 
                               );
-
-
                             });
 
                           }
@@ -301,7 +300,6 @@ class _Dialog2State extends State<Dialog2> {
                           Future.delayed(const Duration(seconds: 1)).then((value) {
                             widget.wifiProvider.changeWifiList();
                             Navigator.of(context).pop();
-                            wifiProvider.changeWifiList();
 
                           });
 
