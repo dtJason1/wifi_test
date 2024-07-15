@@ -29,6 +29,11 @@ class KeyBoardKey extends ChangeNotifier{
     'a','s','d','f','g','h','j','k','l',"'",'Enter',
     'shift','z','x','c','v','b','n', 'm',',','.','?','shift',
     '&123', 'space', 'clear'];
+  List specialKeyLists = ['1','2','3','4','5','6','7','8','9','0',
+    '+','×','÷','=','/','_','<','>','[',']','Back',
+    '!','@','#',r'$','%','^','&','*','(',")",'Enter',
+    'shift','-',"'",'"',':',';',',', '`',r'\','|','?','shift',
+    '&123', 'space', 'clear'];
 
   void capsLock(){
     _keyList = capsLockKeyList;
@@ -37,6 +42,11 @@ class KeyBoardKey extends ChangeNotifier{
   }
   void deCapsLock(){
     _keyList = normalKeyList;
+    notifyListeners();
+
+  }
+  void specialKeyboard(){
+    _keyList = specialKeyLists;
     notifyListeners();
 
   }
@@ -386,6 +396,7 @@ class Key extends StatefulWidget{
 
 class _KeyState extends State<Key> {
   bool _isCapsLocked = false;
+  bool _specialKeyboardState = false;
   @override
   Widget build(BuildContext context){
 
@@ -414,14 +425,19 @@ class _KeyState extends State<Key> {
                   else if(widget.keyboardkey == "clear"){
                     provider.clearKey();
                   }
+                  else if(widget.keyboardkey == "&123"){
+                    provider.specialKeyboard();
+                  }
                   else if(widget.keyboardkey == "shift"){
                     setState(() {
-                      _isCapsLocked  = !_isCapsLocked;
-                      if(_isCapsLocked){
-                        provider.capsLock();
-                      }
-                      else{
-                        provider.deCapsLock();
+                      if (!_specialKeyboardState) {
+                        _isCapsLocked  = !_isCapsLocked;
+                        if(_isCapsLocked){
+                          provider.capsLock();
+                        }
+                        else{
+                          provider.deCapsLock();
+                        }
                       }
                     });
                   }
