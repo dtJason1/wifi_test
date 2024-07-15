@@ -16,16 +16,13 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: MultiProvider(
         providers: [
-
           ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
           ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
-
         ],
         child: MyHomePage(),
       ),
@@ -37,8 +34,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
-
-
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -53,21 +48,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
     showDialog(
       context: context,
-      //Notice the use of ChangeNotifierProvider<ReportState>.value
-      builder: (_) => ChangeNotifierProvider<WifiProvider>.value(
-        value: wifiProvider,
-        child: WifiListIndicator(),
-      ),
+      builder: (_) => WifiListIndicator(),
     );
   }
-  String myPW = "";
-  late TextEditingController _controllerText;
-  bool shiftEnabled = false;
-  bool isNumericMode = false;
-  bool _show = false;
+
   @override
   void initState(){
-    _controllerText = TextEditingController();
 
     super.initState();
 
@@ -91,9 +77,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                           TextButton(child:  Text("WIFI"), onPressed: () async{
-
-                            provider.changeWifiList();
-                            dialog();
+                              provider.changeWifiList();
+                              dialog();
                             },),
 
                       ],
@@ -112,15 +97,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
 }
 
-final firstWifiListKey = GlobalKey();
 
 class WifiListIndicator extends StatelessWidget {
-
   Widget build(BuildContext context) {
-
-  //you can enable or disable listen if you logic require so
-  var wifiProvider = Provider.of<WifiProvider>(context);
-  return Dialog(
+    var wifiProvider = Provider.of<WifiProvider>(context);
+    return Dialog(
 
     child: Padding(
       padding: const EdgeInsets.all(10.0),
