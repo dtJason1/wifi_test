@@ -287,8 +287,8 @@ class KeyBoardDialogue extends StatelessWidget{
     return Dialog(
       alignment: Alignment.bottomCenter,
       child: Container(
-          width: 600,
-          height: 300,
+          width: 800,
+          height: 400,
 
           child: GridView.count(crossAxisCount: 11,
                   children: List.generate(keyList.length, (index) => Key(keyboardkey: keyList[index])),
