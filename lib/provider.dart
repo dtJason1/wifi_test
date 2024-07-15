@@ -294,10 +294,15 @@ List normalKeyList = ['1','2','3','4','5','6','7','8','9','0',
   'shift','z','x','c','v','b','n', 'm',',','.','?','shift',
   '&123', 'space', 'x'];
 
-class KeyBoardDialogue extends StatelessWidget{
+class KeyBoardDialogue extends StatefulWidget{
 
 
 
+  @override
+  State<KeyBoardDialogue> createState() => _KeyBoardDialogueState();
+}
+
+class _KeyBoardDialogueState extends State<KeyBoardDialogue> {
   @override
   Widget build(BuildContext context){
 
@@ -312,7 +317,7 @@ class KeyBoardDialogue extends StatelessWidget{
           child: Column(
             children: [
               Container(width:600, height: 60, child: Row(children: List.generate(10, (index) => Expanded(child: Key(keyboardkey: keyList[index],)),),)),
-              
+
               Container(width:600, height: 60, child: Row(
                 children: [
                   Expanded(child: Row(children: List.generate(10, (index) => Expanded(child: Key(keyboardkey: keyList[index+10],))))),
@@ -342,8 +347,6 @@ class KeyBoardDialogue extends StatelessWidget{
 
     );
   }
-
-
 }
 
 class Key extends StatefulWidget{
@@ -393,7 +396,7 @@ class _KeyState extends State<Key> {
 
                     provider.addKey(widget.keyboardkey);
                   }
-                 }, child: Text(widget.keyboardkey, style: TextStyle(fontSize: 12, color: (widget.keyboardkey == "shift") ? Colors.white : null ),),),
+                 }, child: Text(widget.keyboardkey, style: TextStyle(fontSize: 12, color: (widget.keyboardkey == "shift" || widget.keyboardkey == "&123" ) ? Colors.white : null ),),),
 
 
             );
