@@ -11,7 +11,11 @@ class KeyBoardKey extends ChangeNotifier{
   String _key = '';
   String get key => _key;
 
-  List _keyList = [];
+  List _keyList = ['1','2','3','4','5','6','7','8','9','0',
+    'q','w','e','r','t','y','u','i','o','p','Back',
+    'a','s','d','f','g','h','j','k','l',"'",'Enter',
+    'shift','z','x','c','v','b','n', 'm',',','.','?','shift',
+    '&123', 'space', 'x'];
   List get keyList => _keyList;
 
 
