@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -298,8 +299,9 @@ class KeyBoardDialogue extends StatelessWidget{
           //         children: List.generate(keyList.length, (index) => Key(keyboardkey: keyList[index])),
           child: Column(
             children: [
-              Row(children: List.generate(10, (index) => Expanded(child: Key(keyboardkey: keyList[index],)),),),
-              Row(children: List.generate(11, (index) => Expanded(child: Key(keyboardkey: keyList[index+10],))),)
+              Container(width:600, height: 60, child: Row(children: List.generate(10, (index) => Expanded(child: Key(keyboardkey: keyList[index],)),),)),
+              
+              Container(width:600, height: 60, child: Row(children: List.generate(11, (index) => Expanded(child: Key(keyboardkey: keyList[index+10],))),))
             ],
           ),
 
