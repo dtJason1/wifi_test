@@ -11,6 +11,32 @@ class KeyBoardKey extends ChangeNotifier{
   String _key = '';
   String get key => _key;
 
+  List _keyList = [];
+  List get keyList => _keyList;
+
+
+  List capsLockKeyList = ['1','2','3','4','5','6','7','8','9','0',
+    'Q','W','E','R','T','Y','U','I','O','P','Back',
+    'A','S','D','F','G','H','J','K','L',"'",'Enter',
+    'shift','Z','X','C','V','B','N','M',',','.','?','shift',
+    '&123', 'space', 'x'];
+  List normalKeyList = ['1','2','3','4','5','6','7','8','9','0',
+    'q','w','e','r','t','y','u','i','o','p','Back',
+    'a','s','d','f','g','h','j','k','l',"'",'Enter',
+    'shift','z','x','c','v','b','n', 'm',',','.','?','shift',
+    '&123', 'space', 'x'];
+
+  void capsLock(){
+    _keyList = capsLockKeyList;
+    notifyListeners();
+
+  }
+  void deCapsLock(){
+    _keyList = normalKeyList;
+    notifyListeners();
+
+  }
+
   void addKey (String insertedKey){
     _key += insertedKey;
 
@@ -282,17 +308,6 @@ class _Dialog2State extends State<Dialog2> {
   }
 }
 
-List keyList = normalKeyList;
-List capsLockKeyList = ['1','2','3','4','5','6','7','8','9','0',
-  'Q','W','E','R','T','Y','U','I','O','P','Back',
-  'A','S','D','F','G','H','J','K','L',"'",'Enter',
-  'shift','Z','X','C','V','B','N','M',',','.','?','shift',
-  '&123', 'space', 'x'];
-List normalKeyList = ['1','2','3','4','5','6','7','8','9','0',
-  'q','w','e','r','t','y','u','i','o','p','Back',
-  'a','s','d','f','g','h','j','k','l',"'",'Enter',
-  'shift','z','x','c','v','b','n', 'm',',','.','?','shift',
-  '&123', 'space', 'x'];
 
 class KeyBoardDialogue extends StatefulWidget{
 
@@ -303,8 +318,11 @@ class KeyBoardDialogue extends StatefulWidget{
 }
 
 class _KeyBoardDialogueState extends State<KeyBoardDialogue> {
+
+
   @override
   Widget build(BuildContext context){
+    var key = Provider.of<KeyBoardKey>(context);
 
     return Dialog(
       alignment: Alignment.bottomCenter,
@@ -314,33 +332,37 @@ class _KeyBoardDialogueState extends State<KeyBoardDialogue> {
           //
           // child: GridView.count(crossAxisCount: 11,
           //         children: List.generate(keyList.length, (index) => Key(keyboardkey: keyList[index])),
-          child: Column(
-            children: [
-              Container(width:600, height: 60, child: Row(children: List.generate(10, (index) => Expanded(child: Key(keyboardkey: keyList[index],)),),)),
-
-              Container(width:600, height: 60, child: Row(
+          child: Consumer<KeyBoardKey>(
+            builder: (context ,provider, child) {
+              return Column(
                 children: [
-                  Expanded(child: Row(children: List.generate(10, (index) => Expanded(child: Key(keyboardkey: keyList[index+10],))))),
-                  Key(keyboardkey: keyList[20])
-                ],
-              )),
+                  Container(width:600, height: 60, child: Row(children: List.generate(10, (index) => Expanded(child: Key(keyboardkey: provider.keyList[index],)),),)),
 
-              Padding(
-                padding: const EdgeInsets.only(left: 30.0),
-                child: Container(width:570, height: 60, child: Row(
-                  children: [
-                    Expanded(child: Row(children: List.generate(10, (index) => Expanded(child: Key(keyboardkey: keyList[index+21],))))),
-                    Key(keyboardkey: keyList[31])
-                  ],
-                )),
-              ),
-              Container(width:600, height: 60, child: Row(children: List.generate(12, (index) => Expanded(child: Key(keyboardkey: keyList[index+32],)),),),),
-              Container(width:600, height: 60, child: Row(children: [
-                Key(keyboardkey: keyList[44]),
-                Key(keyboardkey: keyList[45]),
-                Key(keyboardkey: keyList[46])
-              ],),)
-            ],
+                  Container(width:600, height: 60, child: Row(
+                    children: [
+                      Expanded(child: Row(children: List.generate(10, (index) => Expanded(child: Key(keyboardkey: provider.keyList[index+10],))))),
+                      Key(keyboardkey: provider.keyList[20])
+                    ],
+                  )),
+
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30.0),
+                    child: Container(width:570, height: 60, child: Row(
+                      children: [
+                        Expanded(child: Row(children: List.generate(10, (index) => Expanded(child: Key(keyboardkey:provider. keyList[index+21],))))),
+                        Key(keyboardkey: provider.keyList[31])
+                      ],
+                    )),
+                  ),
+                  Container(width:600, height: 60, child: Row(children: List.generate(12, (index) => Expanded(child: Key(keyboardkey:provider. keyList[index+32],)),),),),
+                  Container(width:600, height: 60, child: Row(children: [
+                    Key(keyboardkey: provider.keyList[44]),
+                    Key(keyboardkey: provider.keyList[45]),
+                    Key(keyboardkey: provider.keyList[46])
+                  ],),)
+                ],
+              );
+            }
           ),
 
       )
@@ -385,10 +407,10 @@ class _KeyState extends State<Key> {
                     setState(() {
                       _isCapsLocked  = !_isCapsLocked;
                       if(_isCapsLocked){
-                        keyList = capsLockKeyList;
+                        provider.capsLock();
                       }
                       else{
-                        keyList = normalKeyList;
+                        provider.deCapsLock();
                       }
                     });
                   }
