@@ -277,32 +277,33 @@ class _Dialog2State extends State<Dialog2> {
                           print("stdout ${value.stdout}");
                           print("err: ${value.stderr}");
 
-                          if(value.stderr.toString().contains("property is invalid") || value.stderr.toString().contains("Secrets were required") ){
-                            showDialog(context: context, builder: (context){
-                              return Dialog(
-                                child: Container( width:300, height:300, child: Center(child: Text("password not matched", style: TextStyle(color: Colors.red),),)),
-                              );
-                            });
+                          if (value.stderr != null) {
+                            if(value.stderr.toString().contains("property is invalid") || value.stderr.toString().contains("Secrets were required") ){
+                              showDialog(context: context, builder: (context){
+                                return Dialog(
+                                  child: Container( width:300, height:300, child: Center(child: Text("password not matched", style: TextStyle(color: Colors.red),),)),
+                                );
+                              });
+                            }
+                            if(value.stderr.toString().contains("No network with SSID")){
+                              showDialog(context: context, builder: (context){
+                                return Dialog(
+                                  child: Container( width:300, height:300, child: Center(child: Text("cannot get SSID", style: TextStyle(color: Colors.red),),)),
+
+                                );
+
+
+                              });
+
+                            }
                           }
-                          if(value.stderr.toString().contains("No network with SSID")){
-                            showDialog(context: context, builder: (context){
-                              return Dialog(
-                                child: Container( width:300, height:300, child: Center(child: Text("cannot get SSID", style: TextStyle(color: Colors.red),),)),
-
-                              );
-
-
-                            });
-
+                          else{
+                            widget.wifiProvider.changeWifiList();
+                            Navigator.of(context).pop();
                           }
 
                           keyboardkey.clearKey();
 
-                          Future.delayed(const Duration(seconds: 1)).then((value) {
-                            widget.wifiProvider.changeWifiList();
-                            Navigator.of(context).pop();
-
-                          });
 
 
 
