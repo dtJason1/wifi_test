@@ -378,7 +378,7 @@ class _KeyState extends State<Key> {
                   else if(widget.keyboardkey == "Enter"){
                     Navigator.pop(context);
                   }
-                  else if(widget.keyboardkey == "Shift"){
+                  else if(widget.keyboardkey == "shift"){
                     setState(() {
                       _isCapsLocked  = !_isCapsLocked;
                       if(_isCapsLocked){
