@@ -300,13 +300,9 @@ class KeyBoardDialogue extends StatelessWidget{
           //         children: List.generate(keyList.length, (index) => Key(keyboardkey: keyList[index])),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Container(width:600, height: 60, child: Row(children: List.generate(10, (index) => Expanded(child: Key(keyboardkey: keyList[index],)),),)),
-              ),
+              Container(width:600, height: 60, child: Row(children: List.generate(10, (index) => Expanded(child: Key(keyboardkey: keyList[index],)),),)),
               
-              Container(width:600, height: 60, child: Row(children: List.generate(11, (index) => Expanded(child: Key(keyboardkey: keyList[index+10],)))
-                )
+              Container(width:600, height: 60, child: Row(children: List.generate(11, (index) => Expanded(child: Key(keyboardkey: keyList[index+10],))))
               
               ),
               Container(width:600, height: 60, child: Row(children: List.generate(11, (index) => Expanded(child: Key(keyboardkey: keyList[index+21],))),))
@@ -337,7 +333,6 @@ class _KeyState extends State<Key> {
     return Consumer<KeyBoardKey>(
       builder: (context, provider, child) {
           return Container(
-                width: widget.keyboardkey == "back" ? 120 : null,
                 decoration: BoxDecoration(border: Border.all(color: Colors.black)),
                 alignment: Alignment.center,
                 child: TextButton(onPressed: (){  
