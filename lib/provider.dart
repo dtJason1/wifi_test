@@ -28,7 +28,9 @@ class KeyBoardKey extends ChangeNotifier{
   void deleteKey(){
 
     if (_key != null && _key.length > 0) {
-      _key = _key.substring(0, _key.length - 1);
+      List<String> splitedKeys = _key.split("");
+      splitedKeys.removeLast();
+      _key = splitedKeys.join();
     }
     controller.text = _key;
 
