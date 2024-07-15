@@ -292,18 +292,16 @@ class _Dialog2State extends State<Dialog2> {
 
                                 );
 
-
                               });
-
                             }
                           }
                           else{
                             widget.wifiProvider.changeWifiList();
-                            Navigator.of(context).pop();
                           }
 
                           keyboardkey.clearKey();
 
+                          Navigator.of(context).pop();
 
 
 
