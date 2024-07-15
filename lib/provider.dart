@@ -15,7 +15,7 @@ class KeyBoardKey extends ChangeNotifier{
     'q','w','e','r','t','y','u','i','o','p','Back',
     'a','s','d','f','g','h','j','k','l',"'",'Enter',
     'shift','z','x','c','v','b','n', 'm',',','.','?','shift',
-    '&123', 'space', 'x'];
+    '&123', 'space', 'clear'];
   List get keyList => _keyList;
 
 
@@ -23,12 +23,12 @@ class KeyBoardKey extends ChangeNotifier{
     'Q','W','E','R','T','Y','U','I','O','P','Back',
     'A','S','D','F','G','H','J','K','L',"'",'Enter',
     'shift','Z','X','C','V','B','N','M',',','.','?','shift',
-    '&123', 'space', 'x'];
+    '&123', 'space', 'clear'];
   List normalKeyList = ['1','2','3','4','5','6','7','8','9','0',
     'q','w','e','r','t','y','u','i','o','p','Back',
     'a','s','d','f','g','h','j','k','l',"'",'Enter',
     'shift','z','x','c','v','b','n', 'm',',','.','?','shift',
-    '&123', 'space', 'x'];
+    '&123', 'space', 'clear'];
 
   void capsLock(){
     _keyList = capsLockKeyList;
@@ -40,6 +40,7 @@ class KeyBoardKey extends ChangeNotifier{
     notifyListeners();
 
   }
+
 
   void addKey (String insertedKey){
     _key += insertedKey;
@@ -406,6 +407,12 @@ class _KeyState extends State<Key> {
                   }
                   else if(widget.keyboardkey == "Enter"){
                     Navigator.pop(context);
+                  }
+                  else if(widget.keyboardkey == "Enter"){
+                    provider.addKey(" ");
+                  }
+                  else if(widget.keyboardkey == "clear"){
+                    provider.clearKey();
                   }
                   else if(widget.keyboardkey == "shift"){
                     setState(() {
