@@ -25,6 +25,16 @@ class KeyBoardKey extends ChangeNotifier{
     notifyListeners();
 
   }
+  void deleteKey(){
+
+    if (_key != null && _key.length > 0) {
+      _key = _key.substring(0, _key.length - 1);
+    }
+    controller.text = _key;
+
+    notifyListeners();
+
+  }
 
 }
 
@@ -50,10 +60,7 @@ class WifiProvider extends ChangeNotifier{
       // Filter SSIDs
       var ssids = result.stdout.toString().trim().split('\n');
 
-
-
       ssids.removeAt(0);
-      List< MyButton> currentWIFIList = [];
 
 
       return ssids;
@@ -313,7 +320,14 @@ class _KeyState extends State<Key> {
                 height: 50,
                 decoration: BoxDecoration(border: Border.all(color: Colors.black)),
                 alignment: Alignment.center,
-                child: TextButton(onPressed: (){provider.addKey(widget.keyboardkey);}, child: Text(widget.keyboardkey),),
+                child: TextButton(onPressed: (){
+                  if(widget.keyboardkey != "Back") {
+                    provider.deleteKey();
+                  }
+                  else{
+                    provider.addKey(widget.keyboardkey);
+                  }
+                 }, child: Text(widget.keyboardkey),),
 
 
             );
