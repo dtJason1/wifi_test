@@ -274,7 +274,7 @@ class _Dialog2State extends State<Dialog2> {
   }
 }
 
-List keyList =['1','2','3','4','5','6','7','8','9','0',
+List keyList =['1','2','3','4','5','6','7','8','9','0','back',
   'q','w','e','r','t','y','u','i','o','p',
 'a','s','d','f','g','h','j','k','l',
 'z','x','c','v','b'];
@@ -288,7 +288,7 @@ class KeyBoardDialogue extends StatelessWidget{
           width: 600,
           height: 300,
 
-          child: GridView.count(crossAxisCount: 10,
+          child: GridView.count(crossAxisCount: 11,
                   children: List.generate(keyList.length, (index) => Key(keyboardkey: keyList[index])),
 
           ),
