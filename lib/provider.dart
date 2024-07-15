@@ -277,6 +277,14 @@ class _Dialog2State extends State<Dialog2> {
                           print("controller text : ${controller.text}");
                           print("stdout ${value.stdout}");
                           print("err: ${value.stderr}");
+                          if(value.stderr.toString().contains("Connection activation failed") ){
+                            print("catch");
+                            showDialog(context: context, builder: (context){
+                              return Dialog(
+                                child: Container( width:300, height:300, child: Center(child: Text("password not matched", style: TextStyle(color: Colors.red),),)),
+                              );
+                            });
+                          }
 
                           if(value.stderr.toString().contains("property is invalid") || value.stderr.toString().contains("Secrets were required") || value.stderr.toString().contains("New connection activation was enqueued") ){
                             print("catch");
