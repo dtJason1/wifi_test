@@ -321,9 +321,9 @@ class KeyBoardDialogue extends StatelessWidget{
               ),
               Container(width:600, height: 60, child: Row(children: List.generate(12, (index) => Expanded(child: Key(keyboardkey: keyList[index+32],)),),),),
               Container(width:600, height: 60, child: Row(children: [
+                Key(keyboardkey: keyList[43]),
                 Key(keyboardkey: keyList[44]),
-                Key(keyboardkey: keyList[45]),
-                Key(keyboardkey: keyList[46])
+                Key(keyboardkey: keyList[45])
               ],),)
             ],
           ),
