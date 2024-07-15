@@ -111,8 +111,6 @@ class WifiListIndicator extends StatefulWidget {
 class _WifiListIndicatorState extends State<WifiListIndicator> {
 
   @override
-
-
   Widget build(BuildContext context) {
     List< MyButton> finalList = [];
     List< MyButton> currentWIFIList = [];
@@ -121,11 +119,11 @@ class _WifiListIndicatorState extends State<WifiListIndicator> {
     for (var ssid in wifiProvider.wifiList) {
       if(ssid[0] == '*'){
         currentWIFIList = [
-          MyButton(text: ssid.substring(26,56).replaceAll(" ", ""), iscurrentuse: true, provider: wifiProvider,)
+          MyButton(text: ssid.substring(26,56).replaceAll(" ", ""), iscurrentuse: true,wifiProvider: wifiProvider,)
         ];
       }
       else{
-        finalList.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false, provider: wifiProvider));
+        finalList.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false,wifiProvider: wifiProvider,));
       }
     }
     currentWIFIList.addAll(finalList);

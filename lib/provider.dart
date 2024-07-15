@@ -88,7 +88,8 @@ class WifiProvider extends ChangeNotifier{
 
 
 class MyButton extends StatefulWidget{
-  MyButton({required this.text, required this.iscurrentuse});
+  MyButton({required this.text, required this.iscurrentuse, required this.wifiProvider});
+  final WifiProvider wifiProvider;
   String text;
   final bool iscurrentuse;
   @override
@@ -115,7 +116,7 @@ class _MyButtonState extends State<MyButton> {
             ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
             ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
           ],
-          child:  Dialog2(text:widget.text),
+          child:  Dialog2(text:widget.text, wifiProvider: widget.wifiProvider,),
         ),
 
     );
@@ -141,9 +142,9 @@ TextEditingController controller = TextEditingController();
 
 
 class Dialog2 extends StatefulWidget{
-  Dialog2({required this.text});
+  Dialog2({required this.text, required this.wifiProvider});
   final String text;
-
+  final WifiProvider wifiProvider;
   @override
   State<Dialog2> createState() => _Dialog2State();
 }
@@ -216,7 +217,7 @@ class _Dialog2State extends State<Dialog2> {
                     )
                   ],
                 ),
-                Consumer2<KeyBoardKey,WifiProvider >(
+                Consumer2<KeyBoardKey,WifiProvider>(
                   builder: (context, keyboardkey, wifiProvider,  child) {
                     return TextButton(onPressed: () async{
                       try {
@@ -252,7 +253,7 @@ class _Dialog2State extends State<Dialog2> {
                           keyboardkey.clearKey();
 
                           Future.delayed(const Duration(seconds: 1)).then((value) {
-
+                            widget.wifiProvider.changeWifiList();
                             Navigator.of(context).pop();
                             wifiProvider.changeWifiList();
 
