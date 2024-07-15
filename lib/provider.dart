@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 // import 'package:provider/provider.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
@@ -283,7 +284,7 @@ class _Dialog2State extends State<Dialog2> {
 
 List keyList =['1','2','3','4','5','6','7','8','9','0',
   'q','w','e','r','t','y','u','i','o','p','Back',
-'a','s','d','f','g','h','j','k','l',
+'a','s','d','f','g','h','j','k','l',"'",'enter'
 'z','x','c','v','b'];
 class KeyBoardDialogue extends StatelessWidget{
   @override
@@ -299,9 +300,17 @@ class KeyBoardDialogue extends StatelessWidget{
           //         children: List.generate(keyList.length, (index) => Key(keyboardkey: keyList[index])),
           child: Column(
             children: [
-              Container(width:600, height: 60, child: Row(children: List.generate(10, (index) => Expanded(child: Key(keyboardkey: keyList[index],)),),)),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Container(width:600, height: 60, child: Row(children: List.generate(10, (index) => Expanded(child: Key(keyboardkey: keyList[index],)),),)),
+              ),
               
-              Container(width:600, height: 60, child: Row(children: List.generate(11, (index) => Expanded(child: Key(keyboardkey: keyList[index+10],))),))
+              Container(width:600, height: 60, child: Row(children: List.generate(11, (index) => Expanded(child: Key(keyboardkey: keyList[index+10],)))
+                )
+              
+              ),
+              Container(width:600, height: 60, child: Row(children: List.generate(11, (index) => Expanded(child: Key(keyboardkey: keyList[index+21],))),))
+
             ],
           ),
 
@@ -328,9 +337,10 @@ class _KeyState extends State<Key> {
     return Consumer<KeyBoardKey>(
       builder: (context, provider, child) {
           return Container(
+                width: widget.keyboardkey == "back" ? 120 : null,
                 decoration: BoxDecoration(border: Border.all(color: Colors.black)),
                 alignment: Alignment.center,
-                child: TextButton(onPressed: (){
+                child: TextButton(onPressed: (){  
                   if(widget.keyboardkey == "Back") {
                     provider.deleteKey();
                   }
