@@ -347,12 +347,15 @@ class _KeyState extends State<Key> {
     return Consumer<KeyBoardKey>(
       builder: (context, provider, child) {
           return Container(
-                width: (widget.keyboardkey == "Back") ? 120: null,
+                width: (widget.keyboardkey == "Back" ||  widget.keyboardkey == "Enter") ? 120: null,
                 decoration: BoxDecoration(border: Border.all(color: Colors.black)),
                 alignment: Alignment.center,
                 child: TextButton(onPressed: (){  
                   if(widget.keyboardkey == "Back") {
                     provider.deleteKey();
+                  }
+                  else if(widget.keyboardkey == "Enter"){
+                    Navigator.pop(context);
                   }
                   else{
                     provider.addKey(widget.keyboardkey);
