@@ -301,7 +301,6 @@ class _Dialog2State extends State<Dialog2> {
                           Future.delayed(const Duration(seconds: 1)).then((value) {
                             widget.wifiProvider.changeWifiList();
                             Navigator.of(context).pop();
-                            wifiProvider.changeWifiList();
 
                           });
 
