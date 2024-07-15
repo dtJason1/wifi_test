@@ -240,6 +240,7 @@ class _Dialog2State extends State<Dialog2> {
                           print("controller text : ${controller.text}");
                           print("stdout ${value.stdout}");
                           print("err: ${value.stderr}");
+
                           if(value.stderr.toString().contains("property is invalid") || value.stderr.toString().contains("Secrets were required") ){
                             showDialog(context: context, builder: (context){
                               return Dialog(
@@ -260,9 +261,9 @@ class _Dialog2State extends State<Dialog2> {
                           }
 
                           keyboardkey.clearKey();
+
                           Future.delayed(const Duration(seconds: 1)).then((value) {
 
-                            wifiProvider.changeWifiList();
                             Navigator.of(context).pop();
                             wifiProvider.changeWifiList();
 

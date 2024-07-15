@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:virtual_keyboard_multi_language/virtual_keyboard_multi_language.dart';
+import 'dart:async';
 
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +40,8 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+GlobalKey firstWIFIkey = GlobalKey();
+
 class _MyHomePageState extends State<MyHomePage> {
 
   bool isSelected = false;
@@ -48,16 +51,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
     showDialog(
       context: context,
-      builder: (_) => WifiListIndicator(),
+      builder: (_) => ChangeNotifierProvider<WifiProvider>.value(
+        value: wifiProvider,
+        child: WifiListIndicator(),
+      ),
     );
   }
 
-  @override
-  void initState(){
 
-    super.initState();
-
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,10 +77,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                          TextButton(child:  Text("WIFI"), onPressed: () async{
+                          TextButton(child:  Text("WIFI"),
+                            onPressed: () async{
                               provider.changeWifiList();
                               dialog();
-                            },),
+                            },
+                          ),
 
                       ],
                     ),
@@ -98,8 +101,20 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 
-class WifiListIndicator extends StatelessWidget {
+class WifiListIndicator extends StatefulWidget {
+
+
+  @override
+  State<WifiListIndicator> createState() => _WifiListIndicatorState();
+}
+
+class _WifiListIndicatorState extends State<WifiListIndicator> {
+
+  @override
+
+
   Widget build(BuildContext context) {
+
     var wifiProvider = Provider.of<WifiProvider>(context);
     return Dialog(
 
