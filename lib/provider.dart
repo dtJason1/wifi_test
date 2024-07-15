@@ -321,7 +321,7 @@ class _KeyState extends State<Key> {
                 decoration: BoxDecoration(border: Border.all(color: Colors.black)),
                 alignment: Alignment.center,
                 child: TextButton(onPressed: (){
-                  if(widget.keyboardkey != "Back") {
+                  if(widget.keyboardkey == "Back") {
                     provider.deleteKey();
                   }
                   else{
