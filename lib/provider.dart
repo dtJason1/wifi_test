@@ -284,8 +284,8 @@ class _Dialog2State extends State<Dialog2> {
 
 List keyList =['1','2','3','4','5','6','7','8','9','0',
   'q','w','e','r','t','y','u','i','o','p','Back',
-'a','s','d','f','g','h','j','k','l',"'",'enter',
-  'shift','z','x','c','v','b','n', 'm',',','.','?','shift'
+'a','s','d','f','g','h','j','k','l',"'",'Enter',
+  'shift','z','x','c','v','b','n', 'm',',','.','?','shift',
   '&123', 'space', 'x'];
 class KeyBoardDialogue extends StatelessWidget{
   @override
@@ -351,7 +351,7 @@ class _KeyState extends State<Key> {
     return Consumer<KeyBoardKey>(
       builder: (context, provider, child) {
           return Container(
-                width: (widget.keyboardkey == "Back" ||  widget.keyboardkey == "Enter") ? 120: null,
+                width: (widget.keyboardkey == "Back" ||  widget.keyboardkey == "Enter")  ? 120: null,
 
 
 
