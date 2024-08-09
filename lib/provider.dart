@@ -169,7 +169,9 @@ class _MyButtonState extends State<MyButton> {
   @override
   Widget build(BuildContext context){
     return  TextButton(onPressed: (){
-      dialog2();
+      if(!widget.iscurrentuse) {
+        dialog2();
+      }
 
     },
       child: Text(widget.text, style: TextStyle(color: this.widget.iscurrentuse ? Colors.blue : Colors.black),),);
@@ -277,7 +279,7 @@ class _Dialog2State extends State<Dialog2> {
                           print("controller text : ${controller.text}");
                           print("stdout ${value.stdout}");
                           print("err: ${value.stderr}");
-                          if(value.stderr.toString().contains("Connection activation failed") ){
+                          if(value.stderr.toString().contains("property is invalid") || value.stderr.toString().contains("Secrets were required") || value.stderr.toString().contains("New connection activation was enqueued") ){
                             print("catch");
                             showDialog(context: context, builder: (context){
                               return Dialog(
@@ -308,7 +310,7 @@ class _Dialog2State extends State<Dialog2> {
 
                           Future.delayed(const Duration(seconds: 1)).then((value) {
                             widget.wifiProvider.changeWifiList();
-                            Navigator.of(context, rootNavigator: true).pop();
+                            Navigator.of(context).pop();
 
                           });
 
