@@ -220,21 +220,29 @@ class _MainPageState extends State<MainPage> {
                   child: Column(
 
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 25.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
-                            IconButton(
-                                onPressed: wifiProvider.changeWifiList, icon: Icon(Icons.refresh))
-                          ],
-                        ),
+                      Consumer<WifiProvider>(
+                        builder: (context, provider, child) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 25.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
+                                IconButton(
+                                    onPressed: provider.changeWifiList, icon: Icon(Icons.refresh))
+                              ],
+                            ),
+                          );
+                        }
                       ),
-                      SizedBox(
-                        height: 300,
-                        width: 300,
-                        child: wifiProvider.wifiList == [] ? CircularProgressIndicator() : ListView(shrinkWrap: true, children: currentWIFIList,),
+                      Consumer(
+                        builder: (context,provider,child) {
+                          return SizedBox(
+                            height: 300,
+                            width: 300,
+                            child: provider.wifiList == [] ? CircularProgressIndicator() : ListView(shrinkWrap: true, children: currentWIFIList,),
+                          );
+                        }
                       ),
                     ],
                   ),
