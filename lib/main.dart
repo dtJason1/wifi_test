@@ -216,7 +216,7 @@ class _MainPageState extends State<MainPage> {
           child: Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
-            color: Color.fromRGBO(0, 0, 0, 0.1),
+            color: Color.fromRGBO(0, 0, 0, 1),
 
 
 
