@@ -76,8 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 return Stack(
                   children: [
            Positioned(
-                  top: 150,
-                  child: Container(color: Colors.black, height: 50, width: 800,),),
+                  child: Container(color: Colors.black, height: 50, width: 1200,),),
 
                   Container(
                       width: 1200,
