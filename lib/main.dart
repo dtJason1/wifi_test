@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'dart:io';
 import 'package:virtual_keyboard_multi_language/virtual_keyboard_multi_language.dart';
 import 'dart:async';
@@ -181,52 +182,50 @@ class _MainPageState extends State<MainPage> {
   void initState() {
 
 
-
+    bool isSettingsOpen = true;
 
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        AnimatedOpacity(
-          opacity: scaffoldOpacity,
-          duration: Duration(milliseconds: 100),
-          child: Scaffold(
-            body: Center(
-              child: Container(
-                height: 400,
-                width: 300,
-                color: Colors.white,
-                child: Text('MAIN PAGE BODY'),
+    return Visibility(
+      visible:  isSettingsOpen,
+      child: Stack(
+        children: <Widget>[
+          AnimatedOpacity(
+            opacity: scaffoldOpacity,
+            duration: Duration(milliseconds: 100),
+            child: Scaffold(
+              body: Center(
+                child: Container(
+                  height: 400,
+                  width: 300,
+                  color: Colors.white,
+                  child: Text('MAIN PAGE BODY'),
+                ),
               ),
             ),
           ),
-        ),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-         color: Color.fromRGBO(0, 0, 0, 0.1),
-          child: Column(
-            children: <Widget>[
-              Text('Settings'),
-              //Button,
-        
-              //Button to close settings dialog
-              ElevatedButton(
-                child: Icon(Icons.close),
-                onPressed: () {
-                  setState(() {
-                    scaffoldOpacity = 1.0;
-                    isSettingsOpen = false;
-                  });
-                },
-              ),
-        
-            ],
+          GestureDetector(
+            onTap: (){
+              setState(() {
+
+                isSettingsOpen = false;
+              });
+
+            },
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              color: Color.fromRGBO(0, 0, 0, 0.1),
+
+
+
+            ),
+
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
