@@ -184,9 +184,9 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    // var wifiProvider = Provider.of<WifiProvider>(context);
-    // List< MyButton> finalList = [];
-    // List< MyButton> currentWIFIList = [];
+    var wifiProvider = Provider.of<WifiProvider>(context);
+    List< MyButton> finalList = [];
+    List< MyButton> currentWIFIList = [];
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -226,16 +226,16 @@ class _MainPageState extends State<MainPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
-                            // IconButton(
-                            //     onPressed: wifiProvider.changeWifiList, icon: Icon(Icons.refresh))
+                            IconButton(
+                                onPressed: wifiProvider.changeWifiList, icon: Icon(Icons.refresh))
                           ],
                         ),
                       ),
-                      // SizedBox(
-                      //   height: 300,
-                      //   width: 300,
-                      //   child: wifiProvider.wifiList == [] ? CircularProgressIndicator() : ListView(shrinkWrap: true, children: currentWIFIList,),
-                      // ),
+                      SizedBox(
+                        height: 300,
+                        width: 300,
+                        child: wifiProvider.wifiList == [] ? CircularProgressIndicator() : ListView(shrinkWrap: true, children: currentWIFIList,),
+                      ),
                     ],
                   ),
                 ),
