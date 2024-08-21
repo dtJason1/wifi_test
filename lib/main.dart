@@ -175,9 +175,37 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  List< MyButton> finalList = [];
+  List< MyButton> currentWIFIList = [];
+
+  @override
+  void initState(){
+
+
+  }
+
+  void getWifi(){
+
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
+    var wifiProvider = Provider.of<WifiProvider>(context);
+
+    for (var ssid in wifiProvider.wifiList) {
+      if(ssid[0] == '*'){
+        currentWIFIList = [
+          MyButton(text: ssid.substring(26,56).replaceAll(" ", ""), iscurrentuse: true,wifiProvider: wifiProvider,)
+        ];
+      }
+      else{
+        finalList.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false,wifiProvider: wifiProvider,));
+      }
+    }
+    currentWIFIList.addAll(finalList);
+
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -201,11 +229,34 @@ class _MainPageState extends State<MainPage> {
       
           ),
           Center(
-            child: Container(
-              height: 400,
-              width: 300,
-              color: Colors.white,
-              child: Text('MAIN PAGE BODY'),
+            child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: SizedBox(
+                    height: 400,
+                    width: 400,
+                    child: Column(
+
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 25.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
+                              IconButton(
+                                  onPressed: wifiProvider.changeWifiList, icon: Icon(Icons.refresh))
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 300,
+                          width: 300,
+                          child: wifiProvider.wifiList == [] ? CircularProgressIndicator() : ListView(shrinkWrap: true, children: currentWIFIList,),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
             ),
           ),
         ],
