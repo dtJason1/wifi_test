@@ -175,32 +175,12 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  double scaffoldOpacity = 1.0;
-  bool isSettingsOpen = true;
-
-
-  @override
-  void initState() {
-
-
-    bool isSettingsOpen = true;
-
-  }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Scaffold(
-          body: Center(
-            child: Container(
-              height: 400,
-              width: 300,
-              color: Colors.white,
-              child: Text('MAIN PAGE BODY'),
-            ),
-          ),
-        ),
+
         GestureDetector(
           onTap: (){
             setState(() {
@@ -218,6 +198,16 @@ class _MainPageState extends State<MainPage> {
 
           ),
 
+        ),
+        Scaffold(
+          body: Center(
+            child: Container(
+              height: 400,
+              width: 300,
+              color: Colors.white,
+              child: Text('MAIN PAGE BODY'),
+            ),
+          ),
         ),
       ],
     );
