@@ -188,11 +188,11 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      visible:  isSettingsOpen,
-      child: Stack(
-        children: <Widget>[
-          AnimatedOpacity(
+    return Stack(
+      children: <Widget>[
+        Visibility(
+          visible: isSettingsOpen,
+          child: AnimatedOpacity(
             opacity: scaffoldOpacity,
             duration: Duration(milliseconds: 100),
             child: Scaffold(
@@ -206,7 +206,10 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
           ),
-          GestureDetector(
+        ),
+        Visibility(
+          visible:  isSettingsOpen,
+          child: GestureDetector(
             onTap: (){
               setState(() {
 
@@ -224,8 +227,8 @@ class _MainPageState extends State<MainPage> {
             ),
 
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
