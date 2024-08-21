@@ -184,11 +184,13 @@ class _MainPageState extends State<MainPage> {
           opacity: scaffoldOpacity,
           duration: Duration(milliseconds: 100),
           child: Scaffold(
-            body: Container(
-              height: 400,
-              width: 400,
-              color: Colors.white,
-              child: Text('MAIN PAGE BODY'),
+            body: Center(
+              child: Container(
+                height: 400,
+                width: 300,
+                color: Colors.white,
+                child: Text('MAIN PAGE BODY'),
+              ),
             ),
           ),
         ),
