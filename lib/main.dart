@@ -71,37 +71,35 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Stack(
         children: [
           Consumer<WifiProvider>(
-            builder: (context, provider,child) {
-              return Stack(
-                children: [
+              builder: (context, provider,child) {
+                return Stack(
+                  children: [
                     Container(
-                    width: 1200,
-                    child: Column(
+                      width: 1200,
+                      child: Column(
 
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
                           TextButton(child:  Text("WIFI"),
                             onPressed: () async{
                               provider.changeWifiList();
-                              MaterialPageRoute(builder: (context) {
-                                return ChangeNotifierProvider.value(value: provider, child: MainPage());
-                              });
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
                               // dialog();
                             },
                           ),
 
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              );
-            }
+                  ],
+                );
+              }
           ),
 
 
         ],
       ),
- );
+    );
   }
 
 }
@@ -134,37 +132,37 @@ class _WifiListIndicatorState extends State<WifiListIndicator> {
     }
     currentWIFIList.addAll(finalList);
 
-  //   return Dialog(
-  //
-  //   child: Padding(
-  //     padding: const EdgeInsets.all(10.0),
-  //     child: SizedBox(
-  //       height: 400,
-  //       width: 400,
-  //       child: Column(
-  //
-  //         children: [
-  //           Padding(
-  //             padding: const EdgeInsets.symmetric(vertical: 25.0),
-  //             child: Row(
-  //               mainAxisAlignment: MainAxisAlignment.center,
-  //               children: [
-  //                 Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
-  //                 IconButton(
-  //                     onPressed: wifiProvider.changeWifiList, icon: Icon(Icons.refresh))
-  //               ],
-  //             ),
-  //           ),
-  //           SizedBox(
-  //             height: 300,
-  //             width: 300,
-  //             child: wifiProvider.wifiList == [] ? CircularProgressIndicator() : ListView(shrinkWrap: true, children: currentWIFIList,),
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   ),
-  // );
+    //   return Dialog(
+    //
+    //   child: Padding(
+    //     padding: const EdgeInsets.all(10.0),
+    //     child: SizedBox(
+    //       height: 400,
+    //       width: 400,
+    //       child: Column(
+    //
+    //         children: [
+    //           Padding(
+    //             padding: const EdgeInsets.symmetric(vertical: 25.0),
+    //             child: Row(
+    //               mainAxisAlignment: MainAxisAlignment.center,
+    //               children: [
+    //                 Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
+    //                 IconButton(
+    //                     onPressed: wifiProvider.changeWifiList, icon: Icon(Icons.refresh))
+    //               ],
+    //             ),
+    //           ),
+    //           SizedBox(
+    //             height: 300,
+    //             width: 300,
+    //             child: wifiProvider.wifiList == [] ? CircularProgressIndicator() : ListView(shrinkWrap: true, children: currentWIFIList,),
+    //           ),
+    //         ],
+    //       ),
+    //     ),
+    //   ),
+    // );
     return MainPage();
   }
 
@@ -177,66 +175,39 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  List< MyButton> finalList = [];
-  List< MyButton> currentWIFIList = [];
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-      
+
           GestureDetector(
             onTap: (){
               setState(() {
-      
+
                 Navigator.pop(context);
               });
-      
+
             },
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               color: Color.fromRGBO(0, 0, 0, 0.9),
-      
-      
-      
+
+
+
             ),
-      
+
           ),
           Center(
-            child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: SizedBox(
-                    height: 400,
-                    width: 400,
-                    child: Column(
-
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 25.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
-                              IconButton(
-                                  onPressed: null, icon: Icon(Icons.refresh))
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 300,
-                          width: 300,
-                          child: null//wifiProvider.wifiList == [] ? CircularProgressIndicator() : ListView(shrinkWrap: true, children: currentWIFIList,),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+            child: Container(
+              height: 400,
+              width: 300,
+              color: Colors.white,
+              child: Text('MAIN PAGE BODY'),
             ),
-
+          ),
         ],
       ),
     );
