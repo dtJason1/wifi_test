@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:wifi_test/MyHomepage.dart';
 import 'provider.dart';
 void main() {
-  void main() => runApp(
+  runApp(
     ChangeNotifierProvider(
       create: (_) => WifiProvider(),
       child: MaterialApp(
