@@ -10,9 +10,16 @@ import 'package:provider/provider.dart';
 import 'package:wifi_test/MyHomepage.dart';
 import 'provider.dart';
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  runApp(MyApp());
+  void main() => runApp(
+    ChangeNotifierProvider(
+      create: (_) => WifiProvider(),
+      child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData.light(),
+          home: MyApp()
+      ),
+    ),
+  );
 }
 
 // raspberry nmcli 설치됨
@@ -22,13 +29,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MultiProvider(
-        providers: [
-          ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
-          ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
-        ],
-        child: MyHomePage(),
-      ),
+      home: MyHomePage(),
 
 
     );
@@ -47,18 +48,18 @@ GlobalKey firstWIFIkey = GlobalKey();
 class _MyHomePageState extends State<MyHomePage> {
 
   bool isSelected = false;
-
-  void dialog(){
-    var wifiProvider = Provider.of<WifiProvider>(context, listen: false);
-
-    showDialog(
-      context: context,
-      builder: (_) => ChangeNotifierProvider<WifiProvider>.value(
-        value: wifiProvider,
-        child: WifiListIndicator(),
-      ),
-    );
-  }
+  //
+  // void dialog(){
+  //   var wifiProvider = Provider.of<WifiProvider>(context, listen: false);
+  //
+  //   showDialog(
+  //     context: context,
+  //     builder: (_) => ChangeNotifierProvider<WifiProvider>.value(
+  //       value: wifiProvider,
+  //       child: WifiListIndicator(),
+  //     ),
+  //   );
+  // }
 
 
 
