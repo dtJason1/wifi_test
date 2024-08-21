@@ -235,7 +235,7 @@ class _MainPageState extends State<MainPage> {
                           );
                         }
                       ),
-                      Consumer(
+                      Consumer<WifiProvider>(
                         builder: (context,provider,child) {
                           return SizedBox(
                             height: 300,
