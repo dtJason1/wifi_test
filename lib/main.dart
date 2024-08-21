@@ -191,43 +191,37 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Visibility(
-          visible: isSettingsOpen,
-          child: AnimatedOpacity(
-            opacity: scaffoldOpacity,
-            duration: Duration(milliseconds: 100),
-            child: Scaffold(
-              body: Center(
-                child: Container(
-                  height: 400,
-                  width: 300,
-                  color: Colors.white,
-                  child: Text('MAIN PAGE BODY'),
-                ),
+        AnimatedOpacity(
+          opacity: scaffoldOpacity,
+          duration: Duration(milliseconds: 100),
+          child: Scaffold(
+            body: Center(
+              child: Container(
+                height: 400,
+                width: 300,
+                color: Colors.white,
+                child: Text('MAIN PAGE BODY'),
               ),
             ),
           ),
         ),
-        Visibility(
-          visible:  isSettingsOpen,
-          child: GestureDetector(
-            onTap: (){
-              setState(() {
+        GestureDetector(
+          onTap: (){
+            setState(() {
 
-                isSettingsOpen = false;
-              });
+              Navigator.pop(context);
+            });
 
-            },
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              color: Color.fromRGBO(0, 0, 0, 0.1),
+          },
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            color: Color.fromRGBO(0, 0, 0, 0.1),
 
 
-
-            ),
 
           ),
+
         ),
       ],
     );
