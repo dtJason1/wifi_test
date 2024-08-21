@@ -8,9 +8,7 @@ class Home extends StatelessWidget{
       home: Scaffold(
         body: Stack(
           children: [
-            Positioned(
-              top: 50,
-              child: Container(color: Colors.black, height: 50, width: 800,),),
+
             ElevatedButton(
               key: Home.elevatedButtonKey,
               onPressed: () => {
@@ -18,7 +16,10 @@ class Home extends StatelessWidget{
               },
               child: Text("WIFI"),
 
-            ),
+            ),  Positioned(
+              top: 150,
+              child: Container(color: Colors.black, height: 50, width: 800,),),
+
           ],
         ),
       ),
