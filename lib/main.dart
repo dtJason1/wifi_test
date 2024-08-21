@@ -174,7 +174,16 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   double scaffoldOpacity = 1.0;
-  bool isSettingsOpen = false;
+  bool isSettingsOpen = true;
+
+
+  @override
+  void initState() {
+
+
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -213,7 +222,6 @@ class _MainPageState extends State<MainPage> {
                     },
                   ),
 
-                  // rest of the settings page ui
                 ],
               ),
             )),
