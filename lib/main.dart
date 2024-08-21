@@ -181,19 +181,26 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-
+  Timer _timer;
   @override
   void initState(){
     var wifiProvider = Provider.of<WifiProvider>(context);
     wifiProvider.changeWifiList();
 
-    Timer.periodic(Duration(seconds: 3), (timer) {
+
+    _timer = Timer.periodic(Duration(seconds: 3), (timer) {
       wifiProvider.changeWifiList();
 
     });
     super.initState();
   }
+  void dispose(){
+    _timer.cancel();
+    super.dispose();
 
+
+
+  }
   @override
   Widget build(BuildContext context) {
     List< MyButton> finalList = [];
