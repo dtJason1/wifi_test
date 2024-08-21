@@ -199,12 +199,14 @@ class _MainPageState extends State<MainPage> {
           ),
 
         ),
-        Center(
-          child: Container(
-            height: 400,
-            width: 300,
-            color: Colors.white,
-            child: Text('MAIN PAGE BODY'),
+        Material(
+          child: Center(
+            child: Container(
+              height: 400,
+              width: 300,
+              color: Colors.white,
+              child: Text('MAIN PAGE BODY'),
+            ),
           ),
         ),
       ],
