@@ -83,12 +83,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           TextButton(child:  Text("WIFI"),
                             onPressed: () async{
                               provider.changeWifiList();
-                              MaterialPageRoute(
-                                builder: (BuildContext context) => Provider(
-                                  create: (context) => WifiProvider(),
-                                  builder: (context, child) => MainPage(),
-                                ),
-                              );
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => MainPage()));
                               // dialog();
                             },
                           ),
@@ -189,12 +185,6 @@ class _MainPageState extends State<MainPage> {
 
   }
 
-  void getWifi(){
-
-
-
-  }
-
   @override
   Widget build(BuildContext context) {
     var wifiProvider = Provider.of<WifiProvider>(context);
@@ -210,7 +200,6 @@ class _MainPageState extends State<MainPage> {
       }
     }
     currentWIFIList.addAll(finalList);
-
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -263,7 +252,7 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
             ),
-
+          ),
         ],
       ),
     );
