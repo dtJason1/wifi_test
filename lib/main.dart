@@ -183,8 +183,16 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
 
   @override
+  void initState(){
+    var wifiProvider = Provider.of<WifiProvider>(context);
+    wifiProvider.scanWifi();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var wifiProvider = Provider.of<WifiProvider>(context);
+    wifiProvider.changeWifiList();
     List< MyButton> finalList = [];
     List< MyButton> currentWIFIList = [];
     return Scaffold(
