@@ -202,7 +202,7 @@ class _MainPageState extends State<MainPage> {
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
-              color: Color.fromRGBO(0, 0, 0, 0.9),
+              color: Color.fromRGBO(0, 0, 0, 0.6),
 
 
 
@@ -225,16 +225,16 @@ class _MainPageState extends State<MainPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
-                            IconButton(
-                                onPressed: wifiProvider.changeWifiList, icon: Icon(Icons.refresh))
+                            // IconButton(
+                            //     onPressed: wifiProvider.changeWifiList, icon: Icon(Icons.refresh))
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 300,
-                        width: 300,
-                        child: wifiProvider.wifiList == [] ? CircularProgressIndicator() : ListView(shrinkWrap: true, children: currentWIFIList,),
-                      ),
+                      // SizedBox(
+                      //   height: 300,
+                      //   width: 300,
+                      //   child: wifiProvider.wifiList == [] ? CircularProgressIndicator() : ListView(shrinkWrap: true, children: currentWIFIList,),
+                      // ),
                     ],
                   ),
                 ),
