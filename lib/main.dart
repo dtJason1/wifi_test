@@ -191,24 +191,24 @@ class _MainPageState extends State<MainPage> {
       body: Stack(
         children: <Widget>[
 
-          // GestureDetector(
-          //   onTap: (){
-          //     setState(() {
-          //
-          //       Navigator.pop(context);
-          //     });
-          //
-          //   },
-          //   child: Container(
-          //     width: MediaQuery.of(context).size.width,
-          //     height: MediaQuery.of(context).size.height,
-          //     color: Color.fromRGBO(0, 0, 0, 0.6),
-          //
-          //
-          //
-          //   ),
-          //
-          // ),
+          GestureDetector(
+            onTap: (){
+              setState(() {
+
+                Navigator.pop(context);
+              });
+
+            },
+            child: Container(
+              width: 1200,
+              height: 1200,
+              color: Color.fromRGBO(0, 0, 0, 0.6),
+
+
+
+            ),
+
+          ),
           Center(
 
               child: Padding(
