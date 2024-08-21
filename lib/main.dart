@@ -213,7 +213,8 @@ class _MainPageState extends State<MainPage> {
 
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: SizedBox(
+                child: Container(
+                  color: Colors.white,
                   height: 400,
                   width: 400,
                   child: Column(
