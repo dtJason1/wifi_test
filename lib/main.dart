@@ -184,19 +184,9 @@ class _MainPageState extends State<MainPage> {
           opacity: scaffoldOpacity,
           duration: Duration(milliseconds: 100),
           child: Scaffold(
-            appBar: AppBar(
-              leading: ElevatedButton(
-                child: Icon(Icons.settings),
-                onPressed: () {
-                  setState(() {
-                    scaffoldOpacity = 0.3;
-                    isSettingsOpen = true;
-                  });
-                },
-              ),
-              title: Text('Main Page'),
-            ),
             body: Container(
+              height: 400,
+              width: 400,
               color: Colors.white,
               child: Text('MAIN PAGE BODY'),
             ),
