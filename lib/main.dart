@@ -75,7 +75,11 @@ class _MyHomePageState extends State<MyHomePage> {
               builder: (context, provider,child) {
                 return Stack(
                   children: [
-                    Container(
+           Positioned(
+                  top: 150,
+                  child: Container(color: Colors.black, height: 50, width: 800,),),
+
+                  Container(
                       width: 1200,
                       child: Column(
 

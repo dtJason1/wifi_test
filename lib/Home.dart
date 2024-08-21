@@ -16,10 +16,7 @@ class Home extends StatelessWidget{
               },
               child: Text("WIFI"),
 
-            ),  Positioned(
-              top: 150,
-              child: Container(color: Colors.black, height: 50, width: 800,),),
-
+            )
           ],
         ),
       ),
