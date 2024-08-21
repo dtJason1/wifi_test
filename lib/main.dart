@@ -203,28 +203,29 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
         ),
-        Visibility(
-            visible: isSettingsOpen,
-            child: Container(
-              child: Column(
-                children: <Widget>[
-                  Text('Settings'),
-                  //Button,
-
-                  //Button to close settings dialog
-                  ElevatedButton(
-                    child: Icon(Icons.close),
-                    onPressed: () {
-                      setState(() {
-                        scaffoldOpacity = 1.0;
-                        isSettingsOpen = false;
-                      });
-                    },
-                  ),
-
-                ],
+        Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+         color: Color.fromRGBO(0, 0, 0, 0.1),
+          child: Column(
+            children: <Widget>[
+              Text('Settings'),
+              //Button,
+        
+              //Button to close settings dialog
+              ElevatedButton(
+                child: Icon(Icons.close),
+                onPressed: () {
+                  setState(() {
+                    scaffoldOpacity = 1.0;
+                    isSettingsOpen = false;
+                  });
+                },
               ),
-            )),
+        
+            ],
+          ),
+        ),
       ],
     );
   }
