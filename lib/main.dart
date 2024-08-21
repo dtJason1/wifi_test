@@ -188,10 +188,24 @@ class _MainPageState extends State<MainPage> {
     wifiProvider.changeWifiList();
     super.initState();
   }
-  List< MyButton> finalList = [];
-  List< MyButton> currentWIFIList = [];
+
   @override
   Widget build(BuildContext context) {
+    List< MyButton> finalList = [];
+    List< MyButton> currentWIFIList = [];
+    var wifiProvider = Provider.of<WifiProvider>(context);
+
+    for (var ssid in wifiProvider.wifiList) {
+      if(ssid[0] == '*'){
+        currentWIFIList = [
+          MyButton(text: ssid.substring(26,56).replaceAll(" ", ""), iscurrentuse: true,wifiProvider: wifiProvider,)
+        ];
+      }
+      else{
+        finalList.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false,wifiProvider: wifiProvider,));
+      }
+    }
+    currentWIFIList.addAll(finalList);
 
 
     return Scaffold(
