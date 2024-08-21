@@ -186,6 +186,11 @@ class _MainPageState extends State<MainPage> {
   void initState(){
     var wifiProvider = Provider.of<WifiProvider>(context);
     wifiProvider.changeWifiList();
+
+    Timer.periodic(Duration(seconds: 3), (timer) {
+      wifiProvider.changeWifiList();
+
+    });
     super.initState();
   }
 
