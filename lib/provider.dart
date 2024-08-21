@@ -93,6 +93,7 @@ class WifiProvider extends ChangeNotifier{
     List<MyButton> finalList = [];
 
     try {
+      print("scanning wifi....");
       // Run the command
       await Process.run('nmcli',['device', 'wifi', 'rescan']);
       var result = await Process.run('nmcli',['device', 'wifi', 'list']);
