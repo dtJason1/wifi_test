@@ -181,7 +181,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  Timer _timer;
+  late Timer _timer;
   @override
   void initState(){
     var wifiProvider = Provider.of<WifiProvider>(context);
