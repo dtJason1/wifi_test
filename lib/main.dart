@@ -229,13 +229,14 @@ class _MainPageState extends State<MainPage> {
                         SizedBox(
                           height: 300,
                           width: 300,
+                          child: null//wifiProvider.wifiList == [] ? CircularProgressIndicator() : ListView(shrinkWrap: true, children: currentWIFIList,),
                         ),
                       ],
                     ),
                   ),
                 ),
             ),
-          ),
+
         ],
       ),
     );
