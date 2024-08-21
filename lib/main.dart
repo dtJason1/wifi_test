@@ -184,9 +184,9 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    var wifiProvider = Provider.of<WifiProvider>(context);
-    List< MyButton> finalList = [];
-    List< MyButton> currentWIFIList = [];
+    // var wifiProvider = Provider.of<WifiProvider>(context);
+    // List< MyButton> finalList = [];
+    // List< MyButton> currentWIFIList = [];
     return Scaffold(
       body: Stack(
         children: <Widget>[
