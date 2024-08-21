@@ -199,14 +199,12 @@ class _MainPageState extends State<MainPage> {
           ),
 
         ),
-        Scaffold(
-          body: Center(
-            child: Container(
-              height: 400,
-              width: 300,
-              color: Colors.white,
-              child: Text('MAIN PAGE BODY'),
-            ),
+        Center(
+          child: Container(
+            height: 400,
+            width: 300,
+            color: Colors.white,
+            child: Text('MAIN PAGE BODY'),
           ),
         ),
       ],
