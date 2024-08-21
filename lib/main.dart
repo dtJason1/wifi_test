@@ -83,8 +83,13 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: <Widget>[
                           TextButton(child:  Text("WIFI"),
                             onPressed: () async{
-                              provider.changeWifiList();
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
+                              try {
+                                provider.changeWifiList();
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
+                              } on Exception catch (e) {
+                                print(e);
+                                // TODO
+                              }
                               // dialog();
                             },
                           ),
