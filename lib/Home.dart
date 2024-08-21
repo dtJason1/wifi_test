@@ -6,13 +6,20 @@ class Home extends StatelessWidget{
   Widget build(BuildContext context){
     return MaterialApp(
       home: Scaffold(
-        body: ElevatedButton(
-          key: Home.elevatedButtonKey,
-          onPressed: () => {
+        body: Stack(
+          children: [
+            Positioned(
+              top: 50,
+              child: Container(color: Colors.black, height: 50, width: 800,),),
+            ElevatedButton(
+              key: Home.elevatedButtonKey,
+              onPressed: () => {
 
-          },
-          child: Text("WIFI"),
-      
+              },
+              child: Text("WIFI"),
+
+            ),
+          ],
         ),
       ),
     );

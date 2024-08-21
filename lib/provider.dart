@@ -216,8 +216,9 @@ class _Dialog2State extends State<Dialog2> {
         ),
       );
     }
-    return Dialog(
 
+    // 화면위에 토스트 메세지( wifi 연결...., 핸드폰처럼
+    return Dialog(
           child: Container(
             width: 300,
             height: 300,
@@ -307,7 +308,7 @@ class _Dialog2State extends State<Dialog2> {
 
                           }
                           else{
-
+                            Navigator.pop(context,  );
                           }
                           keyboardkey.clearKey();
 
