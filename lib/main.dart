@@ -6,6 +6,7 @@ import 'dart:async';
 
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
+import 'package:wifi_test/MyHomepage.dart';
 import 'provider.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,6 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
 
 
 
@@ -128,36 +130,102 @@ class _WifiListIndicatorState extends State<WifiListIndicator> {
     }
     currentWIFIList.addAll(finalList);
 
-    return Dialog(
+  //   return Dialog(
+  //
+  //   child: Padding(
+  //     padding: const EdgeInsets.all(10.0),
+  //     child: SizedBox(
+  //       height: 400,
+  //       width: 400,
+  //       child: Column(
+  //
+  //         children: [
+  //           Padding(
+  //             padding: const EdgeInsets.symmetric(vertical: 25.0),
+  //             child: Row(
+  //               mainAxisAlignment: MainAxisAlignment.center,
+  //               children: [
+  //                 Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
+  //                 IconButton(
+  //                     onPressed: wifiProvider.changeWifiList, icon: Icon(Icons.refresh))
+  //               ],
+  //             ),
+  //           ),
+  //           SizedBox(
+  //             height: 300,
+  //             width: 300,
+  //             child: wifiProvider.wifiList == [] ? CircularProgressIndicator() : ListView(shrinkWrap: true, children: currentWIFIList,),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   ),
+  // );
+    return MainPage();
+  }
 
-    child: Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: SizedBox(
-        height: 400,
-        width: 400,
-        child: Column(
+}
 
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 25.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
-                  IconButton(
-                      onPressed: wifiProvider.changeWifiList, icon: Icon(Icons.refresh))
+
+class MainPage extends StatefulWidget {
+  @override
+  _MainPageState createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  double scaffoldOpacity = 1.0;
+  bool isSettingsOpen = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: <Widget>[
+        AnimatedOpacity(
+          opacity: scaffoldOpacity,
+          duration: Duration(milliseconds: 100),
+          child: Scaffold(
+            appBar: AppBar(
+              leading: ElevatedButton(
+                child: Icon(Icons.settings),
+                onPressed: () {
+                  setState(() {
+                    scaffoldOpacity = 0.3;
+                    isSettingsOpen = true;
+                  });
+                },
+              ),
+              title: Text('Main Page'),
+            ),
+            body: Container(
+              color: Colors.white,
+              child: Text('MAIN PAGE BODY'),
+            ),
+          ),
+        ),
+        Visibility(
+            visible: isSettingsOpen,
+            child: Container(
+              child: Column(
+                children: <Widget>[
+                  Text('Settings'),
+                  //Button,
+
+                  //Button to close settings dialog
+                  ElevatedButton(
+                    child: Icon(Icons.close),
+                    onPressed: () {
+                      setState(() {
+                        scaffoldOpacity = 1.0;
+                        isSettingsOpen = false;
+                      });
+                    },
+                  ),
+
+                  // rest of the settings page ui
                 ],
               ),
-            ),
-            SizedBox(
-              height: 300,
-              width: 300,
-              child: wifiProvider.wifiList == [] ? CircularProgressIndicator() : ListView(shrinkWrap: true, children: currentWIFIList,),
-            ),
-          ],
-        ),
-      ),
-    ),
-  );
+            )),
+      ],
+    );
   }
 }

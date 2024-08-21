@@ -288,7 +288,7 @@ class _Dialog2State extends State<Dialog2> {
                             });
                           }
 
-                          if(value.stderr.toString().contains("property is invalid") || value.stderr.toString().contains("Secrets were required") || value.stderr.toString().contains("New connection activation was enqueued") ){
+                          else if(value.stderr.toString().contains("property is invalid") || value.stderr.toString().contains("Secrets were required") || value.stderr.toString().contains("New connection activation was enqueued") ){
                             print("catch");
                             showDialog(context: context, builder: (context){
                               return Dialog(
@@ -296,7 +296,7 @@ class _Dialog2State extends State<Dialog2> {
                               );
                             });
                           }
-                          if(value.stderr.toString().contains("No network with SSID")){
+                          else if(value.stderr.toString().contains("No network with SSID")){
                             showDialog(context: context, builder: (context){
                               return Dialog(
                                 child: Container( width:300, height:300, child: Center(child: Text("cannot get SSID", style: TextStyle(color: Colors.red),),)),
@@ -305,14 +305,12 @@ class _Dialog2State extends State<Dialog2> {
                             });
 
                           }
+                          else{
 
+                          }
                           keyboardkey.clearKey();
 
-                          Future.delayed(const Duration(seconds: 1)).then((value) {
-                            widget.wifiProvider.changeWifiList();
-                            Navigator.of(context).pop();
 
-                          });
 
 
 
