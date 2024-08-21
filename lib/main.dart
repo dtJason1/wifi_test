@@ -178,29 +178,29 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-
-        GestureDetector(
-          onTap: (){
-            setState(() {
-
-              Navigator.pop(context);
-            });
-
-          },
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            color: Color.fromRGBO(0, 0, 0, 0.9),
-
-
-
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+      
+          GestureDetector(
+            onTap: (){
+              setState(() {
+      
+                Navigator.pop(context);
+              });
+      
+            },
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              color: Color.fromRGBO(0, 0, 0, 0.9),
+      
+      
+      
+            ),
+      
           ),
-
-        ),
-        Material(
-          child: Center(
+          Center(
             child: Container(
               height: 400,
               width: 300,
@@ -208,8 +208,8 @@ class _MainPageState extends State<MainPage> {
               child: Text('MAIN PAGE BODY'),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
