@@ -17,9 +17,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   late final AnimationController _animationController;
   bool isSelected = false;
-  int startAnimationTime =1500;
-  int endAnimationTime = 500;
-  int _animationTime = 1500;
+  int startAnimationTime =500;
+  int endAnimationTime = 200;
+  int _animationTime = 500;
   bool playedOnce = true;
 
   @override
