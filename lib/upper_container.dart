@@ -56,7 +56,10 @@ class _UpperContainerState extends State<UpperContainer> {
                     mainAxisAlignment: MainAxisAlignment.center,
 
                     children: [
-                      CircularProgressIndicator(color: Colors.white,)
+                      SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator( color: Colors.white,))
                     ],
                   );
                 }
