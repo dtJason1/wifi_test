@@ -59,7 +59,11 @@ class _UpperContainerState extends State<UpperContainer> {
                       SizedBox(
                           width: 20,
                           height: 20,
-                          child: CircularProgressIndicator( color: Colors.white,))
+                          child: CircularProgressIndicator( color: Colors.white,)),
+                      Container(width: 50,),
+
+                      Text("Checking Password Valid", style: TextStyle(color: Colors.white , fontSize: 16),)
+
                     ],
                   );
                 }
