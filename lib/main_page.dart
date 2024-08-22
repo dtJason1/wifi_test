@@ -17,19 +17,26 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   late final AnimationController _animationController;
   bool isSelected = false;
-
+  int startAnimationTime =1500;
+  int endAnimationTime = 500;
+  int _animationTime = 1500;
 
   @override
   void initState(){
-
-    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 1500));
+    _animationTime = startAnimationTime;
+    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: _animationTime));
     _animationController.forward();
 
   }
 
   void poppedAnimation(Function function)async{
-
+    setState(() {
+      _animationTime = endAnimationTime;
+    });
     _animationController.reverse().then((value) => function());
+    setState(() {
+      _animationTime = startAnimationTime;
+    });
   }
 
   late final Animation<Offset> _offsetAnimation = Tween<Offset>(
