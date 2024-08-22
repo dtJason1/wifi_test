@@ -5,6 +5,7 @@ import 'provider.dart';
 import 'animation.dart';
 import 'wifi_indicator.dart';
 import 'settings.dart';
+import 'package:intl/intl.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -23,6 +24,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   int endAnimationTime = END_ANIMATION_VALUE;
   int _animationTime = 500;
   bool playedOnce = true;
+
 
   @override
   void initState(){
@@ -104,7 +106,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('kk:mm:ss \n EEE d MMM').format(now);
     return Scaffold(
 
       body: Stack(
@@ -124,11 +127,16 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          IconButton(onPressed: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
+                          Row(
+                            children: [
+                              Text(formattedDate,textAlign: TextAlign.center,style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 25.0),),
+                              IconButton(onPressed: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
 
 
-                          }, icon: Icon(Icons.wifi)),
+                              }, icon: Icon(Icons.wifi)),
+                            ],
+                          ),
                           TextButton(child:
                           Text("WIFI"),
                             onPressed: () async{
