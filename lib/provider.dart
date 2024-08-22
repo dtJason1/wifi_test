@@ -237,7 +237,6 @@ class _MyButtonState extends State<MyButton> {
         context: context,
         builder:(_) => MultiProvider(
           providers: [
-            ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
             ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
 
 
@@ -292,7 +291,6 @@ class _Dialog2State extends State<Dialog2> {
         context: context,
         builder:(_) => MultiProvider(
           providers: [
-            ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
             ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
           ],
           child:  KeyBoardDialogue(),
