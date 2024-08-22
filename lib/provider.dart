@@ -366,11 +366,11 @@ class _Dialog2State extends State<Dialog2> {
 
                           if(value.stderr.toString().contains("property is invalid") || value.stderr.toString().contains("Secrets were required") || value.stderr.toString().contains("New connection activation was enqueued") ){
                             print("catch");
-                            wifiProvider.setStatus("비밀번호가 일치하지 않습니다.");
+                            wifiProvider.setStatus("Invalid password");
 
                           }
                           else if(value.stderr.toString().contains("No network with SSID")){
-                            wifiProvider.setStatus("연결할 수 없는 SSID입니다.");
+                            wifiProvider.setStatus("No network with current SSID.");
 
                           }
                           else{
