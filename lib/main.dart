@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'dart:io';
@@ -45,9 +46,31 @@ class MyHomePage extends StatefulWidget {
 
 GlobalKey firstWIFIkey = GlobalKey();
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
+
+  late final AnimationController _animationController;
   bool isSelected = false;
+
+
+  @override
+  void initState(){
+
+    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+    _animationController.forward();
+
+  }
+
+
+  late final Animation<Offset> _offsetAnimation = Tween<Offset>(
+    begin: Offset(0.0, 1.5),
+    end: Offset(0.0,0.0),
+  ).animate(CurvedAnimation(
+    parent: _animationController,
+    curve: Curves.easeInOut,
+  ));
+
+
   //
   // void dialog(){
   //   var wifiProvider = Provider.of<WifiProvider>(context, listen: false);
@@ -75,8 +98,11 @@ class _MyHomePageState extends State<MyHomePage> {
               builder: (context, provider,child) {
                 return Stack(
                   children: [
-           Positioned(
-                  child: Container(color: Colors.black, height: 50, width: 1200,),),
+                  FadeInDemo(
+                    controller: _animationController,
+                    child: Positioned(
+                      child: Container(color: Colors.black, height: 50, width: 1200,),),
+                  ),
 
                   Container(
                       width: 1200,
@@ -288,5 +314,51 @@ class _MainPageState extends State<MainPage> {
         ],
       ),
     );
+  }
+}
+
+
+
+class FadeInDemo extends StatefulWidget {
+  final Widget child;
+  final AnimationController controller;
+  FadeInDemo({required this.child, required this.controller});
+  _FadeInDemoState createState() => _FadeInDemoState();
+}
+
+class _FadeInDemoState extends State<FadeInDemo> with TickerProviderStateMixin {
+  late AnimationController _controller;
+  late CurvedAnimation _curve;
+
+  @override
+  void initState() {
+    _controller = AnimationController(vsync: this, duration: Duration(seconds: 1));
+    _curve = CurvedAnimation(parent: widget.controller, curve: Curves.easeIn);
+    widget.controller.forward();
+  }
+
+  late final Animation<Offset> _offsetAnimation = Tween<Offset>(
+    begin: Offset(0.0, 1.5),
+    end: Offset(0.0,0.0),
+  ).animate(CurvedAnimation(
+    parent: widget.controller,
+    curve: Curves.easeInOut,
+  ));
+
+  @override
+  Widget build(BuildContext context) {
+    return SlideTransition(
+      position: _offsetAnimation,
+      child: FadeTransition(
+          opacity: _curve,
+          child: widget.child
+      ),
+    );
+  }
+
+  @override
+  dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }
