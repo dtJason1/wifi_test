@@ -12,7 +12,18 @@ class UpperContainer extends StatelessWidget{
       controller: animationController,
       child: Consumer<HeaderProvider>(
         builder: (context,provider,child) {
-          return Container(color: Colors.black, height: 50, width: 1200,  alignment: Alignment.center,child: Text("current status :  ${provider.status}", style: TextStyle(color: Colors.white , fontSize: 16),),);
+          return Container(color: Colors.black, height: 50, width: 1200,  alignment: Alignment.center,
+
+
+            child: Row(
+
+              children: [
+
+
+                Text("current status :  ${provider.status}", style: TextStyle(color: Colors.white , fontSize: 16),),
+                CircularProgressIndicator()
+              ],
+            ),);
         }
       ),
     );

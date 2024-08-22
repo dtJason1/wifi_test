@@ -141,3 +141,5 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
 }
 
+// 모든 에러는 상단 바에 기록, 잠시 표시되었다가 사라짐,
+// 에러가 나면, 다시 와이파이 리스트로 돌아옴.
