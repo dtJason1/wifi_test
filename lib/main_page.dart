@@ -22,6 +22,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   int startAnimationTime =START_ANIMATION_VALUE;
   int endAnimationTime = END_ANIMATION_VALUE;
   int _animationTime = 500;
+  bool playedOnce = true;
 
   @override
   void initState(){
