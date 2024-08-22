@@ -9,7 +9,7 @@ class UpperContainer extends StatelessWidget{
   Widget build(BuildContext context){
     return FadeInDemo(
       controller: animationController,
-      child: Container(color: Colors.black, height: 50, width: 1200,),
+      child: Container(color: Colors.black, height: 50, width: 1200, child: Text("Hello", style: TextStyle(color: Colors.white),),),
     );
 
 
