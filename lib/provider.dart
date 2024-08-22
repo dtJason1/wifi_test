@@ -373,6 +373,8 @@ class _Dialog2State extends State<Dialog2> {
 
                           ..timeout(Duration(seconds: 15), onTimeout: (){
                             wifiProvider.setStatus("Connection Timed out");
+                            keyboardkey.clearKey();
+
                             throw Exception("TimeOut Exception");
 
 
