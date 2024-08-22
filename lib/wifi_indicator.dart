@@ -113,7 +113,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
 
     Provider.of<WifiProvider>(context).addListener(() {
       if(Provider.of<WifiProvider>(context).currentState < 2 ){
-        Navigator.pop(context);
+        Navigator.of(context).popUntil((route) => route.isFirst);
       }
     });
 
@@ -158,7 +158,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                   setState(() {
                     poppedAnimation((){
                       sceneProvider.changePage();
-                      Navigator.pop(context);
+                      Navigator.of(context).popUntil((route) => route.isFirst);
 
 
                     });

@@ -353,7 +353,10 @@ class _Dialog2State extends State<Dialog2> {
                   builder: (context, keyboardkey, wifiProvider,sceneProvider , child) {
                     return TextButton(onPressed: () async{
                       try {
-                        Navigator.pop(context);
+
+                        Navigator.of(context).popUntil((route) => route.isFirst);
+
+
                         print("popped!!!!");
                         await Process.run('nmcli',['device', 'wifi', 'rescan']);
 
@@ -494,7 +497,7 @@ class _KeyState extends State<Key> {
                   else if(widget.keyboardkey == "Enter"){
                     Navigator.pop(context);
                   }
-                  else if(widget.keyboardkey == "Enter"){
+                  else if(widget.keyboardkey == "Space"){
                     provider.addKey(" ");
                   }
                   else if(widget.keyboardkey == "clear"){
