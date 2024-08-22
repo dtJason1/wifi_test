@@ -171,17 +171,12 @@ class SceneProvider extends ChangeNotifier{
   bool _isFirstPage = true;
   bool get isFirstPage => _isFirstPage;
 
-  bool _isConnectingAttemptFinished = false;
-  bool get isConnectingAttemptFinished => _isConnectingAttemptFinished;
 
   void changePage() async{
     _isFirstPage = !_isFirstPage;
     notifyListeners();
   }
-  void connecting() async{
-    _isConnectingAttemptFinished = !_isConnectingAttemptFinished;
-    notifyListeners();
-  }
+
 
 
 }
@@ -352,7 +347,6 @@ class _Dialog2State extends State<Dialog2> {
                   builder: (context, keyboardkey, wifiProvider,sceneProvider , child) {
                     return TextButton(onPressed: () async{
                       try {
-                        sceneProvider.connecting();
                         Navigator.pop(context);
                         print("popped!!!!");
                         await Process.run('nmcli',['device', 'wifi', 'rescan']);

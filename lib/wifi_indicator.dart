@@ -111,10 +111,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
 
     });
 
-    Provider.of<SceneProvider>(context).addListener(() {
-      if(Provider.of<SceneProvider>(context).isConnectingAttemptFinished){
+    Provider.of<WifiProvider>(context).addListener(() {
+      if(Provider.of<WifiProvider>(context).currentState < 2 ){
         Navigator.pop(context);
-        Provider.of<SceneProvider>(context).connecting();
       }
     });
 
