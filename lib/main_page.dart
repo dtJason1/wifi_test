@@ -20,6 +20,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   int startAnimationTime =1500;
   int endAnimationTime = 500;
   int _animationTime = 1500;
+  bool playedOnce = true;
 
   @override
   void initState(){
@@ -28,12 +29,20 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     startAnimation();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<SceneProvider>(context).addListener(() {
+        if(Provider.of<SceneProvider>(context).isFirstPage && playedOnce){
+          startAnimation();
+          setState(() {
+            playedOnce = false;
+
+          });
+        }
+      });
 
 
-      if(Provider.of<SceneProvider>(context).isFirstPage){
-        startAnimation();
-      }
     });
+
+
 
   }
 
@@ -95,8 +104,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                             onPressed: () async{
                               try {
                                 poppedAnimation((){
+
                                   provider.changeWifiList();
                                   Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
+                                  setState(() {
+                                    playedOnce = true;
+                                  });
                                   sceneProvider.changePage();
 
 
