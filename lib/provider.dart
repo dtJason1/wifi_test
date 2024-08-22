@@ -127,6 +127,18 @@ class WifiProvider extends ChangeNotifier{
 
 
 }
+class SceneProvider extends ChangeNotifier{
+
+  bool _isFirstPage = true;
+  bool get isFirstPage => _isFirstPage;
+
+  void changePage() async{
+    _isFirstPage = !_isFirstPage;
+    notifyListeners();
+  }
+
+
+}
 
 
 

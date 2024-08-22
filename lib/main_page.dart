@@ -26,8 +26,18 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     _animationTime = startAnimationTime;
     _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: _animationTime));
     startAnimation();
+    Provider.of<SceneProvider>(context, listen: false).addListener(() {
+
+      if(Provider.of<SceneProvider>(context, listen: false).isFirstPage){
+        startAnimation();
+      }
+
+
+    });
+
   }
-  void startAnimation()async{
+
+  void startAnimation() async{
     _animationController.forward();
 
   }
@@ -42,15 +52,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       _animationTime = startAnimationTime;
     });
   }
-
-  late final Animation<Offset> _offsetAnimation = Tween<Offset>(
-    begin: Offset(0.0, 1.5),
-    end: Offset(0.0,0.0),
-  ).animate(CurvedAnimation(
-    parent: _animationController,
-    curve: Curves.easeInOut,
-  ));
-
 
   //
   // void dialog(){
@@ -75,8 +76,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
       body: Stack(
         children: [
-          Consumer<WifiProvider>(
-              builder: (context, provider,child) {
+          Consumer2<WifiProvider, SceneProvider>(
+              builder: (context, provider, sceneProvider, child) {
                 return Stack(
                   children: [
                     Positioned(
@@ -96,6 +97,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                 poppedAnimation((){
                                   provider.changeWifiList();
                                   Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
+                                  sceneProvider.changePage();
 
 
                                 });
