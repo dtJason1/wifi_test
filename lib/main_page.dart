@@ -34,6 +34,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
       Provider.of<WifiProvider>(context).addListener(() {
         if((Provider.of<WifiProvider>(context).currentState < 2) && playedOnce){
+
+          print("helloooooo");
           print(Provider.of<WifiProvider>(context).currentState );
           startAnimation();
           setState(() {
