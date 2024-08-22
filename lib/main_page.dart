@@ -121,16 +121,21 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          TextButton(child:  Text("WIFI"),
+                          TextButton(child:
+                          Text("WIFI"),
                             onPressed: () async{
                               try {
-                                provider.changeWifiList();
+                                if(playedOnce){
+                                  provider.changeWifiList();
 
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
-                                setState(() {
-                                  _animationController.value = 0;
-                                  playedOnce = true;
-                                });
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
+                                  setState(() {
+                                    _animationController.value = 0;
+                                    playedOnce = true;
+                                  });
+
+
+                                }
 
                               } on Exception catch (e) {
                                 print(e);
