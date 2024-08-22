@@ -111,18 +111,14 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
 
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<SceneProvider>(context).addListener(() {
-        if(!Provider.of<SceneProvider>(context).isFirstPage && playedOnce){
-          startAnimation();
-          setState(() {
-            playedOnce = false;
+    Provider.of<SceneProvider>(context).addListener(() {
+      if(!Provider.of<SceneProvider>(context).isFirstPage && playedOnce){
+        startAnimation();
+        setState(() {
+          playedOnce = false;
 
-          });
-        }
-      });
-
-
+        });
+      }
     });
 
 
