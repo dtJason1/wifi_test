@@ -57,6 +57,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
         }
 
+        if(Provider.of<WifiProvider>(context).currentState== 2){
+          Provider.of<WifiProvider>(context).clearWifi();
+          _animationController.value = 1;
+          _animationController.reverse();
+        }
+
       });
 
 
@@ -125,8 +131,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                             onPressed: () async{
                               try {
                                 provider.changeWifiList();
+
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
                                 setState(() {
+                                  _animationController.value = 0;
                                   playedOnce = true;
                                 });
 
