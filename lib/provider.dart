@@ -7,6 +7,8 @@ import 'package:flutter/widgets.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
 import 'package:wifi_test/main.dart';
+import 'dart:async';
+
 class KeyBoardKey extends ChangeNotifier{
   String _key = '';
   String get key => _key;
@@ -360,6 +362,12 @@ class _Dialog2State extends State<Dialog2> {
                         wifiProvider.whileConnectingStatus();
 
                         print("popped!!!!");
+                        Timer(Duration(seconds: 15), () {
+                          wifiProvider.setStatus("Timeout");
+
+                        });
+
+
                         await Process.run('nmcli',['device', 'wifi', 'rescan']);
 
                         Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${controller.text}']).then((value) {
