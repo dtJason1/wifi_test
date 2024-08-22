@@ -100,6 +100,21 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+//
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<WifiProvider>(context).addListener(() {
+        if(Provider.of<WifiProvider>(context).currentState < 2 ){
+          Navigator.of(context).popUntil((route) => route.isFirst);
+        }
+      });
+
+    });
+  }
+
+  @override
   void initState(){
     _animationController = AnimationController(vsync: this, duration: Duration(milliseconds:_animationTime ) );
     var wifiProvider = Provider.of<WifiProvider>(context);
@@ -113,16 +128,8 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
 
 
     //
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<WifiProvider>(context).addListener(() {
-        if(Provider.of<WifiProvider>(context).currentState < 2 ){
-          Navigator.of(context).popUntil((route) => route.isFirst);
-        }
-      });
 
 
-
-    });
 
 
 
