@@ -352,10 +352,12 @@ class _Dialog2State extends State<Dialog2> {
                 Consumer3<KeyBoardKey,WifiProvider,SceneProvider>(
                   builder: (context, keyboardkey, wifiProvider,sceneProvider , child) {
                     return TextButton(onPressed: () async{
+
                       try {
 
                         Navigator.of(context).popUntil((route) => route.isFirst);
-
+                        Navigator.of(context).popUntil((route) => route.isFirst);
+                        wifiProvider.whileConnectingStatus();
 
                         print("popped!!!!");
                         await Process.run('nmcli',['device', 'wifi', 'rescan']);
