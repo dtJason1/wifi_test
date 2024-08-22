@@ -41,6 +41,16 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         }
       });
 
+      Provider.of<WifiProvider>(context).addListener(() {
+        if(Provider.of<WifiProvider>(context).isLoading){
+          startAnimation();
+          setState(() {
+            playedOnce = false;
+
+          });
+        }
+      });
+
 
     });
 

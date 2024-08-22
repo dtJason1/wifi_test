@@ -87,6 +87,9 @@ class WifiProvider extends ChangeNotifier{
   List<String> _wifiList =  [];
   List<String> get wifiList => _wifiList;
 
+  int _currentState = 0;
+  int get currentState => _currentState;
+
   bool _isLoading = true;
   bool get isLoading => _isLoading;
   Future<List<String>> scanWifi() async {
@@ -114,6 +117,7 @@ class WifiProvider extends ChangeNotifier{
       // Print or return the SSIDs
     } catch (e) {
       print('Error: $e');
+
       return [];
     }
   }
