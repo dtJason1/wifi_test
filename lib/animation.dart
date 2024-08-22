@@ -9,12 +9,10 @@ class FadeInDemo extends StatefulWidget {
 
 class _FadeInDemoState extends State<FadeInDemo> with TickerProviderStateMixin {
   late AnimationController _controller;
-  late CurvedAnimation _curve;
 
   @override
   void initState() {
     _controller = AnimationController(vsync: this, duration: Duration(seconds: 1));
-    _curve = CurvedAnimation(parent: widget.controller, curve: Curves.easeIn);
     widget.controller.forward();
   }
 
@@ -30,10 +28,7 @@ class _FadeInDemoState extends State<FadeInDemo> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return SlideTransition(
       position: _offsetAnimation,
-      child: FadeTransition(
-          opacity: _curve,
-          child: widget.child
-      ),
+      child: widget.child,
     );
   }
 
