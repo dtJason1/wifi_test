@@ -38,24 +38,18 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           print("helloooooo");
           print(Provider.of<WifiProvider>(context).currentState );
           startAnimation();
-          setState(() {
-            playedOnce = false;
+          Future.delayed(Duration(seconds: 4)).then((value){
+            poppedAnimation(
 
-          });
-        }
+                    (){
 
-        if(!(Provider.of<WifiProvider>(context).currentState < 2)){
+                  playedOnce = true;
+                }
 
-          Future.delayed(Duration(seconds: 3)).then((value){poppedAnimation(
-
-              (){
-
-                playedOnce = true;
-              }
-
-          );});
+            );});
 
         }
+
       });
 
 
@@ -75,6 +69,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     setState(() {
       _animationTime = endAnimationTime;
     });
+    _animationController.value = 1;
     _animationController.reverse().then((value) => function());
     setState(() {
       _animationTime = startAnimationTime;
