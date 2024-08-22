@@ -1,4 +1,6 @@
+import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
+import 'package:wifi_test/upper_container.dart';
 import 'provider.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
@@ -72,10 +74,33 @@ class MainPage extends StatefulWidget {
   _MainPageState createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
+  int startAnimationTime =1000;
+  int endAnimationTime = 700;
+  int _animationTime = 500;
+  bool playedOnce = true;
+
+  late AnimationController _animationController;
   late Timer _timer;
+  void startAnimation() async{
+    _animationController.forward();
+
+  }
+
+
+  void poppedAnimation(Function function)async{
+    setState(() {
+      _animationTime = endAnimationTime;
+    });
+    _animationController.reverse().then((value) => function());
+    setState(() {
+      _animationTime = startAnimationTime;
+    });
+  }
+
   @override
   void initState(){
+    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds:_animationTime ) );
     var wifiProvider = Provider.of<WifiProvider>(context);
     wifiProvider.changeWifiList();
 
@@ -84,6 +109,23 @@ class _MainPageState extends State<MainPage> {
       wifiProvider.changeWifiList();
 
     });
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<SceneProvider>(context).addListener(() {
+        if(!Provider.of<SceneProvider>(context).isFirstPage && playedOnce){
+          startAnimation();
+          setState(() {
+            playedOnce = false;
+
+          });
+        }
+      });
+
+
+    });
+
+
+
     super.initState();
   }
   void dispose(){
@@ -121,8 +163,13 @@ class _MainPageState extends State<MainPage> {
               return GestureDetector(
                 onTap: (){
                   setState(() {
-                    sceneProvider.changePage();
-                    Navigator.pop(context);
+                    poppedAnimation((){
+                      sceneProvider.changePage();
+                      Navigator.pop(context);
+
+
+                    });
+
                   });
 
                 },
@@ -178,6 +225,7 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
           ),
+          Positioned(child: UpperContainer(animationController: _animationController,))
         ],
       ),
     );
