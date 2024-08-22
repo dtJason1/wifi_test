@@ -75,8 +75,8 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
-  int startAnimationTime =1000;
-  int endAnimationTime = 1000;
+  int startAnimationTime =1500;
+  int endAnimationTime = 1500;
   int _animationTime = 500;
   bool playedOnce = true;
 
