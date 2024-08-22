@@ -46,7 +46,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
           Future.delayed(Duration(seconds: 3)).then((value){poppedAnimation(
 
-              (){playedOnce = true;}
+              (){
+
+                playedOnce = true;
+              }
 
           );});
 
