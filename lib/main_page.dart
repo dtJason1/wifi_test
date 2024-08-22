@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             playedOnce = false;
           });
           if(Provider.of<WifiProvider>(context).currentState != 0){
-            Future.delayed(Duration(seconds: 4)).then((value){
+            Future.delayed(Duration(seconds: 2)).then((value){
               poppedAnimation((){
 
                 playedOnce = true;
