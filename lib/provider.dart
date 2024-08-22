@@ -384,9 +384,13 @@ class _Dialog2State extends State<Dialog2> {
                             wifiProvider.setStatus("No network with current SSID.");
 
                           }
+                          else if (value.stdout.toString().contains("successfully activated")){
+                            wifiProvider.setConnectStatus();
+
+                          }
 
                           else{
-                            wifiProvider.setConnectStatus();
+                            wifiProvider.setStatus("Unexpected Error");
                           }
                           keyboardkey.clearKey();
 
