@@ -22,7 +22,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   int startAnimationTime =START_ANIMATION_VALUE;
   int endAnimationTime = END_ANIMATION_VALUE;
   int _animationTime = 500;
-  bool playedOnce = true;
 
   @override
   void initState(){
@@ -33,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
 
       Provider.of<WifiProvider>(context).addListener(() {
-        if((Provider.of<WifiProvider>(context).currentState < 2) && playedOnce){
+        if((Provider.of<WifiProvider>(context).currentState < 2) ){
 
           print("helloooooo");
           print(Provider.of<WifiProvider>(context).currentState );

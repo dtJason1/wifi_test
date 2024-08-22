@@ -13,7 +13,6 @@ class _FadeInDemoState extends State<FadeInDemo> with TickerProviderStateMixin {
   @override
   void initState() {
     _controller = AnimationController(vsync: this, duration: Duration(seconds: 1));
-    widget.controller.forward();
   }
 
   late final Animation<Offset> _offsetAnimation = Tween<Offset>(
