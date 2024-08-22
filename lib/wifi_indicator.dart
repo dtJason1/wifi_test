@@ -222,7 +222,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               ),
             ),
           ),
-          Positioned(child: UpperContainer(animationController: _animationController,))
         ],
       ),
     );
