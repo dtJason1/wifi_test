@@ -76,9 +76,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
       body: Stack(
         children: [
-          Consumer<WifiProvider>(
-              builder: (context, provider, child) {
-                return Stack(
+
+
+               Stack(
                   children: [
                     Positioned(
                       top: 0,
@@ -91,30 +91,35 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          TextButton(child:  Text("WIFI"),
-                            onPressed: () async{
-                              try {
-                                poppedAnimation((){
-                                  provider.changeWifiList();
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
+                          Consumer2<WifiProvider,SceneProvider>(
+                            builder: (context,provider,sceneProvider, child) {
+                              return TextButton(child:  Text("WIFI"),
+                                onPressed: () async{
+                                  try {
+                                    poppedAnimation((){
+                                      provider.changeWifiList();
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
+                                      sceneProvider.changePage();
 
 
-                                });
+                                    });
 
-                              } on Exception catch (e) {
-                                print(e);
-                                // TODO
-                              }
-                              // dialog();
-                            },
+                                  } on Exception catch (e) {
+                                    print(e);
+                                    // TODO
+                                  }
+                                  // dialog();
+                                },
+                              );
+                            }
                           ),
 
                         ],
                       ),
                     ),
                   ],
-                );
-              }
+
+
           ),
 
 
