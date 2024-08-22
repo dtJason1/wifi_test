@@ -32,7 +32,7 @@ class _UpperContainerState extends State<UpperContainer> {
                     children: [
                       Icon(CupertinoIcons.xmark_circle, color: Colors.red,),
                       Container(width: 50,),
-                      Text("Error!  ${provider.status}", style: TextStyle(color: Colors.white , fontSize: 16),),
+                      Text("Error! ${provider.status}", style: TextStyle(color: Colors.white , fontSize: 16),),
 
                     ],
                   );
