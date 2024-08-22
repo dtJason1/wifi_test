@@ -76,7 +76,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   int startAnimationTime =1000;
-  int endAnimationTime = 700;
+  int endAnimationTime = 1000;
   int _animationTime = 500;
   bool playedOnce = true;
 
@@ -90,7 +90,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
 
   void poppedAnimation(Function function)async{
     setState(() {
-      _animationTime = endAnimationTime;
+      _animationTime = startAnimationTime;
     });
     _animationController.reverse().then((value) => function());
     setState(() {
