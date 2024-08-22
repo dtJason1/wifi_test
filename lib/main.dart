@@ -98,10 +98,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               builder: (context, provider,child) {
                 return Stack(
                   children: [
-                  FadeInDemo(
-                    controller: _animationController,
-                    child: Positioned(
-                      child: Container(color: Colors.black, height: 50, width: 1200,),),
+                  Positioned(
+                    top: 0,
+                    child: FadeInDemo(
+                      controller: _animationController,
+                      child: Container(color: Colors.black, height: 50, width: 1200,),
+                    ),
                   ),
 
                   Container(
