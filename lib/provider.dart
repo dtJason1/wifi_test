@@ -90,8 +90,41 @@ class WifiProvider extends ChangeNotifier{
   int _currentState = 0;
   int get currentState => _currentState;
 
+  String _status = "";
+  String get status => _status;
+
   bool _isLoading = true;
   bool get isLoading => _isLoading;
+
+  bool _isConnecting = false;
+  bool get isConnecting => _isConnecting;
+
+  void setConnectStatus(){
+    _currentState = 1;
+    _isConnecting = false;
+
+    notifyListeners();
+  }
+
+  void whileConnectingStatus(){
+    _isConnecting = true;
+    _status ="";
+    _currentState =0;
+    notifyListeners();
+  }
+
+  void setStatus(String errorStatus){
+    _currentState = -1;
+    _status = errorStatus;
+    _isConnecting = false;
+    notifyListeners();
+
+
+  }
+
+
+
+
   Future<List<String>> scanWifi() async {
     List<MyButton> finalList = [];
 
@@ -314,45 +347,29 @@ class _Dialog2State extends State<Dialog2> {
                   builder: (context, keyboardkey, wifiProvider, headerProvider,  child) {
                     return TextButton(onPressed: () async{
                       try {
-
-
+                        wifiProvider.whileConnectingStatus();
+                        Navigator.pop(context);
+                        print("popped!!!!");
                         await Process.run('nmcli',['device', 'wifi', 'rescan']);
-                        var result = await Process.run('nmcli',['device', 'wifi', 'list']);
 
                         Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${controller.text}']).then((value) {
                           print(widget.text);
                           print("controller text : ${controller.text}");
                           print("stdout ${value.stdout}");
                           print("err: ${value.stderr}");
+
+
                           if(value.stderr.toString().contains("property is invalid") || value.stderr.toString().contains("Secrets were required") || value.stderr.toString().contains("New connection activation was enqueued") ){
                             print("catch");
-                            headerProvider.setStatus("property is invalid");
-                            showDialog(context: context, builder: (context){
-                              return Dialog(
-                                child: Container( width:300, height:300, child: Center(child: Text("password not matched", style: TextStyle(color: Colors.red),),)),
-                              );
-                            });
-                          }
+                            wifiProvider.setStatus("비밀번호가 일치하지 않습니다.");
 
-                          else if(value.stderr.toString().contains("property is invalid") || value.stderr.toString().contains("Secrets were required") || value.stderr.toString().contains("New connection activation was enqueued") ){
-                            print("catch");
-                            showDialog(context: context, builder: (context){
-                              return Dialog(
-                                child: Container( width:300, height:300, child: Center(child: Text("password not matched", style: TextStyle(color: Colors.red),),)),
-                              );
-                            });
                           }
                           else if(value.stderr.toString().contains("No network with SSID")){
-                            showDialog(context: context, builder: (context){
-                              return Dialog(
-                                child: Container( width:300, height:300, child: Center(child: Text("cannot get SSID", style: TextStyle(color: Colors.red),),)),
-
-                              );
-                            });
+                            wifiProvider.setStatus("연결할 수 없는 SSID입니다.");
 
                           }
                           else{
-                            Navigator.pop(context,);
+                            wifiProvider.setConnectStatus();
                           }
                           keyboardkey.clearKey();
 

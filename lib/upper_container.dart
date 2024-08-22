@@ -12,13 +12,12 @@ class UpperContainer extends StatefulWidget{
 }
 
 class _UpperContainerState extends State<UpperContainer> {
-  int currentState = 0;
 
   @override
   Widget build(BuildContext context){
     return FadeInDemo(
       controller: widget.animationController,
-      child: Consumer<HeaderProvider>(
+      child: Consumer<WifiProvider>(
         builder: (context,provider,child) {
           return Container(color: Colors.black, height: 50, width: 1200,  alignment: Alignment.centerRight,
 
@@ -27,7 +26,7 @@ class _UpperContainerState extends State<UpperContainer> {
             Builder(
               builder: (context) {
 
-                if(currentState == -1){
+                if(provider.currentState == -1){
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -38,7 +37,7 @@ class _UpperContainerState extends State<UpperContainer> {
                   );
                 }
 
-                else if(currentState == 1){
+                else if(provider.currentState == 1){
                   return Icon(CupertinoIcons.checkmark_alt_circle, color: Colors.green,);
 
                 }
