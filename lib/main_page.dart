@@ -98,8 +98,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                   try {
                                     poppedAnimation((){
                                       provider.changeWifiList();
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
                                       sceneProvider.changePage();
+
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
 
 
                                     });
