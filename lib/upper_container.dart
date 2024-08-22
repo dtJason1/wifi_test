@@ -45,7 +45,8 @@ class _UpperContainerState extends State<UpperContainer> {
 
                     children: [
                       Icon(CupertinoIcons.checkmark_alt_circle, color: Colors.green,),
-                      Text("Successfully Connected")
+                      Container(width: 50,),
+                      Text("Successfully Connected", style: TextStyle(color: Colors.white , fontSize: 16),)
                     ],
                   );
 
