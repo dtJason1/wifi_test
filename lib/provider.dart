@@ -389,10 +389,13 @@ class _Dialog2State extends State<Dialog2> {
                             wifiProvider.setStatus("Invalid password");
 
                           }
-                          else if(value.stdout.toString().contains("property is invalid") || value.stdout.toString().contains("Secrets were required") || value.stdout.toString().contains("New connection activation was enqueued") ){
+                          else if(value.stdout.toString().contains("property is invalid") || value.stdout.toString().contains("Secrets were required")  ){
                             print("catch");
                             wifiProvider.setStatus("Invalid password");
 
+                          }
+                          else if (value.stdout.toString().contains("New connection activation was enqueued")){
+                            wifiProvider.setStatus("New connection activation was enqueued. Please try again.");
                           }
 
                           else if(value.stderr.toString().contains("No network with SSID") || value.stdout.toString().contains("No network with SSID")  ){
