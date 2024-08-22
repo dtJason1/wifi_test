@@ -4,6 +4,8 @@ import 'package:wifi_test/upper_container.dart';
 import 'provider.dart';
 import 'animation.dart';
 import 'wifi_indicator.dart';
+import 'settings.dart';
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -17,8 +19,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   late final AnimationController _animationController;
   bool isSelected = false;
-  int startAnimationTime =1500;
-  int endAnimationTime = 1500;
+  int startAnimationTime =START_ANIMATION_VALUE;
+  int endAnimationTime = END_ANIMATION_VALUE;
   int _animationTime = 500;
   bool playedOnce = true;
 

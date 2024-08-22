@@ -4,6 +4,7 @@ import 'package:wifi_test/upper_container.dart';
 import 'provider.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
+import 'settings.dart';
 class WifiListIndicator extends StatefulWidget {
 
 
@@ -75,8 +76,8 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
-  int startAnimationTime =1500;
-  int endAnimationTime = 1500;
+  int startAnimationTime =START_ANIMATION_VALUE;
+  int endAnimationTime = END_ANIMATION_VALUE;
   int _animationTime = 500;
   bool playedOnce = true;
 
@@ -94,7 +95,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     });
     _animationController.reverse().then((value) => function());
     setState(() {
-      _animationTime = startAnimationTime;
+      _animationTime = endAnimationTime;
     });
   }
 
