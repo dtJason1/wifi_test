@@ -44,6 +44,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     (){
 
                   playedOnce = true;
+
+                  setState(() {
+                    Provider.of<WifiProvider>(context).clearWifi();
+
+                  });
                 }
 
             );});

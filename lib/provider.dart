@@ -99,6 +99,12 @@ class WifiProvider extends ChangeNotifier{
   bool _isConnecting = false;
   bool get isConnecting => _isConnecting;
 
+  void clearWifi(){
+    _currentState = 2;
+    _status = "";
+    notifyListeners();
+  }
+
   void setConnectStatus(){
     _currentState = 1;
     _isConnecting = false;
