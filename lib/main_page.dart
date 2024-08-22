@@ -90,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 return Stack(
                   children: [
                     Positioned(
-                      top: 0,
+
                       child: UpperContainer(animationController: _animationController,)
                     ),
 
