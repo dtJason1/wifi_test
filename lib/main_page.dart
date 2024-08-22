@@ -28,7 +28,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   void initState(){
     _animationTime = startAnimationTime;
     _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: _animationTime));
-    startAnimation();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
 
@@ -44,6 +43,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         }
 
         if(!(Provider.of<WifiProvider>(context).currentState < 2)){
+
           Future.delayed(Duration(seconds: 3)).then((value){poppedAnimation(
 
               (){playedOnce = true;}
