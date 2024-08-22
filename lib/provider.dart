@@ -171,8 +171,15 @@ class SceneProvider extends ChangeNotifier{
   bool _isFirstPage = true;
   bool get isFirstPage => _isFirstPage;
 
+  bool _isConnectingAttemptFinished = false;
+  bool get isConnectingAttemptFinished => _isConnectingAttemptFinished;
+
   void changePage() async{
     _isFirstPage = !_isFirstPage;
+    notifyListeners();
+  }
+  void connecting() async{
+    _isConnectingAttemptFinished = !_isConnectingAttemptFinished;
     notifyListeners();
   }
 
@@ -343,11 +350,11 @@ class _Dialog2State extends State<Dialog2> {
                     )
                   ],
                 ),
-                Consumer3<KeyBoardKey,WifiProvider,HeaderProvider>(
-                  builder: (context, keyboardkey, wifiProvider, headerProvider,  child) {
+                Consumer3<KeyBoardKey,WifiProvider,SceneProvider>(
+                  builder: (context, keyboardkey, wifiProvider,sceneProvider , child) {
                     return TextButton(onPressed: () async{
                       try {
-                        wifiProvider.whileConnectingStatus();
+                        sceneProvider.connecting();
                         Navigator.pop(context);
                         print("popped!!!!");
                         await Process.run('nmcli',['device', 'wifi', 'rescan']);

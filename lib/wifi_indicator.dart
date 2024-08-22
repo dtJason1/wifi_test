@@ -112,12 +112,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     });
 
     Provider.of<SceneProvider>(context).addListener(() {
-      if(!Provider.of<SceneProvider>(context).isFirstPage && playedOnce){
-        startAnimation();
-        setState(() {
-          playedOnce = false;
-
-        });
+      if(Provider.of<SceneProvider>(context).isConnectingAttemptFinished){
+        Navigator.pop(context);
+        Provider.of<SceneProvider>(context).connecting();
       }
     });
 
