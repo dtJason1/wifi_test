@@ -76,8 +76,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
       body: Stack(
         children: [
-          Consumer2<WifiProvider, SceneProvider>(
-              builder: (context, provider, sceneProvider, child) {
+          Consumer<WifiProvider>(
+              builder: (context, provider, child) {
                 return Stack(
                   children: [
                     Positioned(
@@ -97,7 +97,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                 poppedAnimation((){
                                   provider.changeWifiList();
                                   Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
-                                  sceneProvider.changePage();
 
 
                                 });
