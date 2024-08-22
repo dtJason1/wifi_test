@@ -26,14 +26,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     _animationTime = startAnimationTime;
     _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: _animationTime));
     startAnimation();
-    Provider.of<SceneProvider>(context, listen: false).addListener(() {
-
-      if(Provider.of<SceneProvider>(context, listen: false).isFirstPage){
-        startAnimation();
-      }
-
-
-    });
 
   }
 
@@ -53,6 +45,18 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     });
   }
 
+  @override
+  void didChangeDependencies(){
+    Provider.of<SceneProvider>(context).addListener(() {
+
+      if(Provider.of<SceneProvider>(context).isFirstPage){
+        startAnimation();
+      }
+
+
+    });
+
+  }
   //
   // void dialog(){
   //   var wifiProvider = Provider.of<WifiProvider>(context, listen: false);
