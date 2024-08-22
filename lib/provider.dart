@@ -143,6 +143,29 @@ class SceneProvider extends ChangeNotifier{
 }
 
 
+class HeaderProvider extends ChangeNotifier{
+  String _currentWIFI = "";
+  String get currentWIFI => _currentWIFI;
+
+  String _status = "";
+  String get status => _status;
+
+  void setCurrentWIFI(String string){
+    _currentWIFI = string;
+    notifyListeners();
+
+  }
+
+  void setStatus (String string){
+    _status = string;
+    notifyListeners();
+
+
+  }
+
+
+}
+
 
 class MyButton extends StatefulWidget{
   MyButton({required this.text, required this.iscurrentuse, required this.wifiProvider});
@@ -172,6 +195,8 @@ class _MyButtonState extends State<MyButton> {
           providers: [
             ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
             ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
+
+
           ],
           child:  Dialog2(text:widget.text, wifiProvider: widget.wifiProvider,),
         ),
@@ -281,8 +306,8 @@ class _Dialog2State extends State<Dialog2> {
                     )
                   ],
                 ),
-                Consumer2<KeyBoardKey,WifiProvider>(
-                  builder: (context, keyboardkey, wifiProvider,  child) {
+                Consumer3<KeyBoardKey,WifiProvider,HeaderProvider>(
+                  builder: (context, keyboardkey, wifiProvider, headerProvider,  child) {
                     return TextButton(onPressed: () async{
                       try {
 
@@ -297,6 +322,7 @@ class _Dialog2State extends State<Dialog2> {
                           print("err: ${value.stderr}");
                           if(value.stderr.toString().contains("property is invalid") || value.stderr.toString().contains("Secrets were required") || value.stderr.toString().contains("New connection activation was enqueued") ){
                             print("catch");
+                            headerProvider.setStatus("property is invalid");
                             showDialog(context: context, builder: (context){
                               return Dialog(
                                 child: Container( width:300, height:300, child: Center(child: Text("password not matched", style: TextStyle(color: Colors.red),),)),
@@ -322,7 +348,7 @@ class _Dialog2State extends State<Dialog2> {
 
                           }
                           else{
-                            Navigator.pop(context,  );
+                            Navigator.pop(context,);
                           }
                           keyboardkey.clearKey();
 

@@ -21,6 +21,8 @@ void main() {
 
         ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
         ChangeNotifierProvider<SceneProvider>(create: (BuildContext context) => SceneProvider()),
+        ChangeNotifierProvider<HeaderProvider>(create: (BuildContext context) => HeaderProvider()),
+
 
       ],
       child: MaterialApp(
