@@ -27,6 +27,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   }
 
+  void poppedAnimation(Function function)async{
+
+    _animationController.reverse().then((value) => function());
+  }
 
   late final Animation<Offset> _offsetAnimation = Tween<Offset>(
     begin: Offset(0.0, 1.5),
@@ -78,8 +82,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                           TextButton(child:  Text("WIFI"),
                             onPressed: () async{
                               try {
-                                provider.changeWifiList();
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
+                                poppedAnimation((){
+                                  provider.changeWifiList();
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
+
+
+                                });
+
                               } on Exception catch (e) {
                                 print(e);
                                 // TODO
