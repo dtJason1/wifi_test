@@ -33,27 +33,31 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
 
       Provider.of<WifiProvider>(context).addListener(() {
-        if((Provider.of<WifiProvider>(context).currentState < 2 && playedOnce) ){
+        if((Provider.of<WifiProvider>(context).currentState < 2) ){
+
+          print("helloooooo");
+
+          print(Provider.of<WifiProvider>(context).currentState );
+
+          if(playedOnce){
+            startAnimation();
+          }
           setState(() {
             playedOnce = false;
           });
-          print("helloooooo");
-          print(Provider.of<WifiProvider>(context).currentState );
-          startAnimation();
-          Future.delayed(Duration(seconds: 4)).then((value){
-            poppedAnimation(
+          if(Provider.of<WifiProvider>(context).currentState != 0){
+            Future.delayed(Duration(seconds: 4)).then((value){
+              poppedAnimation((){
 
-                    (){
+                playedOnce = true;
 
-                  playedOnce = true;
+                setState(() {
+                  Provider.of<WifiProvider>(context).clearWifi();
 
-                  setState(() {
-                    Provider.of<WifiProvider>(context).clearWifi();
+                });
+              });});
 
-                  });
-                }
-
-            );});
+          }
 
         }
 
