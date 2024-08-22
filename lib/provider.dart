@@ -87,7 +87,7 @@ class WifiProvider extends ChangeNotifier{
   List<String> _wifiList =  [];
   List<String> get wifiList => _wifiList;
 
-  int _currentState = 0;
+  int _currentState = 2;
   int get currentState => _currentState;
 
   String _status = "";

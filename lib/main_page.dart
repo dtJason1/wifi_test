@@ -31,18 +31,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     startAnimation();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<SceneProvider>(context).addListener(() {
-        if(Provider.of<SceneProvider>(context).isFirstPage && playedOnce){
-          startAnimation();
-          setState(() {
-            playedOnce = false;
 
-          });
-        }
-      });
 
       Provider.of<WifiProvider>(context).addListener(() {
-        if(Provider.of<WifiProvider>(context).isConnecting && playedOnce){
+        if((Provider.of<WifiProvider>(context).currentState < 2) && playedOnce){
 
           startAnimation();
           setState(() {
@@ -51,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           });
         }
 
-        if(!Provider.of<WifiProvider>(context).isConnecting){
+        if(!(Provider.of<WifiProvider>(context).currentState < 2)){
           Future.delayed(Duration(seconds: 3)).then((value){poppedAnimation(
 
               (){playedOnce = true;}
