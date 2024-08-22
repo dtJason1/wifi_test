@@ -280,6 +280,7 @@ class Dialog2 extends StatefulWidget{
 }
 
 class _Dialog2State extends State<Dialog2> {
+
   @override
   void initState(){
     super.initState();
@@ -368,8 +369,15 @@ class _Dialog2State extends State<Dialog2> {
                         await Process.run('nmcli',['device', 'wifi', 'rescan']);
 
                         Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${controller.text}'])
-                          ..timeout(Duration(seconds: 14))
-                          .then((value) {
+
+
+                          ..timeout(Duration(seconds: 10), onTimeout: (){
+                            wifiProvider.setStatus("Timeout");
+                            throw Exception("TimeOut Exception");
+
+
+                          })
+                          ..then((value) {
                           print(widget.text);
                           print("controller text : ${controller.text}");
                           print("stdout ${value.stdout}");
