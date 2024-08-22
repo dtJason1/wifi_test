@@ -39,11 +39,24 @@ class _UpperContainerState extends State<UpperContainer> {
                 }
 
                 else if(provider.currentState == 1){
-                  return Icon(CupertinoIcons.checkmark_alt_circle, color: Colors.green,);
+
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+
+                    children: [
+                      Icon(CupertinoIcons.checkmark_alt_circle, color: Colors.green,),
+                    ],
+                  );
 
                 }
                 else{
-                  return CircularProgressIndicator(color: Colors.white,);
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+
+                    children: [
+                      CircularProgressIndicator(color: Colors.white,)
+                    ],
+                  );
                 }
 
               }
