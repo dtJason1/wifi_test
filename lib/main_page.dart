@@ -25,9 +25,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   void initState(){
     _animationTime = startAnimationTime;
     _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: _animationTime));
+    startAnimation();
+  }
+  void startAnimation()async{
     _animationController.forward();
 
   }
+
 
   void poppedAnimation(Function function)async{
     setState(() {
