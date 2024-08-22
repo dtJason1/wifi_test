@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   @override
   void initState(){
 
-    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 2500));
     _animationController.forward();
 
   }
