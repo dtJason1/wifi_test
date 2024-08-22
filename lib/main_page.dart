@@ -124,6 +124,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
+                          IconButton(onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
+
+
+                          }, icon: Icon(Icons.wifi)),
                           TextButton(child:
                           Text("WIFI"),
                             onPressed: () async{
