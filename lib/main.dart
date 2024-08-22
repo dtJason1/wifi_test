@@ -340,7 +340,7 @@ class _FadeInDemoState extends State<FadeInDemo> with TickerProviderStateMixin {
   }
 
   late final Animation<Offset> _offsetAnimation = Tween<Offset>(
-    begin: Offset(0.0, 1.5),
+    begin: Offset(0.0, -1.5),
     end: Offset(0.0,0.0),
   ).animate(CurvedAnimation(
     parent: widget.controller,
