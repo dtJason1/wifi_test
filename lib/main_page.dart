@@ -27,13 +27,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: _animationTime));
     startAnimation();
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-
-
-      if(Provider.of<SceneProvider>(context).isFirstPage){
-        startAnimation();
-      }
-    });
 
   }
 
