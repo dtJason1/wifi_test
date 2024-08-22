@@ -15,14 +15,21 @@ import 'wifi_indicator.dart';
 import 'main_page.dart';
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => WifiProvider(),
+
+    MultiProvider(
+      providers: [
+
+        ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
+        ChangeNotifierProvider<SceneProvider>(create: (BuildContext context) => SceneProvider()),
+
+      ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData.light(),
           home: MyApp()
       ),
     ),
+
   );
 }
 

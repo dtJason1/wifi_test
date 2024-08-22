@@ -27,6 +27,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: _animationTime));
     startAnimation();
 
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+
+
+      if(Provider.of<SceneProvider>(context).isFirstPage){
+        startAnimation();
+      }
+    });
 
   }
 
@@ -85,14 +92,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Consumer2<WifiProvider,SceneProvider>(
-                            builder: (context,provider,sceneProvider, child) {
+                            builder: (context,provider,sceneProvider child) {
                               return TextButton(child:  Text("WIFI"),
                                 onPressed: () async{
                                   try {
                                     poppedAnimation((){
                                       provider.changeWifiList();
-                                      sceneProvider.changePage();
-
                                       Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
 
 
