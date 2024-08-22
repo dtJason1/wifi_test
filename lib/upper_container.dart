@@ -21,7 +21,7 @@ class UpperContainer extends StatelessWidget{
 
 
                 Text("current status :  ${provider.status}", style: TextStyle(color: Colors.white , fontSize: 16),),
-                CircularProgressIndicator()
+                CircularProgressIndicator(color: Colors.white,)
               ],
             ),);
         }
