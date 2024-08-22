@@ -105,10 +105,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
 
 //
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Navigator.of(context).popUntil((route) => route.isFirst);
-
-
-    });
+      if(Provider.of<WifiProvider>(context).currentState < 2 ){
+        Navigator.of(context).popUntil((route) => route.isFirst);
+      }
   }
 
   @override
