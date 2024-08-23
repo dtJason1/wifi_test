@@ -371,7 +371,7 @@ class _Dialog2State extends State<Dialog2> {
                         Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${controller.text}'])
                           ..timeout(Duration(seconds: 10))
                           ..then((value) {
-                              Process.run('nmcli',['con', 'down', 'id', '${widget.text}']);
+                              Process.run('nmcli',['dev', 'wifi', 'disconnect', '${widget.text}']);
 
                             print('pid: $pid');
 
@@ -400,7 +400,7 @@ class _Dialog2State extends State<Dialog2> {
 
                           }
                           else if (value.stdout.toString().contains("successfully activated")){
-                            wifiProvider.setConnectStatus();
+                              wifiProvider.setConnectStatus();
 
                           }
 
