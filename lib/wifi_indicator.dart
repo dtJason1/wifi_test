@@ -18,7 +18,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   bool playedOnce = true;
 
   late AnimationController _animationController;
-  late Timer _timer;
   void startAnimation() async{
     _animationController.forward();
 
@@ -58,7 +57,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     super.initState();
   }
   void dispose(){
-    _timer.cancel();
     super.dispose();
 
 

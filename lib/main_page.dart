@@ -34,6 +34,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     String currentDate = formatDate.format(now);
     return currentDate;
   }
+  late Timer _timer;
 
 
   @override
@@ -46,33 +47,36 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       _timeData = check_time(context);
     });
 
-    // Timer.periodic(Duration(seconds: 1), (timer) {
-    //   setState(() {
-    //     _timeData = check_time(context);
-    //   });
-    //
-    // });
+    Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        _timeData = check_time(context);
+      });
+
+    });
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      // _timer = Timer.periodic(Duration(seconds: 3), (timer) {
-      //   Provider.of<WifiProvider>(context).scanWifi();
-      //
-      // });
+      _timer = Timer.periodic(Duration(seconds: 3), (timer) {
+        Provider.of<WifiProvider>(context).scanWifi();
 
-
-
+      });
 
       Provider.of<WifiProvider>(context).addListener(() {
+
+
         if((Provider.of<WifiProvider>(context).currentState < 2) ){
+
+
+          print(Provider.of<WifiProvider>(context).currentState );
+
           if(playedOnce){
             startAnimation();
           }
-
           setState(() {
             playedOnce = false;
           });
           if(Provider.of<WifiProvider>(context).currentState != 0){
             Future.delayed(Duration(seconds: 2)).then((value){
               poppedAnimation((){
+
                 playedOnce = true;
 
                 setState(() {
