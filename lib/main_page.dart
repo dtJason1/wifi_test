@@ -38,6 +38,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   @override
   void initState(){
+    Intl.defaultLocale = 'ko';
+
     _animationTime = startAnimationTime;
     _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: _animationTime));
 
