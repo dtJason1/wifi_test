@@ -169,7 +169,6 @@ class WifiProvider extends ChangeNotifier{
 
 
       for (var ssid in ssids) {
-        print(ssids);
 
         if(ssid[0] == '*'){
           currentWIFIList = [
@@ -183,8 +182,8 @@ class WifiProvider extends ChangeNotifier{
         }
       }
 
-      print(currentWIFIList);
       currentWIFIList.addAll(finalList);
+      print(currentWIFIList);
 
       if(_noWIFI){
         noWIFI();
