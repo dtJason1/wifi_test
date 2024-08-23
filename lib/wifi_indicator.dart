@@ -52,6 +52,8 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   void initState(){
     _animationController = AnimationController(vsync: this, duration: Duration(milliseconds:_animationTime ) );
     var wifiProvider = Provider.of<WifiProvider>(context);
+    wifiProvider.scanWifi();
+
     Timer.periodic(Duration(seconds: 3), (timer) {
       wifiProvider.scanWifi();
     });
