@@ -65,14 +65,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         if((Provider.of<WifiProvider>(context).currentState < 2) ){
 
 
-          print(Provider.of<WifiProvider>(context).currentState );
 
           if(playedOnce){
             startAnimation();
           }
-          setState(() {
-            playedOnce = false;
-          });
+
           if(Provider.of<WifiProvider>(context).currentState != 0){
             Future.delayed(Duration(seconds: 2)).then((value){
               poppedAnimation((){
@@ -100,7 +97,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   void startAnimation() async{
     _animationController.forward();
-
+    setState(() {
+      playedOnce = false;
+    });
   }
 
 

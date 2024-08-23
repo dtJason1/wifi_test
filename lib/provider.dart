@@ -185,7 +185,6 @@ class WifiProvider extends ChangeNotifier{
 
       _selectedWIFI.addAll(_anotherWIFI);
       _currentWIFIList = _selectedWIFI;
-      print(currentWIFIList);
 
       if(_noWIFI){
         noWIFI();
@@ -401,18 +400,18 @@ class _Dialog2State extends State<Dialog2> {
                         Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${controller.text}'])
                           ..timeout(Duration(seconds: 15), onTimeout: (){
 
-                            Process.run('nmcli',['radio', 'wifi', 'off']).whenComplete(() => Process.run('nmcli',['radio', 'wifi', 'on']).then((value) => wifiProvider.setStatus("Connection Time Out")
-                            ));
+                            Process.run('nmcli',['radio', 'wifi', 'off']).whenComplete(() => Process.run('nmcli',['radio', 'wifi', 'on']).then((value) => wifiProvider.setStatus("Connection Time Out")));
                             throw TimeoutException('Connection Time Out // 3');
                           })
+
                           ..then((value) {
 
                             print('pid: $pid');
 
                             print(widget.text);
-                          print("controller text : ${controller.text}");
-                          print("stdout ${value.stdout}");
-                          print("err: ${value.stderr}");
+                            print("controller text : ${controller.text}");
+                            print("stdout ${value.stdout}");
+                            print("err: ${value.stderr}");
 
 
 
@@ -432,11 +431,9 @@ class _Dialog2State extends State<Dialog2> {
 
                           else if(value.stderr.toString().contains("No network with SSID") || value.stdout.toString().contains("No network with SSID")  ){
                             wifiProvider.setStatus("No network with current SSID.");
-
                           }
                           else if (value.stdout.toString().contains("successfully activated")){
                               wifiProvider.setConnectStatus();
-
                           }
 
                           else{
