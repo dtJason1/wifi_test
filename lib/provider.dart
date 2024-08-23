@@ -439,6 +439,8 @@ class _Dialog2State extends State<Dialog2> {
                           }
 
                           else{
+                            wifiProvider.setStatus("Invalid password");
+
                           }
                           keyboardkey.clearKey();
 
