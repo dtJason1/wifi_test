@@ -377,7 +377,6 @@ class _Dialog2State extends State<Dialog2> {
                           print("controller text : ${controller.text}");
                           print("stdout ${value.stdout}");
                           print("err: ${value.stderr}");
-                            Process.run('ps', ['-ef']).then((value) => print(" value : ${value.stdout}, error: ${value.stderr}"));
 
 
                           if(value.stderr.toString().contains("property is invalid") || value.stderr.toString().contains("Secrets were required") || value.stderr.toString().contains("New connection activation was enqueued") ){
@@ -404,13 +403,12 @@ class _Dialog2State extends State<Dialog2> {
                           }
 
                           else{
-                            Process.killPid(pid);
+                            Process.run('nmcli',['connection', 'delete', '${widget.text}']);
+
                             wifiProvider.setStatus("TimeOut Error");
 
                           }
-                            Process.run('ps', ['-ef']).then((value) => print(" value : ${value.stdout}, error: ${value.stderr}"));
-
-                            keyboardkey.clearKey();
+                          keyboardkey.clearKey();
 
 
 
