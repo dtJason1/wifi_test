@@ -8,7 +8,7 @@ import 'animation.dart';
 import 'wifi_indicator.dart';
 import 'settings.dart';
 import 'package:intl/intl.dart';
-
+import 'package:intl/date_symbol_data_local.dart';
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -35,6 +35,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     return formatDate;
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+  }
 
   @override
   void initState(){
