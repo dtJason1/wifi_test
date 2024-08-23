@@ -59,8 +59,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   void dispose(){
     super.dispose();
 
-
-
   }
   @override
   Widget build(BuildContext context) {
