@@ -149,8 +149,9 @@ class WifiProvider extends ChangeNotifier{
 
 
   void scanWifi() async {
-    List<MyButton> finalList = [];
-    List<MyButton> currentWIFIList =[];
+    List<MyButton> _selectedWIFI =[];
+    List<MyButton> _anotherWIFI =[];
+
     bool _noWIFI = false;
     try {
       print("scanning wifi....");
@@ -171,18 +172,19 @@ class WifiProvider extends ChangeNotifier{
       for (var ssid in ssids) {
 
         if(ssid[0] == '*'){
-          currentWIFIList = [
+          _selectedWIFI = [
             MyButton(text: ssid.substring(26,56).replaceAll(" ", ""), iscurrentuse: true)
           ];
           _noWIFI = false;
         }
         else{
-          finalList.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false));
+          _anotherWIFI.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false));
 
         }
       }
 
-      currentWIFIList.addAll(finalList);
+      _selectedWIFI.addAll(_anotherWIFI);
+      _currentWIFIList = _selectedWIFI;
       print(currentWIFIList);
 
       if(_noWIFI){
