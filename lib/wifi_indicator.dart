@@ -130,7 +130,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                           return SizedBox(
                             height: 300,
                             width: 300,
-                            child: provider.wifiList == [] ? CircularProgressIndicator() : ListView(shrinkWrap: true, children: provider.currentWIFIList,),
+                            child: provider.currentWIFIList == [] ? CircularProgressIndicator() : ListView(shrinkWrap: true, children: provider.currentWIFIList,),
                           );
                         }
                     ),
