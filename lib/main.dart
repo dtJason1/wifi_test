@@ -14,9 +14,7 @@ import 'animation.dart';
 import 'wifi_indicator.dart';
 import 'main_page.dart';
 import 'package:intl/intl.dart';
-import 'package:intl/date_symbol_data_local.dart';
 void main() {
-  initializeDateFormatting('ko', null);
 
   runApp(
 

@@ -30,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   String _timeData = "";
   String check_time(BuildContext context){
     DateTime now = DateTime.now();
-    DateFormat formatDate = DateFormat.Hm('ko');
+    DateFormat formatDate = DateFormat.Hms('ko');
     String currentDate = formatDate.format(now);
     return currentDate;
   }
@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       _timeData = check_time(context);
     });
 
-    Timer.periodic(Duration(seconds: 2), (timer) {
+    Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
         _timeData = check_time(context);
       });
