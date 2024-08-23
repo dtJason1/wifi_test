@@ -115,7 +115,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       return formatDate;
     }
     Timer.periodic(Duration(seconds: 2), (timer) {
-      _timeData = check_time(context);
+      setState(() {
+        _timeData = check_time(context);
+
+      });
 
     });
     return Scaffold(
