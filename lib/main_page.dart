@@ -19,7 +19,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
-  Timer? _timer;
 
   late final AnimationController _animationController;
   bool isSelected = false;
@@ -54,6 +53,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
     });
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      // _timer = Timer.periodic(Duration(seconds: 3), (timer) {
+      //   Provider.of<WifiProvider>(context).scanWifi();
+      //
+      // });
 
 
 
