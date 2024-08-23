@@ -28,10 +28,31 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   bool playedOnce = true;
 
   String _timeData = "";
+  DateTime now = DateTime.now();
+  String check_time(){ //context는 Snackbar용, 다른 방식으로 출력할거면 필요없음.
+    var now = new DateTime.now(); //반드시 다른 함수에서 해야함, Mypage같은 클래스에서는 사용 불가능
+    String formatDate = DateFormat('HH:mm', '').format(now); //format변경
+    return formatDate;
+  }
+
+
   @override
   void initState(){
     _animationTime = startAnimationTime;
     _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: _animationTime));
+
+    var now = new DateTime.now(); //반드시 다른 함수에서 해야함, Mypage같은 클래스에서는 사용 불가능
+    String formatDate = DateFormat('HH:mm', '').format(now);
+    _timeData = check_time();
+
+    Timer.periodic(Duration(seconds: 2), (timer) {
+      setState(() {
+        _timeData = check_time();
+
+      });
+
+    });
+
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
 
@@ -108,20 +129,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    Intl.defaultLocale = 'en_US';
-    DateTime now = DateTime.now();
-    String check_time(BuildContext context){ //context는 Snackbar용, 다른 방식으로 출력할거면 필요없음.
-      var now = new DateTime.now(); //반드시 다른 함수에서 해야함, Mypage같은 클래스에서는 사용 불가능
-      String formatDate = DateFormat('HH:mm', '').format(now); //format변경
-      return formatDate;
-    }
-    Timer.periodic(Duration(seconds: 2), (timer) {
-      setState(() {
-        _timeData = check_time(context);
 
-      });
 
-    });
     return Scaffold(
 
       body: Stack(
