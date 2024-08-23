@@ -357,7 +357,7 @@ class _Dialog2State extends State<Dialog2> {
                     return TextButton(onPressed: () async{
 
                       try {
-
+                        int myPid = 0;
                         Navigator.of(context).popUntil((route) => route.isFirst);
                         Navigator.of(context).popUntil((route) => route.isFirst);
                         wifiProvider.whileConnectingStatus();
@@ -369,6 +369,7 @@ class _Dialog2State extends State<Dialog2> {
                         await Process.run('nmcli',['device', 'wifi', 'rescan']);
 
                         Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${controller.text}'])
+                          ..timeout(Duration(seconds: 10))
                           ..then((value) {
 
                             print('pid: $pid');
@@ -403,8 +404,7 @@ class _Dialog2State extends State<Dialog2> {
                           }
 
                           else{
-                            Process.run('ps',['-ef']);
-
+                            Process.killPid(pid);
                             wifiProvider.setStatus("TimeOut Error");
 
                           }
