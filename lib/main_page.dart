@@ -46,12 +46,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       _timeData = check_time(context);
     });
 
-    Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
-        _timeData = check_time(context);
-      });
-
-    });
+    // Timer.periodic(Duration(seconds: 1), (timer) {
+    //   setState(() {
+    //     _timeData = check_time(context);
+    //   });
+    //
+    // });
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       // _timer = Timer.periodic(Duration(seconds: 3), (timer) {
       //   Provider.of<WifiProvider>(context).scanWifi();
