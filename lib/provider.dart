@@ -169,7 +169,7 @@ class WifiProvider extends ChangeNotifier{
 
 
       for (var ssid in ssids) {
-
+        print(ssids);
 
         if(ssid[0] == '*'){
           currentWIFIList = [
