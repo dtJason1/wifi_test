@@ -38,6 +38,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   @override
   void initState(){
+
     _animationTime = startAnimationTime;
     _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: _animationTime));
     initializeDateFormatting();
@@ -51,11 +52,16 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       });
 
     });
-
+    Timer _timer;
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _timer = Timer.periodic(Duration(seconds: 3), (timer) {
+        Provider.of<WifiProvider>(context).changeWifiList();
 
+      });
 
       Provider.of<WifiProvider>(context).addListener(() {
+
+
         if((Provider.of<WifiProvider>(context).currentState < 2) ){
 
 

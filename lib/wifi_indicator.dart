@@ -120,10 +120,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     wifiProvider.changeWifiList();
 
 
-    _timer = Timer.periodic(Duration(seconds: 3), (timer) {
-      wifiProvider.changeWifiList();
 
-    });
 
 
     //
