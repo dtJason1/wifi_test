@@ -310,7 +310,7 @@ class Dialog2 extends StatefulWidget{
 }
 
 class _Dialog2State extends State<Dialog2> {
-
+  bool _timeOut = false;
   @override
   void initState(){
     super.initState();
@@ -400,46 +400,50 @@ class _Dialog2State extends State<Dialog2> {
                         Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${controller.text}'])
                           ..timeout(Duration(seconds: 15), onTimeout: (){
 
-                            Process.run('nmcli',['radio', 'wifi', 'off']).whenComplete(() => Process.run('nmcli',['radio', 'wifi', 'on']).then((value) => wifiProvider.setStatus("Connection Time Out")));
+                            Process.run('nmcli',['radio', 'wifi', 'off']).whenComplete(() => Process.run('nmcli',['radio', 'wifi', 'on']).then((value) => setState(() {
+                              _timeOut = true;
+                            })).then((value) => wifiProvider.setStatus("Connection Time Out")));
                             throw TimeoutException('Connection Time Out // 3');
                           })
 
                           ..then((value) {
 
-                            print('pid: $pid');
-
-                            print(widget.text);
-                            print("controller text : ${controller.text}");
-                            print("stdout ${value.stdout}");
-                            print("err: ${value.stderr}");
-
-
-                          if(value.stderr.toString().contains("property is invalid") || value.stderr.toString().contains("Secrets were required") || value.stderr.toString().contains("New connection activation was enqueued") ){
-                            print("catch");
-                            wifiProvider.setStatus("Invalid password");
-
-                          }
-                          else if(value.stdout.toString().contains("property is invalid") || value.stdout.toString().contains("Secrets were required")  ){
-                            print("catch");
-                            wifiProvider.setStatus("Invalid password");
-
-                          }
-                          else if (value.stdout.toString().contains("New connection activation was enqueued")){
-                            wifiProvider.setStatus("New connection activation was enqueued. Please try again.");
-                          }
-
-                          else if(value.stderr.toString().contains("No network with SSID") || value.stdout.toString().contains("No network with SSID")  ){
-                            wifiProvider.setStatus("No network with current SSID.");
-                          }
-                          else if (value.stdout.toString().contains("successfully activated")){
-                              wifiProvider.setConnectStatus();
-                          }
-
-                          else{
-                            wifiProvider.setStatus("TimeOutConnection.");
-
-                          }
-                          keyboardkey.clearKey();
+                            if (_timeOut) {
+                              print('pid: $pid');
+                              
+                              print(widget.text);
+                              print("controller text : ${controller.text}");
+                              print("stdout ${value.stdout}");
+                              print("err: ${value.stderr}");
+                              
+                              
+                                                        if(value.stderr.toString().contains("property is invalid") || value.stderr.toString().contains("Secrets were required") || value.stderr.toString().contains("New connection activation was enqueued") ){
+                              print("catch");
+                              wifiProvider.setStatus("Invalid password");
+                              
+                                                        }
+                                                        else if(value.stdout.toString().contains("property is invalid") || value.stdout.toString().contains("Secrets were required")  ){
+                              print("catch");
+                              wifiProvider.setStatus("Invalid password");
+                              
+                                                        }
+                                                        else if (value.stdout.toString().contains("New connection activation was enqueued")){
+                              wifiProvider.setStatus("New connection activation was enqueued. Please try again.");
+                                                        }
+                              
+                                                        else if(value.stderr.toString().contains("No network with SSID") || value.stdout.toString().contains("No network with SSID")  ){
+                              wifiProvider.setStatus("No network with current SSID.");
+                                                        }
+                                                        else if (value.stdout.toString().contains("successfully activated")){
+                                wifiProvider.setConnectStatus();
+                                                        }
+                              
+                                                        else{
+                              wifiProvider.setStatus("TimeOutConnection.");
+                              
+                                                        }
+                                                        keyboardkey.clearKey();
+                            }
 
 
 
