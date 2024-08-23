@@ -54,20 +54,16 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
     });
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _timer = Timer.periodic(Duration(seconds: 3), (timer) {
-        Provider.of<WifiProvider>(context).scanWifi();
-
-      });
 
 
 
 
       Provider.of<WifiProvider>(context).addListener(() {
         if((Provider.of<WifiProvider>(context).currentState < 2) ){
-          print(Provider.of<WifiProvider>(context).currentState );
           if(playedOnce){
             startAnimation();
           }
+
           setState(() {
             playedOnce = false;
           });
