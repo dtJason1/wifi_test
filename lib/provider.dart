@@ -414,7 +414,6 @@ class _Dialog2State extends State<Dialog2> {
                             print("err: ${value.stderr}");
 
 
-
                           if(value.stderr.toString().contains("property is invalid") || value.stderr.toString().contains("Secrets were required") || value.stderr.toString().contains("New connection activation was enqueued") ){
                             print("catch");
                             wifiProvider.setStatus("Invalid password");
