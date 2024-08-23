@@ -373,7 +373,8 @@ class _Dialog2State extends State<Dialog2> {
                           ..then((value) {
 
                             print('pid: $pid');
-
+                            Process.killPid(pid);
+                            wifiProvider.setStatus("TimeOut Error");
                             print(widget.text);
                           print("controller text : ${controller.text}");
                           print("stdout ${value.stdout}");
@@ -404,8 +405,7 @@ class _Dialog2State extends State<Dialog2> {
                           }
 
                           else{
-                            Process.killPid(pid);
-                            wifiProvider.setStatus("TimeOut Error");
+
 
                           }
                           keyboardkey.clearKey();
