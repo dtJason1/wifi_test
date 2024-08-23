@@ -371,7 +371,6 @@ class _Dialog2State extends State<Dialog2> {
                         Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${controller.text}'])
                           ..timeout(Duration(seconds: 10))
                           ..then((value) {
-                              Process.run('nmcli',['device',  'disconnect']);
 
                             print('pid: $pid');
 
@@ -380,6 +379,7 @@ class _Dialog2State extends State<Dialog2> {
                           print("stdout ${value.stdout}");
                           print("err: ${value.stderr}");
 
+                            Process.run('nmcli',['con',  'down' , 'id', widget.text]);
 
                           if(value.stderr.toString().contains("property is invalid") || value.stderr.toString().contains("Secrets were required") || value.stderr.toString().contains("New connection activation was enqueued") ){
                             print("catch");
