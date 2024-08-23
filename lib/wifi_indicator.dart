@@ -47,7 +47,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
 
     });
   }
-  late Timer _timer;
   @override
   void initState(){
     _animationController = AnimationController(vsync: this, duration: Duration(milliseconds:_animationTime ) );
@@ -56,7 +55,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     super.initState();
   }
   void dispose(){
-    _timer.cancel();
     super.dispose();
 
   }
