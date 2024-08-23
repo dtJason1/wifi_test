@@ -366,10 +366,15 @@ class _Dialog2State extends State<Dialog2> {
 
 
 
-                        await Process.run('nmcli',['device', 'wifi', 'rescan']);
 
                         Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${controller.text}'])
-                          ..timeout(Duration(seconds: 10))
+                          ..timeout(Duration(seconds: 10), onTimeout: (){
+
+                            Process.run('nmcli',['connection', 'delete', '${widget.text}']);
+                            Process.run('nmcli',['radio', 'wifi', 'off']).whenComplete(() => Process.run('nmcli',['radio', 'wifi', 'on']).then((value) => wifiProvider.setStatus("TimeOut Error")
+                            ));
+                            throw TimeoutException('Connection Time Out // 3');
+                          })
                           ..then((value) {
 
                             print('pid: $pid');
@@ -379,7 +384,7 @@ class _Dialog2State extends State<Dialog2> {
                           print("stdout ${value.stdout}");
                           print("err: ${value.stderr}");
 
-                            Process.run('nmcli',['con',  'down' , 'id', '"${widget.text}"']).then((value) => print("stderr: ${value.stderr} , stdout: ${value.stdout}"));
+
 
                           if(value.stderr.toString().contains("property is invalid") || value.stderr.toString().contains("Secrets were required") || value.stderr.toString().contains("New connection activation was enqueued") ){
                             print("catch");
@@ -405,7 +410,7 @@ class _Dialog2State extends State<Dialog2> {
                           }
 
                           else{
-                            // Process.run('nmcli',['connection', 'delete', '${widget.text}']);
+                            Process.run('nmcli',['connection', 'delete', '${widget.text}']);
                             //
                             wifiProvider.setStatus("TimeOut Error");
 
