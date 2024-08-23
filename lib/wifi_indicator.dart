@@ -47,19 +47,20 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
 
     });
   }
-
+  late Timer _timer;
   @override
   void initState(){
     _animationController = AnimationController(vsync: this, duration: Duration(milliseconds:_animationTime ) );
     var wifiProvider = Provider.of<WifiProvider>(context);
     wifiProvider.scanWifi();
 
-    Timer.periodic(Duration(seconds: 3), (timer) {
+    _timer = Timer.periodic(Duration(seconds: 3), (timer) {
       wifiProvider.scanWifi();
     });
     super.initState();
   }
   void dispose(){
+    _timer.cancel();
     super.dispose();
 
   }
