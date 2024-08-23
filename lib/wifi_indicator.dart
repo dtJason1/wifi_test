@@ -148,18 +148,28 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     List< MyButton> finalList = [];
     List< MyButton> currentWIFIList = [];
     var wifiProvider = Provider.of<WifiProvider>(context);
-
+    bool noWIFI = true;
     for (var ssid in wifiProvider.wifiList) {
+
+
       if(ssid[0] == '*'){
         currentWIFIList = [
           MyButton(text: ssid.substring(26,56).replaceAll(" ", ""), iscurrentuse: true,wifiProvider: wifiProvider,)
         ];
+        noWIFI = false;
       }
       else{
         finalList.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false,wifiProvider: wifiProvider,));
       }
     }
     currentWIFIList.addAll(finalList);
+    if(noWIFI){
+      wifiProvider.noWIFI();
+    }
+    else{
+      wifiProvider.hasWIFI();
+    }
+
 
 
     return Scaffold(

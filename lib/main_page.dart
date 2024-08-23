@@ -156,7 +156,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
 
 
-                              }, icon: Icon(Icons.wifi)),
+                              }, icon: Icon(provider.isNoWIFI ? Icons.wifi_off :Icons.wifi)),
                             ],
                           ),
                           TextButton(child:

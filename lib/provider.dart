@@ -101,6 +101,19 @@ class WifiProvider extends ChangeNotifier{
   bool _isConnecting = false;
   bool get isConnecting => _isConnecting;
 
+  bool _isNoWIFI = false;
+  bool get isNoWIFI => _isNoWIFI;
+
+  void noWIFI(){
+    _isNoWIFI = true;
+    notifyListeners();
+  }
+
+  void hasWIFI(){
+    _isNoWIFI = false;
+    notifyListeners();
+  }
+
   void clearWifi(){
     _currentState = 2;
     _status = "";
