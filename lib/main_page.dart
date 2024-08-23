@@ -34,6 +34,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     String currentDate = formatDate.format(now);
     return currentDate;
   }
+  late Timer _timer;
 
 
   @override
@@ -52,10 +53,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       });
 
     });
-    Timer _timer;
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _timer = Timer.periodic(Duration(seconds: 3), (timer) {
-        Provider.of<WifiProvider>(context).changeWifiList();
+        Provider.of<WifiProvider>(context).scanWifi();
 
       });
 
@@ -170,7 +170,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                             onPressed: () async{
                               try {
                                 if(playedOnce){
-                                  provider.changeWifiList();
+                                  provider.scanWifi();
 
                                   Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
                                   setState(() {

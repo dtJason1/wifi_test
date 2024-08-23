@@ -5,70 +5,6 @@ import 'provider.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
 import 'settings.dart';
-class WifiListIndicator extends StatefulWidget {
-
-
-  @override
-  State<WifiListIndicator> createState() => _WifiListIndicatorState();
-}
-
-class _WifiListIndicatorState extends State<WifiListIndicator> {
-
-  @override
-  Widget build(BuildContext context) {
-    List< MyButton> finalList = [];
-    List< MyButton> currentWIFIList = [];
-    var wifiProvider = Provider.of<WifiProvider>(context);
-
-    for (var ssid in wifiProvider.wifiList) {
-      if(ssid[0] == '*'){
-        currentWIFIList = [
-          MyButton(text: ssid.substring(26,56).replaceAll(" ", ""), iscurrentuse: true,wifiProvider: wifiProvider,)
-        ];
-      }
-      else{
-        finalList.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false,wifiProvider: wifiProvider,));
-      }
-    }
-    currentWIFIList.addAll(finalList);
-
-    //   return Dialog(
-    //
-    //   child: Padding(
-    //     padding: const EdgeInsets.all(10.0),
-    //     child: SizedBox(
-    //       height: 400,
-    //       width: 400,
-    //       child: Column(
-    //
-    //         children: [
-    //           Padding(
-    //             padding: const EdgeInsets.symmetric(vertical: 25.0),
-    //             child: Row(
-    //               mainAxisAlignment: MainAxisAlignment.center,
-    //               children: [
-    //                 Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
-    //                 IconButton(
-    //                     onPressed: wifiProvider.changeWifiList, icon: Icon(Icons.refresh))
-    //               ],
-    //             ),
-    //           ),
-    //           SizedBox(
-    //             height: 300,
-    //             width: 300,
-    //             child: wifiProvider.wifiList == [] ? CircularProgressIndicator() : ListView(shrinkWrap: true, children: currentWIFIList,),
-    //           ),
-    //         ],
-    //       ),
-    //     ),
-    //   ),
-    // );
-    return MainPage();
-  }
-
-}
-
-
 
 class MainPage extends StatefulWidget {
   @override
@@ -117,19 +53,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   void initState(){
     _animationController = AnimationController(vsync: this, duration: Duration(milliseconds:_animationTime ) );
     var wifiProvider = Provider.of<WifiProvider>(context);
-    wifiProvider.changeWifiList();
-
-
-
-
-
-    //
-
-
-
-
-
-
+    wifiProvider.scanWifi();
 
     super.initState();
   }
@@ -142,30 +66,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   }
   @override
   Widget build(BuildContext context) {
-    List< MyButton> finalList = [];
-    List< MyButton> currentWIFIList = [];
-    var wifiProvider = Provider.of<WifiProvider>(context);
-    bool noWIFI = true;
-    for (var ssid in wifiProvider.wifiList) {
-
-
-      if(ssid[0] == '*'){
-        currentWIFIList = [
-          MyButton(text: ssid.substring(26,56).replaceAll(" ", ""), iscurrentuse: true,wifiProvider: wifiProvider,)
-        ];
-        noWIFI = false;
-      }
-      else{
-        finalList.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false,wifiProvider: wifiProvider,));
-      }
-    }
-    currentWIFIList.addAll(finalList);
-    if(noWIFI){
-      wifiProvider.noWIFI();
-    }
-    else{
-      wifiProvider.hasWIFI();
-    }
 
 
 
@@ -220,7 +120,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                               children: [
                                 Text("WIFI Lists",style: TextStyle(fontWeight: FontWeight.bold),),
                                 IconButton(
-                                    onPressed: provider.changeWifiList, icon: Icon(Icons.refresh))
+                                    onPressed: provider.scanWifi, icon: Icon(Icons.refresh))
                               ],
                             ),
                           );
@@ -231,7 +131,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                           return SizedBox(
                             height: 300,
                             width: 300,
-                            child: provider.wifiList == [] ? CircularProgressIndicator() : ListView(shrinkWrap: true, children: currentWIFIList,),
+                            child: provider.wifiList == [] ? CircularProgressIndicator() : ListView(shrinkWrap: true, children: provider.currentWIFIList,),
                           );
                         }
                     ),

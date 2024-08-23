@@ -103,6 +103,8 @@ class WifiProvider extends ChangeNotifier{
 
   bool _isNoWIFI = false;
   bool get isNoWIFI => _isNoWIFI;
+  List<MyButton> _currentWIFIList =[];
+  List<MyButton> get currentWIFIList => _currentWIFIList;
 
   void noWIFI(){
     _isNoWIFI = true;
@@ -146,9 +148,10 @@ class WifiProvider extends ChangeNotifier{
 
 
 
-  Future<List<String>> scanWifi() async {
+  void scanWifi() async {
     List<MyButton> finalList = [];
-
+    List<MyButton> currentWIFIList =[];
+    bool _noWIFI = false;
     try {
       print("scanning wifi....");
       // Run the command
@@ -158,7 +161,6 @@ class WifiProvider extends ChangeNotifier{
       // Check for errors
       if (result.exitCode != 0) {
         print('Error: ${result.stderr}');
-        return [];
       }
       // Filter SSIDs
       var ssids = result.stdout.toString().trim().split('\n');
@@ -166,22 +168,37 @@ class WifiProvider extends ChangeNotifier{
       ssids.removeAt(0);
 
 
-      return ssids;
+      for (var ssid in ssids) {
 
+
+        if(ssid[0] == '*'){
+          currentWIFIList = [
+            MyButton(text: ssid.substring(26,56).replaceAll(" ", ""), iscurrentuse: true)
+          ];
+          _noWIFI = false;
+        }
+        else{
+          finalList.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false));
+
+        }
+      }
+      currentWIFIList.addAll(finalList);
+
+      if(_noWIFI){
+        noWIFI();
+      }
+      else{
+        hasWIFI();
+      }
+
+      notifyListeners();
       // Print or return the SSIDs
     } catch (e) {
       print('Error: $e');
 
-      return [];
     }
   }
 
-  void changeWifiList() async{
-    _wifiList = await scanWifi();
-    _isLoading = false;
-
-    notifyListeners();
-  }
 
 
 }
@@ -228,8 +245,7 @@ class HeaderProvider extends ChangeNotifier{
 
 
 class MyButton extends StatefulWidget{
-  MyButton({required this.text, required this.iscurrentuse, required this.wifiProvider});
-  final WifiProvider wifiProvider;
+  MyButton({required this.text, required this.iscurrentuse});
   String text;
   final bool iscurrentuse;
   @override
@@ -257,7 +273,7 @@ class _MyButtonState extends State<MyButton> {
 
 
           ],
-          child:  Dialog2(text:widget.text, wifiProvider: widget.wifiProvider,),
+          child:  Dialog2(text:widget.text),
         ),
 
     );
@@ -285,9 +301,8 @@ TextEditingController controller = TextEditingController();
 
 
 class Dialog2 extends StatefulWidget{
-  Dialog2({required this.text, required this.wifiProvider});
+  Dialog2({required this.text});
   final String text;
-  final WifiProvider wifiProvider;
   @override
   State<Dialog2> createState() => _Dialog2State();
 }
