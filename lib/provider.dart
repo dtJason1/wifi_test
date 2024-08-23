@@ -371,7 +371,7 @@ class _Dialog2State extends State<Dialog2> {
                         Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${controller.text}'])
                           ..timeout(Duration(seconds: 10))
                           ..then((value) {
-                              Process.run('nmcli',['dev',  'disconnect', '${widget.text}']);
+                              Process.run('nmcli',['device',  'disconnect']);
 
                             print('pid: $pid');
 
