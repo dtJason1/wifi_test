@@ -29,8 +29,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   String _timeData = "";
   String check_time(BuildContext context){
-    DateTime now = DateTime.now().add(Duration(hours: 9));
-    DateFormat formatDate = DateFormat.Hms('fr');
+    DateTime now = DateTime.now().add(Duration(hours: 8));
+    DateFormat formatDate = DateFormat.Hms('en_US');
     String currentDate = formatDate.format(now);
     return currentDate;
   }
