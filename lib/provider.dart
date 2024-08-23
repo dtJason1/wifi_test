@@ -367,11 +367,7 @@ class _Dialog2State extends State<Dialog2> {
 
 
                         await Process.run('nmcli',['device', 'wifi', 'rescan']);
-                        Timer(Duration(seconds:4), () {
-                          Process.run('ps',['-ef']);
 
-                          wifiProvider.setStatus("TimeOut Error");
-                        });
                         Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${controller.text}'])
                           ..then((value) {
                           print(widget.text);
