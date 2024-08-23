@@ -379,7 +379,7 @@ class _Dialog2State extends State<Dialog2> {
                           print("stdout ${value.stdout}");
                           print("err: ${value.stderr}");
 
-                            Process.run('nmcli',['con',  'down' , 'id', widget.text]);
+                            Process.run('nmcli',['con',  'down' , 'id', widget.text]).then((value) => print("con down"));
 
                           if(value.stderr.toString().contains("property is invalid") || value.stderr.toString().contains("Secrets were required") || value.stderr.toString().contains("New connection activation was enqueued") ){
                             print("catch");
