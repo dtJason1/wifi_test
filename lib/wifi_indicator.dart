@@ -50,7 +50,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   @override
   void initState(){
     _animationController = AnimationController(vsync: this, duration: Duration(milliseconds:_animationTime ) );
-    var wifiProvider = Provider.of<WifiProvider>(context);
 
     super.initState();
   }

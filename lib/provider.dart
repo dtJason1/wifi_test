@@ -436,6 +436,8 @@ class _Dialog2State extends State<Dialog2> {
                           }
 
                           else{
+                            wifiProvider.setStatus("TimeOutConnection.");
+
                           }
                           keyboardkey.clearKey();
 
