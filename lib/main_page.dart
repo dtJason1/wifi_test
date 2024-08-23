@@ -80,30 +80,21 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
 
   void poppedAnimation(Function function)async{
-    setState(() {
-      _animationTime = endAnimationTime;
+    DateTime now = DateTime.now();
+    String check_time(BuildContext context){ //context는 Snackbar용, 다른 방식으로 출력할거면 필요없음.
+      var now = new DateTime.now(); //반드시 다른 함수에서 해야함, Mypage같은 클래스에서는 사용 불가능
+      String formatDate = DateFormat('HH:mm').format(now); //format변경
+      return formatDate;
+    }
+    Timer.periodic(Duration(seconds: 2), (timer) {
+      setState(() {
+        _timeData = check_time(context);
+
+      });
+
     });
-    _animationController.value = 1;
-    _animationController.reverse().then((value) => function());
-    setState(() {
-      _animationTime = startAnimationTime;
-    });
-  }
 
-  //
-  // void dialog(){
-  //   var wifiProvider = Provider.of<WifiProvider>(context, listen: false);
-  //
-  //   showDialog(
-  //     context: context,
-  //     builder: (_) => ChangeNotifierProvider<WifiProvider>.value(
-  //       value: wifiProvider,
-  //       child: WifiListIndicator(),
-  //     ),
-  //   );
-  // }
-
-
+  _timeData = check_time(context);
 
 
   @override
