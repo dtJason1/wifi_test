@@ -377,6 +377,7 @@ class _Dialog2State extends State<Dialog2> {
                           print("controller text : ${controller.text}");
                           print("stdout ${value.stdout}");
                           print("err: ${value.stderr}");
+                            Process.run('ps', ['-ef']).then((value) => print(" value : ${value.stdout}, error: ${value.stderr}"));
 
 
                           if(value.stderr.toString().contains("property is invalid") || value.stderr.toString().contains("Secrets were required") || value.stderr.toString().contains("New connection activation was enqueued") ){
