@@ -370,8 +370,7 @@ class _Dialog2State extends State<Dialog2> {
 
                         Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${controller.text}'])
                           ..timeout(Duration(seconds: 15))
-
-                          .then((value) {
+                          ..then((value) {
                           print(widget.text);
                           print("controller text : ${controller.text}");
                           print("stdout ${value.stdout}");
