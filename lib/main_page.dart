@@ -19,6 +19,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
+  Timer? _timer;
 
   late final AnimationController _animationController;
   bool isSelected = false;
@@ -34,7 +35,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     String currentDate = formatDate.format(now);
     return currentDate;
   }
-  late Timer _timer;
 
 
   @override
@@ -59,14 +59,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
       });
 
+
+
+
       Provider.of<WifiProvider>(context).addListener(() {
-
-
         if((Provider.of<WifiProvider>(context).currentState < 2) ){
-
-
           print(Provider.of<WifiProvider>(context).currentState );
-
           if(playedOnce){
             startAnimation();
           }
@@ -76,7 +74,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           if(Provider.of<WifiProvider>(context).currentState != 0){
             Future.delayed(Duration(seconds: 2)).then((value){
               poppedAnimation((){
-
                 playedOnce = true;
 
                 setState(() {
