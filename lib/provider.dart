@@ -182,6 +182,8 @@ class WifiProvider extends ChangeNotifier{
 
         }
       }
+
+      print(currentWIFIList);
       currentWIFIList.addAll(finalList);
 
       if(_noWIFI){
