@@ -14,6 +14,8 @@ import 'animation.dart';
 import 'wifi_indicator.dart';
 import 'main_page.dart';
 import 'package:intl/intl.dart';
+import 'package:timezone/timezone.dart';
+
 void main() {
 
   runApp(
