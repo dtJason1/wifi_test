@@ -77,10 +77,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   print("start function");
                   Provider.of<WifiProvider>(context).clearWifi();
                   print("cleared");
+                  playedOnce = true;
 
                 });
 
-                playedOnce = true;
 
 
               });});
