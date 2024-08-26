@@ -547,7 +547,7 @@ class _KeyState extends State<Key> {
     return Consumer<KeyBoardKey>(
       builder: (context, provider, child) {
           return Container(
-                width: (widget.keyboardkey == "Back" ||  widget.keyboardkey == "Enter")  ? 120: (widget.keyboardkey == "space") ? 470 : null,
+                width: (widget.keyboardkey == "Back" ||  widget.keyboardkey == "Enter")  ? 120: (widget.keyboardkey == "space") ? 480 : null,
 
 
 
