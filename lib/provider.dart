@@ -423,7 +423,7 @@ class _Dialog2State extends State<Dialog2> {
                               Process.run('nmcli',['radio', 'wifi', 'on']);
                               wifiProvider.setStatus("Connection Time Out");
                               throw TimeoutException('Connection Time Out // 3');
-                            })
+                            });
                                 //
                                 // .whenComplete(() => Process.run('nmcli',['radio', 'wifi', 'on'])
                                 // .then((value) => wifiProvider.setStatus("Connection Time Out"))); throw TimeoutException('Connection Time Out // 3');
