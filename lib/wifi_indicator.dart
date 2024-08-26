@@ -127,7 +127,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                               height: 300,
                               width: 300,
                               alignment: Alignment.center,
-                              child: Text("Trying to find WIFI... Please Wait"),
+                              child: Text("Trying to find WIFI... Please Wait",),
                             );
                           }
                           else{
