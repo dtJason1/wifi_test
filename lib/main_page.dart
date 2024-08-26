@@ -73,23 +73,26 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             });
             startAnimation();
           }
+          else{
+            if(Provider.of<WifiProvider>(context).currentState != 0){
+              Future.delayed(Duration(seconds: 2)).then((value){
+                poppedAnimation((){
+                  setState(() {
+                    print("start function");
+                    Provider.of<WifiProvider>(context).clearWifi();
+                    print("cleared");
+                    playedOnce = true;
 
-          if(Provider.of<WifiProvider>(context).currentState != 0){
-            Future.delayed(Duration(seconds: 2)).then((value){
-              poppedAnimation((){
-                setState(() {
-                  print("start function");
-                  Provider.of<WifiProvider>(context).clearWifi();
-                  print("cleared");
-                  playedOnce = true;
-
-                });
+                  });
 
 
 
-              });});
+                });});
+
+            }
 
           }
+
 
         }
 
