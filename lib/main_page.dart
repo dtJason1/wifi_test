@@ -118,8 +118,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     _animationController.value = 1;
     print("2=========");
     _animationController.reverse().then((value){
-      print("hello");
-
+      print("3==========");
+      function();
     });
     setState(() {
       _animationTime = startAnimationTime;
