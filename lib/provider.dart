@@ -511,7 +511,7 @@ class _KeyBoardDialogueState extends State<KeyBoardDialogue> {
                     )),
                   ),
                   Container(width:600, height: 60, child: Row(children: List.generate(12, (index) => Expanded(child: Key(keyboardkey:provider. keyList[index+32],)),),),),
-                  Container(width:600, height: 60, child: Row(children: [
+                  Container(width:570, height: 60, child: Row(children: [
                     Key(keyboardkey: provider.keyList[44]),
                     Key(keyboardkey: provider.keyList[45]),
                     Key(keyboardkey: provider.keyList[46])
