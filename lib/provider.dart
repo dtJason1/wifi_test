@@ -117,6 +117,7 @@ class WifiProvider extends ChangeNotifier{
   }
 
   void clearWifi(){
+    print("clear wifi started ====");
     _currentState = 2;
     _status = "";
     notifyListeners();

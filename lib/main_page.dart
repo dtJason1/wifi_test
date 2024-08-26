@@ -74,6 +74,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             Future.delayed(Duration(seconds: 2)).then((value){
               poppedAnimation((){
                 setState(() {
+                  print("start function");
                   Provider.of<WifiProvider>(context).clearWifi();
                   print("cleared");
 
@@ -108,8 +109,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   void poppedAnimation(Function function)async{
     setState(() {
       _animationTime = endAnimationTime;
+      print("1=========");
     });
     _animationController.value = 1;
+    print("2=========");
     _animationController.reverse().then((value) => function());
     setState(() {
       _animationTime = startAnimationTime;
