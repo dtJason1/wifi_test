@@ -186,7 +186,6 @@ class WifiProvider extends ChangeNotifier{
       }
 
       _selectedWIFI.addAll(_anotherWIFI);
-      _selectedWIFI.toSet().toList();
 
       for (var ssid in _selectedWIFI){
         if(ssid.text.contains("_")){

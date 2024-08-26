@@ -123,9 +123,10 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                         builder: (context,provider,child) {
                           if( provider.currentWIFIList.length == 0){
 
-                            return SizedBox(
+                            return Container(
                               height: 300,
                               width: 300,
+                              alignment: Alignment.center,
                               child: Text("Trying to find WIFI... Please Wait"),
                             );
                           }
