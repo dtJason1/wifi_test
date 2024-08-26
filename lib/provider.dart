@@ -186,6 +186,12 @@ class WifiProvider extends ChangeNotifier{
       }
 
       _selectedWIFI.addAll(_anotherWIFI);
+      for(var selectwifi in _selectedWIFI){
+        if(selectwifi.text.contains("/")){
+          _selectedWIFI.clear();
+        }
+      }
+
       _selectedWIFI.toSet().toList();
 
       // for (var ssid in _selectedWIFI){
