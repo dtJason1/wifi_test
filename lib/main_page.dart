@@ -67,7 +67,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
 
           if(playedOnce){
-            playedOnce = false;
+            setState(() {
+              playedOnce = false;
+
+            });
             startAnimation();
           }
 
