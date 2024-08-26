@@ -373,7 +373,8 @@ class _Dialog2State extends State<Dialog2> {
                                   contentPadding: EdgeInsets.fromLTRB(5.0, 1.0, 5.0, 1.0),
                                 ),
                                 onTap:(){keyBoardDialog();},
-                                controller: controller,                              ),
+                                controller: controller,
+                              ),
                             )
                         //      (){keyBoardDialog();}
 
