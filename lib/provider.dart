@@ -120,13 +120,14 @@ class WifiProvider extends ChangeNotifier{
     print("clear wifi started ====");
     _currentState = 2;
     _status = "";
+
     notifyListeners();
   }
 
   void setConnectStatus(){
     _currentState = 1;
     _isConnecting = false;
-
+    hasWIFI();
     notifyListeners();
   }
 
