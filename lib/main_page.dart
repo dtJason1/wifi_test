@@ -180,29 +180,29 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                               }, icon: Icon(provider.isNoWIFI ? Icons.wifi_off :Icons.wifi)),
                             ],
                           ),
-                          TextButton(child:
-                          Text("WIFI"),
-                            onPressed: () async{
-                              try {
-                                if(playedOnce){
-                                  provider.scanWifi();
-
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
-                                  setState(() {
-                                    _animationController.value = 0;
-                                    playedOnce = true;
-                                  });
-
-
-                                }
-
-                              } on Exception catch (e) {
-                                print(e);
-                                // TODO
-                              }
-                              // dialog();
-                            },
-                          ),
+                          // TextButton(child:
+                          // Text("WIFI"),
+                          //   onPressed: () async{
+                          //     try {
+                          //       if(playedOnce){
+                          //         provider.scanWifi();
+                          //
+                          //         Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
+                          //         setState(() {
+                          //           _animationController.value = 0;
+                          //           playedOnce = true;
+                          //         });
+                          //
+                          //
+                          //       }
+                          //
+                          //     } on Exception catch (e) {
+                          //       print(e);
+                          //       // TODO
+                          //     }
+                          //     // dialog();
+                          //   },
+                          // ),
 
                         ],
                       ),
