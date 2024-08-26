@@ -153,7 +153,7 @@ class WifiProvider extends ChangeNotifier{
     List<MyButton> _selectedWIFI =[];
     List<MyButton> _anotherWIFI =[];
 
-    bool _noWIFI = false;
+    bool _noWIFI = true;
     try {
       print("scanning wifi....");
       // Run the command
