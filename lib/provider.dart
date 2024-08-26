@@ -596,7 +596,7 @@ class _KeyState extends State<Key> {
 
                     provider.addKey(widget.keyboardkey);
                   }
-                 }, child: Text(widget.keyboardkey, style: TextStyle(fontSize: 12, color: (widget.keyboardkey == "shift" || widget.keyboardkey == "&123" ) ? Colors.white : null ),),),
+                 }, child: Text(widget.keyboardkey, style: TextStyle(fontSize: (widget.keyboardkey == "shift" || widget.keyboardkey == "&123" ) ? 10 : 12, color: (widget.keyboardkey == "shift" || widget.keyboardkey == "&123" ) ? Colors.white : null ),),),
 
 
             );
