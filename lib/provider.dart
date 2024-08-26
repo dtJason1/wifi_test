@@ -180,11 +180,10 @@ class WifiProvider extends ChangeNotifier{
           _noWIFI = false;
         }
         else{
-          if(!ssid.substring(26,56).replaceAll(" ", "").contains("/")){
-            // _anotherWIFI.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false));
+          if(!ssid.substring(26,56).replaceAll(" ", "").contains("bit/")){
+            _anotherWIFI.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false));
 
           }
-          _anotherWIFI.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false));
 
 
         }
