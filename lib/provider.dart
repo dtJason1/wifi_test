@@ -7,6 +7,8 @@ import 'package:flutter/widgets.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
 import 'package:wifi_test/main.dart';
+import 'dart:async';
+
 class KeyBoardKey extends ChangeNotifier{
   String _key = '';
   String get key => _key;
@@ -87,11 +89,72 @@ class WifiProvider extends ChangeNotifier{
   List<String> _wifiList =  [];
   List<String> get wifiList => _wifiList;
 
+  int _currentState = 2;
+  int get currentState => _currentState;
+
+  String _status = "";
+  String get status => _status;
+
   bool _isLoading = true;
   bool get isLoading => _isLoading;
-  Future<List<String>> scanWifi() async {
-    List<MyButton> finalList = [];
 
+  bool _isConnecting = false;
+  bool get isConnecting => _isConnecting;
+
+  bool _isNoWIFI = false;
+  bool get isNoWIFI => _isNoWIFI;
+  List<MyButton> _currentWIFIList =[];
+  List<MyButton> get currentWIFIList => _currentWIFIList;
+
+  void noWIFI(){
+    _isNoWIFI = true;
+    notifyListeners();
+  }
+
+  void hasWIFI(){
+    _isNoWIFI = false;
+    notifyListeners();
+  }
+
+  void clearWifi(){
+    print("clear wifi started ====");
+    _currentState = 2;
+    _status = "";
+
+    notifyListeners();
+  }
+
+  void setConnectStatus(){
+    _currentState = 1;
+    _isConnecting = false;
+    hasWIFI();
+    notifyListeners();
+  }
+
+  void whileConnectingStatus(){
+    _isConnecting = true;
+    _status ="";
+    _currentState =0;
+    notifyListeners();
+  }
+
+  void setStatus(String errorStatus){
+    _currentState = -1;
+    _status = errorStatus;
+    _isConnecting = false;
+    notifyListeners();
+
+
+  }
+
+
+
+
+  void scanWifi() async {
+    List<MyButton> _selectedWIFI =[];
+    List<MyButton> _anotherWIFI =[];
+
+    bool _noWIFI = true;
     try {
       print("scanning wifi....");
       // Run the command
@@ -101,7 +164,6 @@ class WifiProvider extends ChangeNotifier{
       // Check for errors
       if (result.exitCode != 0) {
         print('Error: ${result.stderr}');
-        return [];
       }
       // Filter SSIDs
       var ssids = result.stdout.toString().trim().split('\n');
@@ -109,30 +171,100 @@ class WifiProvider extends ChangeNotifier{
       ssids.removeAt(0);
 
 
-      return ssids;
+      for (var ssid in ssids) {
 
+        if(ssid[0] == '*'){
+          _selectedWIFI = [
+            MyButton(text: ssid.substring(26,56).replaceAll(" ", ""), iscurrentuse: true)
+          ];
+          _noWIFI = false;
+        }
+        else{
+          if(!ssid.substring(26,56).replaceAll(" ", "").contains("bit/")){
+            _anotherWIFI.add(MyButton(text: ssid.substring(25,55).replaceAll(" ", ""), iscurrentuse: false));
+
+          }
+
+
+        }
+      }
+
+      _selectedWIFI.addAll(_anotherWIFI);
+
+      _selectedWIFI.toSet().toList();
+
+      // for (var ssid in _selectedWIFI){
+      //   if(ssid.text.contains("_")){
+      //     _selectedWIFI.clear();
+      //     _sel
+      //   }
+      //
+      // }
+
+      _currentWIFIList = _selectedWIFI;
+
+      if(_noWIFI){
+        noWIFI();
+      }
+      else{
+        hasWIFI();
+      }
+
+      notifyListeners();
       // Print or return the SSIDs
     } catch (e) {
       print('Error: $e');
-      return [];
+
     }
   }
 
-  void changeWifiList() async{
-    _wifiList = await scanWifi();
-    _isLoading = false;
 
+
+}
+
+
+class SceneProvider extends ChangeNotifier{
+
+  bool _isFirstPage = true;
+  bool get isFirstPage => _isFirstPage;
+
+
+  void changePage() async{
+    _isFirstPage = !_isFirstPage;
     notifyListeners();
+  }
+
+
+
+}
+
+
+class HeaderProvider extends ChangeNotifier{
+  String _currentWIFI = "";
+  String get currentWIFI => _currentWIFI;
+
+  String _status = "";
+  String get status => _status;
+
+  void setCurrentWIFI(String string){
+    _currentWIFI = string;
+    notifyListeners();
+
+  }
+
+  void setStatus (String string){
+    _status = string;
+    notifyListeners();
+
+
   }
 
 
 }
 
 
-
 class MyButton extends StatefulWidget{
-  MyButton({required this.text, required this.iscurrentuse, required this.wifiProvider});
-  final WifiProvider wifiProvider;
+  MyButton({required this.text, required this.iscurrentuse});
   String text;
   final bool iscurrentuse;
   @override
@@ -156,10 +288,11 @@ class _MyButtonState extends State<MyButton> {
         context: context,
         builder:(_) => MultiProvider(
           providers: [
-            ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
             ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
+
+
           ],
-          child:  Dialog2(text:widget.text, wifiProvider: widget.wifiProvider,),
+          child:  Dialog2(text:widget.text),
         ),
 
     );
@@ -187,14 +320,14 @@ TextEditingController controller = TextEditingController();
 
 
 class Dialog2 extends StatefulWidget{
-  Dialog2({required this.text, required this.wifiProvider});
+  Dialog2({required this.text});
   final String text;
-  final WifiProvider wifiProvider;
   @override
   State<Dialog2> createState() => _Dialog2State();
 }
 
 class _Dialog2State extends State<Dialog2> {
+
   @override
   void initState(){
     super.initState();
@@ -209,7 +342,6 @@ class _Dialog2State extends State<Dialog2> {
         context: context,
         builder:(_) => MultiProvider(
           providers: [
-            ChangeNotifierProvider<WifiProvider>(create: (BuildContext context) => WifiProvider()),
             ChangeNotifierProvider<KeyBoardKey>(create: (BuildContext context) => KeyBoardKey()),
           ],
           child:  KeyBoardDialogue(),
@@ -258,7 +390,8 @@ class _Dialog2State extends State<Dialog2> {
                                   contentPadding: EdgeInsets.fromLTRB(5.0, 1.0, 5.0, 1.0),
                                 ),
                                 onTap:(){keyBoardDialog();},
-                                controller: controller,                              ),
+                                controller: controller,
+                              ),
                             )
                         //      (){keyBoardDialog();}
 
@@ -267,48 +400,71 @@ class _Dialog2State extends State<Dialog2> {
                     )
                   ],
                 ),
-                Consumer2<KeyBoardKey,WifiProvider>(
-                  builder: (context, keyboardkey, wifiProvider,  child) {
+                Consumer3<KeyBoardKey,WifiProvider,SceneProvider>(
+                  builder: (context, keyboardkey, wifiProvider,sceneProvider , child) {
                     return TextButton(onPressed: () async{
+
                       try {
+                        int myPid = 0;
+                        Navigator.of(context).popUntil((route) => route.isFirst);
+                        Navigator.of(context).popUntil((route) => route.isFirst);
+                        wifiProvider.whileConnectingStatus();
+
+                        print("popped!!!!");
 
 
-                        await Process.run('nmcli',['device', 'wifi', 'rescan']);
-                        var result = await Process.run('nmcli',['device', 'wifi', 'list']);
 
-                        Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${controller.text}']).then((value) {
-                          print(widget.text);
-                          print("controller text : ${controller.text}");
-                          print("stdout ${value.stdout}");
-                          print("err: ${value.stderr}");
+
+                        Process.run('nmcli',['dev', 'wifi', 'connect', '${widget.text}', 'password', '${controller.text}'])
+                          ..timeout(Duration(seconds: 15), onTimeout: (){
+
+                            Process.run('nmcli',['radio', 'wifi', 'off'])
+                                .whenComplete((){
+                              Process.run('nmcli',['radio', 'wifi', 'on']);
+                              wifiProvider.setStatus("Connection Time Out");
+                            });
+                            throw TimeoutException('Connection Time Out // 3');
+
+                            //
+                                // .whenComplete(() => Process.run('nmcli',['radio', 'wifi', 'on'])
+                                // .then((value) => wifiProvider.setStatus("Connection Time Out"))); throw TimeoutException('Connection Time Out // 3');
+                          })
+
+                          ..then((value) {
+
+                            print('pid: $pid');
+
+                            print(widget.text);
+                            print("controller text : ${controller.text}");
+                            print("stdout ${value.stdout}");
+                            print("err: ${value.stderr}");
+
+
+
                           if(value.stderr.toString().contains("property is invalid") || value.stderr.toString().contains("Secrets were required") || value.stderr.toString().contains("New connection activation was enqueued") ){
                             print("catch");
-                            showDialog(context: context, builder: (context){
-                              return Dialog(
-                                child: Container( width:300, height:300, child: Center(child: Text("password not matched", style: TextStyle(color: Colors.red),),)),
-                              );
-                            });
-                          }
+                            wifiProvider.setStatus("Invalid password");
 
-                          else if(value.stderr.toString().contains("property is invalid") || value.stderr.toString().contains("Secrets were required") || value.stderr.toString().contains("New connection activation was enqueued") ){
+                          }
+                          else if(value.stdout.toString().contains("property is invalid") || value.stdout.toString().contains("Secrets were required")  ){
                             print("catch");
-                            showDialog(context: context, builder: (context){
-                              return Dialog(
-                                child: Container( width:300, height:300, child: Center(child: Text("password not matched", style: TextStyle(color: Colors.red),),)),
-                              );
-                            });
-                          }
-                          else if(value.stderr.toString().contains("No network with SSID")){
-                            showDialog(context: context, builder: (context){
-                              return Dialog(
-                                child: Container( width:300, height:300, child: Center(child: Text("cannot get SSID", style: TextStyle(color: Colors.red),),)),
-
-                              );
-                            });
+                            wifiProvider.setStatus("Invalid password");
 
                           }
+                          else if (value.stdout.toString().contains("New connection activation was enqueued")){
+                            wifiProvider.setStatus("New connection activation was enqueued. Please try again.");
+                          }
+
+                          else if(value.stderr.toString().contains("No network with SSID") || value.stdout.toString().contains("No network with SSID")  ){
+                            wifiProvider.setStatus("No network with current SSID.");
+                          }
+                          else if (value.stdout.toString().contains("successfully activated")){
+                              wifiProvider.setConnectStatus();
+                          }
+
                           else{
-                            Navigator.pop(context,  );
+                            wifiProvider.setStatus("Invalid password");
+
                           }
                           keyboardkey.clearKey();
 
@@ -379,11 +535,14 @@ class _KeyBoardDialogueState extends State<KeyBoardDialogue> {
                     )),
                   ),
                   Container(width:600, height: 60, child: Row(children: List.generate(12, (index) => Expanded(child: Key(keyboardkey:provider. keyList[index+32],)),),),),
-                  Container(width:600, height: 60, child: Row(children: [
-                    Key(keyboardkey: provider.keyList[44]),
-                    Key(keyboardkey: provider.keyList[45]),
-                    Key(keyboardkey: provider.keyList[46])
-                  ],),)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 30.0),
+                    child: Container(width:570, height: 60, child: Row(children: [
+                      Key(keyboardkey: provider.keyList[44]),
+                      Key(keyboardkey: provider.keyList[45]),
+                      Key(keyboardkey: provider.keyList[46])
+                    ],),),
+                  )
                 ],
               );
             }
@@ -412,7 +571,7 @@ class _KeyState extends State<Key> {
     return Consumer<KeyBoardKey>(
       builder: (context, provider, child) {
           return Container(
-                width: (widget.keyboardkey == "Back" ||  widget.keyboardkey == "Enter")  ? 120: (widget.keyboardkey == "space") ? 500 : null,
+                width: (widget.keyboardkey == "Back" ||  widget.keyboardkey == "Enter")  ? 120: (widget.keyboardkey == "space") ? 483 : null,
 
 
 
@@ -428,7 +587,7 @@ class _KeyState extends State<Key> {
                   else if(widget.keyboardkey == "Enter"){
                     Navigator.pop(context);
                   }
-                  else if(widget.keyboardkey == "Enter"){
+                  else if(widget.keyboardkey == "Space"){
                     provider.addKey(" ");
                   }
                   else if(widget.keyboardkey == "clear"){
@@ -461,7 +620,7 @@ class _KeyState extends State<Key> {
 
                     provider.addKey(widget.keyboardkey);
                   }
-                 }, child: Text(widget.keyboardkey, style: TextStyle(fontSize: 12, color: (widget.keyboardkey == "shift" || widget.keyboardkey == "&123" ) ? Colors.white : null ),),),
+                 }, child: Text(widget.keyboardkey, style: TextStyle(fontSize: (widget.keyboardkey == "shift" || widget.keyboardkey == "&123" ) ? 10 : 12, color: (widget.keyboardkey == "shift" || widget.keyboardkey == "&123" ) ? Colors.white : null ),),),
 
 
             );
